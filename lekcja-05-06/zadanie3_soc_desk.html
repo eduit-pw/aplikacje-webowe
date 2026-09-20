@@ -1,0 +1,57 @@
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>SOC Cyber Threat Console</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 25px; background: #121820; color: #ecf0f1; }
+        .alert-box { background: #1e2936; border-left: 6px solid #3498db; padding: 15px; margin-bottom: 12px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; }
+        .alert-box.CRITICAL { border-left-color: #e74c3c; background: #2c1f24; }
+        .alert-box.HIGH { border-left-color: #e67e22; }
+        .alert-box.LOW { border-left-color: #2ecc71; }
+        .btn-rozwiaz { background: #e74c3c; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; }
+        .form-row { margin-bottom: 15px; }
+        input, select, textarea { width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #34495e; background: #1e2936; color: #fff; box-sizing: border-box; }
+        .blad-walidacji { border-color: #e74c3c !important; }
+    </style>
+</head>
+<body>
+
+    <h2>Pulpit Zdarzeń SOC (Security Operations Center)</h2>
+    <p>Aktywne incydenty bezpieczeństwa: <span id="licznikZdarzen">0</span></p>
+
+    <form id="formularzIncydentu" style="background: #1a2330; padding: 20px; border-radius: 6px; margin-bottom: 25px;">
+        <div class="form-row">
+            <label>Źródłowy adres IP / Host:</label>
+            <input type="text" id="adresIp" placeholder="np. 185.220.101.5">
+        </div>
+        <div class="form-row">
+            <label>Poziom krytyczności:</label>
+            <select id="poziomZagrozenia">
+                <option value="LOW">Niski (LOW)</option>
+                <option value="HIGH">Wysoki (HIGH)</option>
+                <option value="CRITICAL">Krytyczny (CRITICAL)</option>
+            </select>
+        </div>
+        <div class="form-row">
+            <label>Opis wektora ataku:</label>
+            <textarea id="opisZdarzenia" rows="2" placeholder="Opis wykrytej anomalii"></textarea>
+        </div>
+        <button type="submit" style="background: #27ae60; color: #fff; padding: 10px 20px; border: none; cursor: pointer; border-radius: 4px;">Zarejestruj Zdarzenie</button>
+    </form>
+
+    <div id="rejestrAlertow">
+        <!-- Dynamiczne alerty wstrzykiwane przez jQuery -->
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // KROK 1: Obsłuż wysyłanie formularza #formularzIncydentu
+            // KROK 2: Walidacja pól i dynamiczne tworzenie szablonu HTML
+            // KROK 3: Wstrzyknięcie przez .prepend() i animacja .fadeIn()
+            // KROK 4: Delegacja zdarzenia kliknięcia w .btn-rozwiaz na kontenerze #rejestrAlertow
+            // KROK 5: Aktualizacja licznika #licznikZdarzen
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Hardware Configurator - AI Workstation</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 25px; background: #f4f6f9; }
+        .sekcja { margin-bottom: 20px; }
+        .kafelki { display: flex; gap: 15px; margin-top: 10px; }
+        .kafelek {
+            padding: 15px 25px; border: 2px solid #ccc; background: #fff;
+            border-radius: 8px; cursor: pointer; transition: all 0.2s ease;
+        }
+        .kafelek:hover { border-color: #007bff; }
+        .kafelek.wybrany { border-color: #28a745; background: #d4edda; font-weight: bold; }
+        .podsumowanie { margin-top: 30px; font-size: 22px; color: #333; }
+    </style>
+</head>
+<body>
+
+    <h2>Konfigurator Serwera Obliczeniowego AI</h2>
+    <div class="podsumowanie">
+        Cena bazowa: <strong>12 000 PLN</strong> | Razem do zapłaty: <span id="kwotaCalkowita">12000</span> PLN
+    </div>
+    <hr>
+
+    <div class="sekcja">
+        <h3>1. Wybierz pamięć RAM:</h3>
+        <div class="kafelki" id="grupaRam">
+            <div class="kafelek opcja-ram wybrany" data-cena="0">64 GB ECC DDR5 (+0 PLN)</div>
+            <div class="kafelek opcja-ram" data-cena="2400">128 GB ECC DDR5 (+2 400 PLN)</div>
+            <div class="kafelek opcja-ram" data-cena="5800">256 GB ECC DDR5 (+5 800 PLN)</div>
+        </div>
+    </div>
+
+    <div class="sekcja">
+        <h3>2. Wybierz dysk NVMe:</h3>
+        <div class="kafelki" id="grupaDysk">
+            <div class="kafelek opcja-dysk wybrany" data-cena="0">1 TB NVMe Gen4 (+0 PLN)</div>
+            <div class="kafelek opcja-dysk" data-cena="1200">2 TB NVMe Gen4 (+1 200 PLN)</div>
+            <div class="kafelek opcja-dysk" data-cena="2900">4 TB NVMe Gen4 Enterprise (+2 900 PLN)</div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // KROK 1: Napisz funkcję przeliczCene(), która zsumuje cenę bazową (12000) 
+            // oraz wartości data-cena z elementów z klasą .wybrany
+            
+            // KROK 2: Obsłuż kliknięcia w kafelki pamięci RAM
+            
+            // KROK 3: Obsłuż kliknięcia w kafelki dysków SSD
+        });
+    </script>
+</body>
+</html>

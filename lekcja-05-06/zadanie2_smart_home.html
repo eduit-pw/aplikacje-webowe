@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Home Zone Controller</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 30px; background: #2c3e50; color: #fff; }
+        .karta-strefy { background: #34495e; border-radius: 8px; margin-bottom: 15px; overflow: hidden; border: 1px solid #4a6278; }
+        .naglowek-strefy { padding: 15px 20px; background: #1abc9c; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .tresc-strefy { padding: 20px; display: none; background: #3d566e; }
+        .strefa-wylaczona { opacity: 0.5; filter: grayscale(1); }
+        .kontrolka { margin: 15px 0; }
+        label { display: block; margin-bottom: 5px; }
+    </style>
+</head>
+<body>
+
+    <h2>Zarządzanie Strefami Klimatycznymi HVAC</h2>
+
+    <div class="karta-strefy">
+        <div class="naglowek-strefy">
+            <span>Strefa A: Główna Sala Konferencyjna</span>
+            <label><input type="checkbox" class="przelacznik-zasilania" checked> Aktywna</label>
+        </div>
+        <div class="tresc-strefy">
+            <div class="kontrolka">
+                <label>Temperatura zadana: <span class="wartosc-temp">21</span>°C</label>
+                <input type="range" class="suwak-temp" min="16" max="28" value="21">
+            </div>
+            <p>Tryb wentylacji: Wymuszony obieg rekuperatora (HEPA H13)</p>
+        </div>
+    </div>
+
+    <div class="karta-strefy">
+        <div class="naglowek-strefy">
+            <span>Strefa B: Serwerownia Rack 42U</span>
+            <label><input type="checkbox" class="przelacznik-zasilania" checked> Aktywna</label>
+        </div>
+        <div class="tresc-strefy">
+            <div class="kontrolka">
+                <label>Temperatura zadana: <span class="wartosc-temp">18</span>°C</label>
+                <input type="range" class="suwak-temp" min="15" max="22" value="18">
+            </div>
+            <p>Tryb wentylacji: Agregat precyzyjny In-Row Cooling</p>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // 1. Zaimplementuj rozwijanie/zwijanie akordeonu (.slideToggle) po kliknięciu nagłówka
+            // UWAGA: Kliknięcie w sam checkbox nie może zwijać/rozwijać akordeonu! (e.stopPropagation())
+
+            // 2. Zaimplementuj obsługę suwaka temperatury (zdarzenie 'input' aktualizujące .wartosc-temp)
+
+            // 3. Zaimplementuj odcięcie zasilania (checkbox change: blokada suwaka i klasa .strefa-wylaczona)
+        });
+    </script>
+</body>
+</html>
