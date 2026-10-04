@@ -1,66 +1,96 @@
-# Ćwiczenia: formularze i komponenty Bootstrapa
+# Ćwiczenia: responsywna siatka Bootstrapa
 
-> Wykonaj zadania, korzystając z przygotowanego szablonu. Zwróć uwagę na poprawne działanie formularzy, dostępność etykiet oraz zachowanie strony bez jej przeładowywania.
+## Zadanie 1. Trzy bloki informacji
 
-## Zadanie 1. Pełny formularz zapisu
+Zbuduj stronę z tytułem i nagłówkiem **Pracownia webowa**. Pod nagłówkiem umieść trzy bloki w podanej kolejności:
 
-1. Ustaw tytuł strony i nagłówek `h1` na **Zapis na warsztaty**.
-2. Dodaj wymagane pola:
-   - `Imię` — pole tekstowe;
-   - `Adres e-mail` — pole typu `email`;
-   - `Warsztat` — lista z pustą opcją `Wybierz warsztat` oraz opcjami `Python` i `JavaScript`.
-3. Zastosuj właściwe klasy Bootstrapa i dodaj etykiety. Dodaj też przełącznik `Wyślij przypomnienie`, zaznaczony początkowo.
-4. Dodaj przyciski `Zapisz` i `Wyczyść`. Pierwszy zatwierdza formularz, a drugi go resetuje. Nie pozwól zatwierdzić formularza z pustym imieniem, imieniem składającym się z samych spacji, niepoprawnym adresem e-mail ani bez wybranego warsztatu.
-5. Po poprawnym zatwierdzeniu wyświetl komunikat w formacie: `Zapisano: <imię>. Warsztat: <warsztat>. Przypomnienie: tak/nie.` Imię ma być przycięte, a strona nie może się przeładować.
-6. Edycja pola lub przełącznika usuwa poprzedni komunikat. Reset przywraca puste pola, pusty wybór i zaznaczone przypomnienie, a także usuwa komunikat oraz własny błąd imienia.
+| Nagłówek | Treść akapitu |
+|---|---|
+| HTML | Struktura strony. |
+| CSS | Wygląd strony. |
+| JavaScript | Zachowanie strony. |
 
-## Zadanie 2. Karty z obrazami, filtrem i licznikami
+Każdy blok powinien zawierać nagłówek i akapit, obramowanie oraz wewnętrzny odstęp `p-3`. Ustaw odstęp między blokami za pomocą `g-3`. Całą treść umieść w `container` z pionowym odstępem `py-4`.
 
-1. Ustaw nagłówek strony na **Katalog kursów** i dodaj dwie karty w podanej kolejności:
-   - **Python** — `Podstawy programowania. Tryb: stacjonarnie.`
-   - **JavaScript** — `Interaktywne strony. Tryb: online.`
-2. Każda karta ma zawierać właściwy lokalny obraz z opisem alternatywnym, tytuł, opis, tekst `Polubienia: 0` i przycisk `Lubię to`. Użyj odpowiednich klas `.card-*`.
-3. Poniżej szerokości 768 px karty mają być ułożone jedna pod drugą. Od 768 px każda karta ma zajmować połowę wiersza. Zachowaj odstępy i dopasuj obrazy tak, by mieściły się w kartach.
-4. Dodaj początkowo wyłączony przełącznik `Tylko online`:
-   - po włączeniu ukryj całą kolumnę Python;
-   - karta JavaScript ma przesunąć się na początek i nadal zajmować połowę szerokości od 768 px;
-   - po wyłączeniu przełącznika pokaż ponownie obie karty.
-5. Kliknięcie przycisku zwiększa licznik tylko na danej karcie o 1. Filtrowanie nie może resetować liczników, a zmiana napisu tytułu nie może psuć ich działania.
+### Układ zależnie od szerokości
 
-## Zadanie 3. Samodzielnie: rezerwacja i tabela
+| Szerokość ekranu | Układ |
+|---|---|
+| Poniżej 768 px | Jeden blok w wierszu |
+| Od 768 do 991 px | Dwa bloki w pierwszym wierszu; trzeci po lewej w kolejnym |
+| Od 992 px | Trzy bloki w jednym wierszu |
 
-1. Ustaw tytuł strony i nagłówek `h1` na **Rezerwacja stanowiska**. Umieść formularz w karcie z nagłówkiem **Formularz rezerwacji**.
-2. Dodaj wymagane kontrolki:
-   - `Imię` — nie może składać się z samych spacji;
-   - `Adres e-mail`;
-   - `Stanowisko` — lista z pustą opcją `Wybierz stanowisko`, a następnie `PC-1` i `PC-2`.
-3. Dodaj początkowo zaznaczony przełącznik `Bez dodatkowych uwag` oraz pole `Uwagi (opcjonalnie)` typu `textarea`. Gdy przełącznik jest zaznaczony, pole ma być nieaktywne. Odznaczenie ma natychmiast je odblokować, a ponowne zaznaczenie — zablokować. Zmiana przełącznika nie może usuwać tekstu z pola.
-4. Przycisk `Zarezerwuj` zatwierdza formularz. Podsumowanie ma być tabelą z kolumnami `Pole` i `Wartość` oraz czterema wierszami: `Imię`, `Adres e-mail`, `Stanowisko`, `Uwagi`. Przed pierwszym zatwierdzeniem wszystkie wartości mają wynosić `—`.
-5. Uzupełniaj tabelę dopiero po poprawnym zatwierdzeniu:
-   - gdy przełącznik jest zaznaczony, pokaż `Brak uwag`, nawet jeśli nieaktywne pole zawiera wcześniejszy tekst;
-   - gdy przełącznik jest odznaczony, pokaż przycięty tekst albo `Brak uwag`, jeśli pole jest puste.
-6. Zmiana pól lub przełącznika nie może zmieniać poprzedniego podsumowania. Dopiero kolejne poprawne zatwierdzenie zastępuje wartości. Błędny formularz pozostawia ostatnie poprawne podsumowanie.
-7. Od 768 px formularz i tabela mają zajmować dwie równe kolumny. Na telefonie tabela ma znajdować się pod formularzem. Użyj `.card`, `.table`, `.table-striped` i opakowania `.table-responsive`.
-8. Wyświetlaj dane użytkownika jako tekst. Strona nie może się przeładowywać; dane nie są zapisywane na serwerze.
+Nie ustawiaj własnych szerokości w pikselach. **Przed kodowaniem** zapisz, ile bloków znajdzie się w pierwszym wierszu przy szerokościach: 767, 768, 991 i 992 px.
 
-## Zadanie 4. Naprawa i własne testy
+## Zadanie 2. Treść główna i panel boczny
 
-1. Otwórz `zadanie4/index.html`. Formularz ma spełniać wymagania zadania 3, ale przełącznik nie działa prawidłowo. Zapisz, co powinno się stać po jego odznaczeniu, a następnie sprawdź rzeczywisty wynik.
-2. Znajdź przyczynę problemu i popraw ją. Nie usuwaj kontrolki ani nie odblokowuj pola na stałe.
-3. W pliku `dokumentacja.md` zapisz jedno lub dwa zdania o przyczynie i poprawce.
-4. Sprawdź cztery przypadki:
-   - stan początkowy;
-   - odznaczenie przełącznika i zatwierdzenie formularza z uwagami;
-   - ponowne zaznaczenie przełącznika i zatwierdzenie formularza;
-   - wybrany przez siebie przypadek graniczny.
+Zbuduj nową stronę. Ustaw tytuł dokumentu i nagłówek `h1` na **Plan dnia**, a podtytuł **Uczymy się przez praktykę.** oznacz klasą `lead`. Umieść całość w `container py-4`.
 
-   Przypadek graniczny wybierz przed uruchomieniem testu, np. imię złożone z samych spacji albo pusty wybór stanowiska.
+Pod nagłówkiem dodaj wiersz z odstępem `g-4`, zawierający:
 
-## Zadanie 5. Dla chętnych: modal z informacją
+- sekcję główną **Zajęcia** z listą numerowaną: ES6+, jQuery, Bootstrap;
+- panel boczny **Informacje** z tekstem: „Pracownia: sala 12. Początek: 8:00.”.
 
-Utwórz przycisk `Zobacz informacje`, który otwiera modal zawierający:
+Każdy z tych obszarów umieść we własnym pudełku z klasami `bg-light border p-3`.
 
-- tytuł **Przed zajęciami**;
-- tekst `Zabierz własne pomysły. Sprzęt jest dostępny w pracowni.`
+### Układ i stopka
 
-Modal ma się zamykać przez ikonę, przycisk `Rozumiem` oraz klawisz Escape. Użyj atrybutów `data-bs-*` i dopasowanego identyfikatora. Nie pisz własnego mechanizmu modala.
+- Poniżej 992 px oba obszary mają zajmować pełną szerokość. Sekcja **Zajęcia** powinna być nad panelem **Informacje**.
+- Od 992 px sekcja **Zajęcia** ma zajmować 8/12, a panel **Informacje** 4/12 szerokości wiersza.
+- Pod obszarami dodaj stopkę z tekstem „Technikum programistyczne”. Zastosuj `mt-4`, `border-top` i `pt-3`.
+- Użyj elementów `main` i `aside` zgodnie z ich rolą. Nie twórz własnych media queries.
+
+## Zadanie 3. Oferta kursów
+
+W nowym pliku zbuduj ofertę szkoły. Ustaw tytuł dokumentu i nagłówek `h1` na **Oferta kursów**, a podtytuł **Wybierz kierunek nauki.** oznacz klasą `lead`.
+
+Dodaj trzy sekcje w podanej kolejności i użyj dokładnie wskazanych tekstów:
+
+| Nagłówek sekcji | Treść akapitu |
+|---|---|
+| Python | Poznaj podstawy programowania. |
+| JavaScript | Twórz interaktywne strony. |
+| Bazy danych | Projektuj i odczytuj dane. |
+
+### Wymagania dotyczące układu
+
+- Umieść treść w `container py-4`; nagłówek oddziel od oferty klasą `mb-4`.
+- Poniżej 768 px wyświetlaj jedną sekcję w wierszu, od 768 px dwie, a od 992 px trzy. Przy szerokości tabletowej trzecia sekcja ma znaleźć się po lewej stronie nowego wiersza.
+- Ustaw `g-4` na wierszu.
+- Wewnątrz każdej kolumny dodaj pudełko z klasami `border rounded p-3 h-100`.
+- Nagłówek każdej sekcji ma być elementem `h2`, stylizowanym jak `h4`. Akapit ma mieć klasę `mb-0`.
+- Nie używaj komponentu `card`.
+
+### Stopka i testy
+
+Pod ofertą dodaj stopkę z `mt-4`, `border-top` i `pt-3`. Umieść w niej nagłówek `h2` **Kontakt**, stylizowany jak `h5`, oraz akapit „Sekretariat: sala 12.” z klasą `mb-0`.
+
+Sprawdź, czy przy szerokości 390 px nie pojawia się poziomy pasek przewijania. Wszystkie wymagane teksty są podane w tym zadaniu — nie dodawaj tekstów odgadywanych z rozwiązania. Przygotuj tabelę testów dla sześciu szerokości podanych w ściądze.
+
+## Zadanie 4. Naprawa responsywności i odstępów
+
+Skrócony przykład ma pokazywać trzy nazwy kursów: jeden blok poniżej 768 px, dwa od 768 px i trzy od 992 px. Widoczne pudełka powinny mieć obramowanie, `p-3` i odstępy wynikające z `g-4`.
+
+Nie dodawaj opisów ani stopki. To skrócony test siatki, a nie ponowne wykonanie zadania 3.
+
+### Znajdź i popraw problemy
+
+Wskaż trzy problemy:
+
+1. Brak metadanej viewport.
+2. Stała klasa `col-4` na wszystkich szerokościach.
+3. Obramowanie na kolumnach, przez które powierzchnie stykają się mimo gutterów.
+
+Napraw problemy i sprawdź szerokości 767, 768, 991 oraz 992 px. Wykonaj też test telefonu przy 390 px w trybie emulacji urządzenia. W pliku `testy.md` wyjaśnij, co robi każda poprawka.
+
+Brak metadanej viewport sprawdzaj w emulacji telefonu — na zwykłym desktopie problem może nie być widoczny.
+
+## Zadanie 5. Nowy wariant siatki
+
+Na kopii zadania 3 zmień **tylko siatkę**:
+
+- Poniżej 768 px wyświetlaj po jednym kursie w wierszu.
+- Od 768 px umieść Python i JavaScript po połowie pierwszego wiersza, a Bazy danych na pełną szerokość w drugim wierszu.
+- Zachowaj ten układ również od 992 px.
+
+Zachowaj całą treść i odstępy. Wyjaśnij, dlaczego pozostawienie `col-lg-4` ze starej wersji zepsuje nowy wariant.
