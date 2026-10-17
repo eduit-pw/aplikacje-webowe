@@ -1,0 +1,29 @@
+[
+  {
+    "kod": "PR-1",
+    "tytul": "Panel kursanta",
+    "opiekun": { "imie": "Ala", "klasa": "4TP" },
+    "zadania": [
+      { "nazwa": "Widok", "status": "gotowe" },
+      { "nazwa": "API", "status": "otwarte" }
+    ]
+  },
+  {
+    "kod": "PR-2",
+    "tytul": "Raporty",
+    "opiekun": { "imie": "Bartek", "klasa": "4TP" },
+    "zadania": [
+      { "nazwa": "Eksport", "status": "gotowe" },
+      { "nazwa": "Filtry", "status": "gotowe" }
+    ]
+  },
+  {
+    "kod": "PR-3",
+    "tytul": "Forum",
+    "opiekun": { "imie": "Ala", "klasa": "4TP" },
+    "zadania": [
+      { "nazwa": "Logowanie", "status": "otwarte" }
+    ],
+    "priorytet": "wysoki"
+  }
+]

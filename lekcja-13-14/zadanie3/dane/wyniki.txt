@@ -1,0 +1,4 @@
+Ala;8
+Bartek;5
+Celina;10
+Daniel;7
