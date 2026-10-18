@@ -4,5 +4,6 @@
   "private": true,
   "dependencies": {
     "express": "^5.0.0"
-  }
+  },
+  "type": "commonjs"
 }

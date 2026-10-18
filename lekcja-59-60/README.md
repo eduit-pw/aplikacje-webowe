@@ -18,11 +18,11 @@ Jeśli zadanie wymaga Bootstrapa, skopiuj `vendor/bootstrap.min.css` z lekcji 09
 
 Potrzebne obrazy z folderu `obrazy` lekcji 09-10 skopiuj do `public/obrazy` projektu Angular. Odwołuj się do nich jako `obrazy/nazwa.svg`.
 
-Dołączone pliki są infrastrukturą: `backend/api.cjs`, `backend/package.json`, `proxy.conf.json` i `src/app/app.config.ts`. W folderze `backend` wykonaj `npm install` i `node api.cjs`. Konfigurację proxy skopiuj do głównego katalogu własnego frontendu, a `app.config.ts` do jego `src/app`. Komponent `App`, widok i style wykonaj samodzielnie.
+Dołączone pliki są infrastrukturą: `backend/api.js`, `backend/package.json`, `proxy.conf.json` i `src/app/app.config.ts`. W folderze `backend` wykonaj `npm install` i `node api.js`. Konfigurację proxy skopiuj do głównego katalogu własnego frontendu, a `app.config.ts` do jego `src/app`. Komponent `App`, widok i style wykonaj samodzielnie.
 
 ## Zadanie 1. Analiza specyfikacji i start
 
-Przed kodowaniem wypisz wymagania w tabeli: wymaganie, plik/metoda, sposób sprawdzenia. API GET /api/rezerwacje zwraca listę; POST przyjmuje {imie,miejsca}, miejsc całkowite 1-4, imię po trim niepuste. Endpoint działa na 3000. Frontend używa proxy, działa na 4200. Przygotowany backend uruchom `node api.cjs`, frontend `npx ng serve --proxy-config proxy.conf.json`. Na początku musi pojawić się ładowanie, potem lista lub pusty komunikat. Własne reguły nie mogą zmienić wymaganych danych.
+Przed kodowaniem wypisz wymagania w tabeli: wymaganie, plik/metoda, sposób sprawdzenia. API GET /api/rezerwacje zwraca listę; POST przyjmuje {imie,miejsca}, miejsc całkowite 1-4, imię po trim niepuste. Endpoint działa na 3000. Frontend używa proxy, działa na 4200. Przygotowany backend uruchom `node api.js`, frontend `npx ng serve --proxy-config proxy.conf.json`. Na początku musi pojawić się ładowanie, potem lista lub pusty komunikat. Własne reguły nie mogą zmienić wymaganych danych.
 
 ## Zadanie 2. Aplikacja według wymagań
 
@@ -34,7 +34,7 @@ Nowy start backendu: lista[], suma 0. Zapis Anna 2 →lista 1,suma 2. Bartek 1 �
 
 ## Zadanie 4. Dokumentacja i kompletne oddanie
 
-Szkolna specyfikacja oddania: folder lekcja-59-60 zawiera frontend z konfiguracją/manifestami i zasobami, backend/api.cjs z manifestami oraz dokumentacja.md i dowody/typowy.png, dowody/graniczny.png, dowody/bledny.png. Dokumentacja: faktyczne wersje narzędzi odczytane na stanowisku, polecenia startu, trzy testy z wynikami, jeden opis naprawy. Komentarz przy metodzie zapisz opisuje cel, dane wejściowe i skutki; nie kopiuj numerów kryteriów z innego arkusza. Archiwum lekcja-59-60.zip bez node_modules, cache, dist i danych wrażliwych. 
+Szkolna specyfikacja oddania: folder lekcja-59-60 zawiera frontend z konfiguracją/manifestami i zasobami, backend/api.js z manifestami oraz dokumentacja.md i dowody/typowy.png, dowody/graniczny.png, dowody/bledny.png. Dokumentacja: faktyczne wersje narzędzi odczytane na stanowisku, polecenia startu, trzy testy z wynikami, jeden opis naprawy. Komentarz przy metodzie zapisz opisuje cel, dane wejściowe i skutki; nie kopiuj numerów kryteriów z innego arkusza. Archiwum lekcja-59-60.zip bez node_modules, cache, dist i danych wrażliwych. 
 
 Przed końcem rozpakuj ZIP do innego folderu, sprawdź obecność plików i aktualność źródeł/zrzutów. Zależności odtwarzaj z przygotowanego zestawu; nie usuwaj jedynej lokalnej kopii przez npm ci bez dostępu do pakietów. Na rzeczywistym egzaminie nazwy, zawartość i forma dokumentacji wynikają z otrzymanego arkusza, nie z tej szkolnej specyfikacji.
 

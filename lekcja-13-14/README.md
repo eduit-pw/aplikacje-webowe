@@ -39,7 +39,7 @@ Daniel;7
 
 ## Zadanie 4. Diagnoza: Ścieżka zależna od terminala
 
-Otwórz `naprawa.cjs` i plik `dane/tekst.txt`. Najpierw uruchom skrypt z folderu lekcji przez `node naprawa.cjs`, a potem z katalogu nadrzędnego przez `node lekcja-13-14/naprawa.cjs`. Przed drugą próbą zapisz przewidywanie. Wyjaśnij różnicę wyników i popraw budowanie ścieżki, aby obie próby odczytały `Zażółć gęślą`. Nie wpisuj bezwzględnej ścieżki swojego komputera. Zapisz przyczynę, poprawkę i wyniki obu prób w `dokumentacja.md`.
+Otwórz `naprawa.js` i plik `dane/tekst.txt`. Najpierw uruchom skrypt z folderu lekcji przez `node naprawa.js`, a potem z katalogu nadrzędnego przez `node lekcja-13-14/naprawa.js`. Przed drugą próbą zapisz przewidywanie. Wyjaśnij różnicę wyników i popraw budowanie ścieżki, aby obie próby odczytały `Zażółć gęślą`. Nie wpisuj bezwzględnej ścieżki swojego komputera. Zapisz przyczynę, poprawkę i wyniki obu prób w `dokumentacja.md`.
 
 ## Zadanie 5. Dla chętnych: historia wygenerowanych raportów
 

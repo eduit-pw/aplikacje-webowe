@@ -18,7 +18,7 @@ Jeśli zadanie wymaga Bootstrapa, skopiuj `vendor/bootstrap.min.css` z lekcji 09
 
 Potrzebne obrazy z folderu `obrazy` lekcji 09-10 skopiuj do `public/obrazy` projektu Angular. Odwołuj się do nich jako `obrazy/nazwa.svg`.
 
-Backend do zadania 2 znajduje się w `backend/api.cjs`. W katalogu `backend` wykonaj `npm install`, a następnie `node api.cjs`. Plik `proxy.conf.json` skopiuj do katalogu głównego projektu Angular i uruchom frontend przez `npx ng serve --proxy-config proxy.conf.json`.
+Backend do zadania 2 znajduje się w `backend/api.js`. W katalogu `backend` wykonaj `npm install`, a następnie `node api.js`. Plik `proxy.conf.json` skopiuj do katalogu głównego projektu Angular i uruchom frontend przez `npx ng serve --proxy-config proxy.conf.json`.
 
 ## Zadanie 1. Dwa adresy i RouterOutlet
 
@@ -28,13 +28,13 @@ Utwórz dwa widoki Oferta i Informacje. Menu routerLink, miejsce na widok router
 
 ## Zadanie 2. GET przez proxy
 
-Dodaj provideHttpClient oraz Oferta z pobieraniem danych. Przygotuj api.cjs i proxy.conf.json. Najpierw sprawdź JSON pod localhost:3000/api/produkty, potem uruchom Angular z proxy. Przed subscribe przewidź, czy samo get wysyła żądanie.
+Dodaj provideHttpClient oraz Oferta z pobieraniem danych. Przygotuj api.js i proxy.conf.json. Najpierw sprawdź JSON pod localhost:3000/api/produkty, potem uruchom Angular z proxy. Przed subscribe przewidź, czy samo get wysyła żądanie.
 
 **Wynik oczekiwany:** Widoczne Notes 12 i Długopis 5; GET w Network.
 
 ## Zadanie 3. Samodzielne API kursów i trzy stany widoku
 
-Nowe dane /api/kursy: ID 1 Python cena 80, ID 2 JavaScript 100, ID 3 C# 120. Widok Oferta pobiera kursy zamiast produktów, menu zachowane. Ma Ładowanie, błąd, listę albo Brak kursów. Dodaj Odśwież z blokadą podczas ładowania. Przy błędzie nie wyświetlaj starej listy jako udanej odpowiedzi. Przećwicz ponowienie po przywróceniu backendu. Wykorzystaj dołączony `backend/szkielet.cjs` i konfigurację proxy. Endpoint i obsługę odpowiedzi napisz samodzielnie. Przed uruchomieniem zatrzymaj serwer zadania 2.
+Nowe dane /api/kursy: ID 1 Python cena 80, ID 2 JavaScript 100, ID 3 C# 120. Widok Oferta pobiera kursy zamiast produktów, menu zachowane. Ma Ładowanie, błąd, listę albo Brak kursów. Dodaj Odśwież z blokadą podczas ładowania. Przy błędzie nie wyświetlaj starej listy jako udanej odpowiedzi. Przećwicz ponowienie po przywróceniu backendu. Wykorzystaj dołączony `backend/szkielet.js` i konfigurację proxy. Endpoint i obsługę odpowiedzi napisz samodzielnie. Przed uruchomieniem zatrzymaj serwer zadania 2.
 
 **Wynik oczekiwany:** Lista 3, [] daje Brak kursów, brak serwera daje Nie udało się pobrać danych.
 

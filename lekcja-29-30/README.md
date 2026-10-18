@@ -9,7 +9,7 @@ npm init -y
 npm install express@5 mongodb@6 cors@2
 ```
 
-Używaj CommonJS (`require`). Serwery uruchamiaj przez `node nazwa.js` lub `node nazwa.cjs` i zatrzymuj Ctrl+C. Zapisz rzeczywiste identyfikatory dokumentów zwrócone przez bazę.
+Używaj CommonJS (`require`). Serwery uruchamiaj przez `node nazwa.js` i zatrzymuj Ctrl+C. Zapisz rzeczywiste identyfikatory dokumentów zwrócone przez bazę.
 
 ## Zadanie 1. Start i odczyt
 

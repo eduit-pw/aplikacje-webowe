@@ -39,7 +39,7 @@ Utwórz `zadanie2.js`. Serwer zaczyna z tablicą dwóch kursów: `{id:1,nazwa:'P
 
 ## Zadanie 4. Diagnoza: Parser zarejestrowany za trasą
 
-Otwórz celowo błędny `naprawa.cjs`. Serwer działa na porcie 3090. Przed uruchomieniem przewidź wartość `req.body`, gdy trasa POST jest zarejestrowana przed parserem JSON. Wyślij `POST /echo` z JSON-em `{"nazwa":"Notes"}`. Popraw kolejność middleware i sprawdź poprawne żądanie oraz pusty obiekt. Zapisz przyczynę i wyniki prób. Przed startem zatrzymaj poprzedni serwer.
+Otwórz celowo błędny `naprawa.js`. Serwer działa na porcie 3090. Przed uruchomieniem przewidź wartość `req.body`, gdy trasa POST jest zarejestrowana przed parserem JSON. Wyślij `POST /echo` z JSON-em `{"nazwa":"Notes"}`. Popraw kolejność middleware i sprawdź poprawne żądanie oraz pusty obiekt. Zapisz przyczynę i wyniki prób. Przed startem zatrzymaj poprzedni serwer.
 
 ## Zadanie 5. Dla chętnych: podsumowanie miejsc
 

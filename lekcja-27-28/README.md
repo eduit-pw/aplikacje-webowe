@@ -9,7 +9,7 @@ npm init -y
 npm install express@5 mongodb@6 cors@2
 ```
 
-Używaj CommonJS (`require`). Serwery uruchamiaj przez `node nazwa.js` lub `node nazwa.cjs` i zatrzymuj Ctrl+C. Zapisz rzeczywiste identyfikatory dokumentów zwrócone przez bazę.
+Używaj CommonJS (`require`). Serwery uruchamiaj przez `node nazwa.js` i zatrzymuj Ctrl+C. Zapisz rzeczywiste identyfikatory dokumentów zwrócone przez bazę.
 
 ## Zadanie 1. Odczytaj dane z poprzedniej lekcji
 
@@ -35,7 +35,7 @@ Napisz `zadanie2.js` pracujący w bazie tematu 14 i kolekcji `notatki_demo`. W t
 
 ## Zadanie 4. CORS sprawdzony w przeglądarce
 
-W folderze `zadanie4` znajdziesz `cors-api.cjs`, `klient.cjs` i `public/index.html`. Zainstaluj zależności w katalogu lekcji. W dwóch terminalach uruchom `node zadanie4/cors-api.cjs` i `node zadanie4/klient.cjs`. API działa na porcie 3094, strona na 8080.
+W folderze `zadanie4` znajdziesz `cors-api.js`, `klient.js` i `public/index.html`. Zainstaluj zależności w katalogu lekcji. W dwóch terminalach uruchom `node zadanie4/cors-api.js` i `node zadanie4/klient.js`. API działa na porcie 3094, strona na 8080.
 
 1. Otwórz `http://localhost:8080`. Przed poprawką sprawdź blokowanie odczytu odpowiedzi przez JavaScript.
 2. Dodaj konfigurację CORS przed trasami API. Dozwolony origin to `http://localhost:8080`.
