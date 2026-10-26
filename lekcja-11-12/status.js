@@ -5,10 +5,8 @@ function pobierzStatus() {
 }
 
 async function main() {
-  console.log('A');
-  // Pobierz wynik pobierzStatus() przez await do zmiennej status.
-  // Wypisz: Status: <wynik>
-  console.log('B');
+  // TODO: uzupełnij funkcję.
+  throw new Error('TODO');
 }
 
 main().catch((blad) => {
@@ -16,4 +14,4 @@ main().catch((blad) => {
   process.exitCode = 1;
 });
 
-console.log('C');
+// Uzupełnij wykonanie programu zgodnie z README.

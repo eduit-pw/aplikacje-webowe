@@ -1,96 +1,104 @@
-# Ćwiczenia: responsywna siatka Bootstrapa
+# Bootstrap: kontener, siatka i responsywność
 
-## Zadanie 1. Trzy bloki informacji
+Otwórz plik HTML w przeglądarce. Wyniki i błędy skryptu sprawdzaj w F12. Biblioteki i obrazy są lokalne.
 
-Zbuduj stronę z tytułem i nagłówkiem **Pracownia webowa**. Pod nagłówkiem umieść trzy bloki w podanej kolejności:
+Wykonaj zadania 1-4. Zadanie 5 to własne ulepszenie dla chętnych, a zadanie 6 jest domowe. Rozwiązuj kolejne punkty i sprawdzaj działanie na bieżąco. Opis testów oddajesz w testy.md tylko przy zadaniu 4.
 
-| Nagłówek | Treść akapitu |
-|---|---|
-| HTML | Struktura strony. |
-| CSS | Wygląd strony. |
-| JavaScript | Zachowanie strony. |
+## Zadanie 1. Trzy bloki informacji | 15 minut, prowadzone
 
-Każdy blok powinien zawierać nagłówek i akapit, obramowanie oraz wewnętrzny odstęp `p-3`. Ustaw odstęp między blokami za pomocą `g-3`. Całą treść umieść w `container` z pionowym odstępem `py-4`.
+**Pliki:** [zadanie1/index.html](zadanie1/index.html).
 
-### Układ zależnie od szerokości
+**Polecenie:**
 
-| Szerokość ekranu | Układ |
-|---|---|
-| Poniżej 768 px | Jeden blok w wierszu |
-| Od 768 do 991 px | Dwa bloki w pierwszym wierszu; trzeci po lewej w kolejnym |
-| Od 992 px | Trzy bloki w jednym wierszu |
+1. Zbuduj stronę z tytułem i nagłówkiem „Pracownia webowa”. Pod nagłówkiem trzy bloki w kolejności: HTML - „Struktura strony.”; CSS - „Wygląd strony.”; JavaScript - „Zachowanie strony.”.
+2. Każdy blok ma nagłówek i akapit, obramowanie i wewnętrzny odstęp klasy `p-3`; odstęp między blokami `g-3`. Treść mieści się w `container` z pionowym odstępem `py-4`.
+3. Poniżej 768 px: jeden blok na wiersz. Od 768 do 991 px: dwa, trzeci w następnym wierszu po lewej.
+4. Od 992 px: trzy w wierszu. Nie ustawiaj własnych szerokości w px.
+5. Przed kodowaniem zapisz przewidywaną liczbę bloków w pierwszym wierszu przy 767,768,991,992 px.
 
-Nie ustawiaj własnych szerokości w pikselach. **Przed kodowaniem** zapisz, ile bloków znajdzie się w pierwszym wierszu przy szerokościach: 767, 768, 991 i 992 px.
+**Oczekiwany wynik - przykład:** Przy 767 px jeden blok w pierwszym wierszu; przy 768 px dwa; przy 992 px trzy.
 
-## Zadanie 2. Treść główna i panel boczny
+**Sprawdź również:** Porównaj 767/768 i 991/992 px. Nie ustawiaj własnych szerokości w pikselach.
 
-Zbuduj nową stronę. Ustaw tytuł dokumentu i nagłówek `h1` na **Plan dnia**, a podtytuł **Uczymy się przez praktykę.** oznacz klasą `lead`. Umieść całość w `container py-4`.
+## Zadanie 2. Treść główna i panel boczny | 18 minut, wspólne
 
-Pod nagłówkiem dodaj wiersz z odstępem `g-4`, zawierający:
+**Pliki:** [zadanie2/index.html](zadanie2/index.html).
 
-- sekcję główną **Zajęcia** z listą numerowaną: ES6+, jQuery, Bootstrap;
-- panel boczny **Informacje** z tekstem: „Pracownia: sala 12. Początek: 8:00.”.
+**Polecenie:**
 
-Każdy z tych obszarów umieść we własnym pudełku z klasami `bg-light border p-3`.
+1. Zbuduj nową stronę, tytuł i h1 „Plan dnia”, podtytuł „Uczymy się przez praktykę.” jako `lead`. Wszystko w `container py-4`.
+2. Pod nagłówkiem wiersz `g-4`: główna sekcja „Zajęcia” z listą numerowaną ES6+, jQuery, Bootstrap oraz panel boczny „Informacje” z tekstem „Pracownia: sala 12. Początek: 8:00.”.
+3. Każdy z tych dwóch obszarów ma wewnętrzne pudełko `bg-light border p-3`.
+4. Poniżej 992 px oba obszary zajmują pełną szerokość: Zajęcia wyżej, Informacje niżej. Od 992 px Zajęcia zajmują 8/12, Informacje 4/12 jednego wiersza.
+5. Stopka pod nimi: „Technikum programistyczne”, odstęp `mt-4`, górna linia `border-top`, odstęp `pt-3`. Użyj `main` i `aside` zgodnie z rolą; bez własnych media queries.
 
-### Układ i stopka
+**Oczekiwany wynik - przykład:** Przy szerokości od 992 px Zajęcia zajmują 8/12, Informacje 4/12; poniżej są jeden pod drugim.
 
-- Poniżej 992 px oba obszary mają zajmować pełną szerokość. Sekcja **Zajęcia** powinna być nad panelem **Informacje**.
-- Od 992 px sekcja **Zajęcia** ma zajmować 8/12, a panel **Informacje** 4/12 szerokości wiersza.
-- Pod obszarami dodaj stopkę z tekstem „Technikum programistyczne”. Zastosuj `mt-4`, `border-top` i `pt-3`.
-- Użyj elementów `main` i `aside` zgodnie z ich rolą. Nie twórz własnych media queries.
+**Sprawdź również:** Sprawdź kolejność treści, stopkę i brak poziomego przewijania.
 
-## Zadanie 3. Oferta kursów
+## Zadanie 3. Oferta kursów | 25 minut, samodzielne
 
-W nowym pliku zbuduj ofertę szkoły. Ustaw tytuł dokumentu i nagłówek `h1` na **Oferta kursów**, a podtytuł **Wybierz kierunek nauki.** oznacz klasą `lead`.
+**Pliki:** [zadanie3/index.html](zadanie3/index.html).
 
-Dodaj trzy sekcje w podanej kolejności i użyj dokładnie wskazanych tekstów:
+**Polecenie:**
 
-| Nagłówek sekcji | Treść akapitu |
-|---|---|
-| Python | Poznaj podstawy programowania. |
-| JavaScript | Twórz interaktywne strony. |
-| Bazy danych | Projektuj i odczytuj dane. |
+1. W pliku zadanie3/index.html przygotuj polski dokument UTF-8 z viewport. Tytuł i h1: Oferta kursów; podtytuł lead: Wybierz kierunek nauki.
+2. Użyj container py-4 i odstępu mb-4 pod nagłówkiem. Dodaj sekcje Python, JavaScript, Bazy danych w tej kolejności.
+3. Wpisz odpowiednio opisy: Poznaj podstawy programowania.; Twórz interaktywne strony.; Projektuj i odczytuj dane.
+4. Zbuduj siatkę: jedna sekcja w wierszu poniżej 768 px, dwie od 768 px, trzy od 992 px. Trzecia sekcja na tablecie zaczyna kolejny wiersz po lewej. Użyj g-4.
+5. W każdej kolumnie umieść osobne pudełko border rounded p-3 h-100, nagłówek h2 z klasą h4 i akapit mb-0. Komponent card poznasz później.
+6. Dodaj stopkę mt-4 border-top pt-3: nagłówek Kontakt jako h2 z klasą h5 i akapit Sekretariat: sala 12. z mb-0. Sprawdź brak poziomego przewijania przy 390 px.
+7. Oddziel kolumnę siatki od pudełka z obramowaniem i odstępem wewnętrznym.
 
-### Wymagania dotyczące układu
+**Oczekiwany wynik - przykład:** Telefon: trzy sekcje jedna pod drugą; tablet: dwie i trzecia po lewej; duży ekran: trzy obok siebie.
 
-- Umieść treść w `container py-4`; nagłówek oddziel od oferty klasą `mb-4`.
-- Poniżej 768 px wyświetlaj jedną sekcję w wierszu, od 768 px dwie, a od 992 px trzy. Przy szerokości tabletowej trzecia sekcja ma znaleźć się po lewej stronie nowego wiersza.
-- Ustaw `g-4` na wierszu.
-- Wewnątrz każdej kolumny dodaj pudełko z klasami `border rounded p-3 h-100`.
-- Nagłówek każdej sekcji ma być elementem `h2`, stylizowanym jak `h4`. Akapit ma mieć klasę `mb-0`.
-- Nie używaj komponentu `card`.
+**Sprawdź również:** Sprawdź 390,767,768,991,992 px oraz komplet podanych tekstów.
 
-### Stopka i testy
+<details><summary>Wskazówka</summary>
 
-Pod ofertą dodaj stopkę z `mt-4`, `border-top` i `pt-3`. Umieść w niej nagłówek `h2` **Kontakt**, stylizowany jak `h5`, oraz akapit „Sekretariat: sala 12.” z klasą `mb-0`.
+Uruchom najmniejszy działający fragment. Sprawdź jeden rekord lub jedną akcję, a potem dodawaj kolejne wymagania.
 
-Sprawdź, czy przy szerokości 390 px nie pojawia się poziomy pasek przewijania. Wszystkie wymagane teksty są podane w tym zadaniu — nie dodawaj tekstów odgadywanych z rozwiązania. Przygotuj tabelę testów dla sześciu szerokości podanych w ściądze.
+</details>
 
-## Zadanie 4. Naprawa responsywności i odstępów
+## Zadanie 4. Naprawa responsywności i odstępów | 15 minut, diagnoza
 
-Skrócony przykład ma pokazywać trzy nazwy kursów: jeden blok poniżej 768 px, dwa od 768 px i trzy od 992 px. Widoczne pudełka powinny mieć obramowanie, `p-3` i odstępy wynikające z `g-4`.
+**Pliki:** [zadanie4/index.html](zadanie4/index.html).
 
-Nie dodawaj opisów ani stopki. To skrócony test siatki, a nie ponowne wykonanie zadania 3.
+**Polecenie:**
 
-### Znajdź i popraw problemy
+1. Skrócony przykład w starterze ma pokazywać trzy nazwy kursów: jeden blok poniżej 768 px, dwa od 768 px, trzy od 992 px. Widoczne pudełka mają mieć obramowanie, `p-3` i przerwy wynikające z `g-4`.
+2. Nie dodawaj opisów ani stopki - to skrócony test siatki, a nie ponowne zadanie 3.
+3. Wskaż trzy problemy: brak viewport meta, stałe `col-4` na wszystkich szerokościach oraz obramowanie na kolumnach powodujące, że powierzchnie stykają się mimo gutterów. Napraw i sprawdź 767/768 oraz 991/992 px; zrób także test telefonu 390 px w trybie emulacji urządzenia.
+4. Brak viewport meta badaj w emulacji telefonu - na zwykłym desktopie nie musi się ujawnić.
 
-Wskaż trzy problemy:
+**Oczekiwany wynik - przykład:** Po naprawie bloki mają układ 1/2/3 i widoczne odstępy między obramowaniami.
 
-1. Brak metadanej viewport.
-2. Stała klasa `col-4` na wszystkich szerokościach.
-3. Obramowanie na kolumnach, przez które powierzchnie stykają się mimo gutterów.
+**Sprawdź również:** Zbadaj granice breakpointów; brak viewport oceń także w emulacji telefonu 390 px.
 
-Napraw problemy i sprawdź szerokości 767, 768, 991 oraz 992 px. Wykonaj też test telefonu przy 390 px w trybie emulacji urządzenia. W pliku `testy.md` wyjaśnij, co robi każda poprawka.
+W testy.md zapisz trzy próby: typową, graniczną i własną, z oczekiwaniem i rzeczywistym wynikiem. Dodaj krótką diagnozę.
 
-Brak metadanej viewport sprawdzaj w emulacji telefonu — na zwykłym desktopie problem może nie być widoczny.
+## Zadanie 5. Własne ulepszenie - dla chętnych
 
-## Zadanie 5. Nowy wariant siatki
+**Punkt wyjścia:** własna, działająca część podstawowa wskazana w poleceniu.
 
-Na kopii zadania 3 zmień **tylko siatkę**:
+Wybierz wariant opisany poniżej albo własny dodatek: Zaprojektuj inny układ tej samej treści na telefonie i dużym ekranie. Zachowaj działanie części podstawowej.
 
-- Poniżej 768 px wyświetlaj po jednym kursie w wierszu.
-- Od 768 px umieść Python i JavaScript po połowie pierwszego wiersza, a Bazy danych na pełną szerokość w drugim wierszu.
-- Zachowaj ten układ również od 992 px.
+**Polecenie:**
 
-Zachowaj całą treść i odstępy. Wyjaśnij, dlaczego pozostawienie `col-lg-4` ze starej wersji zepsuje nowy wariant.
+1. Na kopii zadania 3 zmień tylko siatkę: poniżej 768 px po jednym kursie; od 768 px Python i JavaScript po połowie pierwszego wiersza, Bazy danych na pełną szerokość drugiego. Ten układ ma pozostać także od 992 px.
+2. Zachowaj całą treść i odstępy. Wyjaśnij, dlaczego pozostawienie `col-lg-4` ze starej wersji zepsuje wariant.
+
+Dla własnego pomysłu ustal oczekiwany efekt, pokaż jeden test dodatku i ponownie sprawdź podstawę. Wystarczy krótki komentarz w kodzie.
+
+## Zadanie 6. Zadanie domowe: Plan wystawy
+
+**Pliki:** [domowe/index.html](domowe/index.html).
+
+**Cel naprawy:** Trzy sale mają układ 1/2/3 kolumn: telefon/md/lg. Każde pudełko ma własny odstęp wewnętrzny, a wiersz gutter g-3. Sprawdź 390, 768 i 992 px.
+
+**Polecenie:**
+
+1. Uruchom lub skompiluj błędną wersję i porównaj jej zachowanie z wymaganiami.
+2. Znajdź i popraw trzy usterki. Zachowaj poznane mechanizmy i wymagane zachowanie.
+3. Nad każdą poprawką dodaj komentarz CODE REVIEW wyjaśniający przyczynę błędu. W HTML użyj komentarza HTML, a w JS lub TS komentarza //.
+4. Sprawdź: Szerokości 390,768,992 px i przerwy pomiędzy pudełkami. Oddaj poprawiony kod i przygotuj krótkie wyjaśnienie jednej poprawki.

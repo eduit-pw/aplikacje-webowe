@@ -1,0 +1,9 @@
+{
+  "name": "lekcja-25-26-powtorka",
+  "private": true,
+  "type": "commonjs",
+  "dependencies": {
+    "express": "5.2.1",
+    "express-session": "1.19.0"
+  }
+}

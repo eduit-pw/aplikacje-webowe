@@ -1,0 +1,17 @@
+[
+  {
+    "kod": "P-21",
+    "temperatura": 18,
+    "aktywny": true
+  },
+  {
+    "kod": "P-22",
+    "temperatura": 26,
+    "aktywny": true
+  },
+  {
+    "kod": "P-23",
+    "temperatura": 21,
+    "aktywny": false
+  }
+]

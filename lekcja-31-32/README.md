@@ -1,58 +1,28 @@
-# Ćwiczenia: TypeScript: typy proste i `tsconfig.json`
+# Trening: dokumenty MongoDB i API
 
-## Przygotowanie
+Powtórz typy pól, filtrowanie, zapis i odczyt dokumentów oraz interpretowanie odpowiedzi bazy. Pracuj na bazie trening_odczytow, niezależnej od wcześniejszych ćwiczeń. W folderze wykonaj npm install, a przed uruchomieniem API włącz lokalny serwer MongoDB.
 
-W nowym katalogu zainstaluj kompilator i utwórz konfigurację:
+## 1. Obserwacja dokumentów w Compassie
 
-```bash
-npm init -y
-npm install --save-dev typescript@5.9.3
-npx tsc --init
-```
+Dane: [odczyty.json](dane/odczyty.json).
 
-Utwórz katalog `src` i pliki wskazane w zadaniach. Korzystaj z domyślnej konfiguracji TypeScript 5.9.3: JavaScript powstaje obok plików TypeScript. Kompiluj i uruchamiaj kolejno:
+1. Utwórz kolekcję odczyty i zaimportuj trzy dokumenty tylko raz.
+2. Znajdź aktywne czujniki; oczekuj P-21 i P-22. Następnie znajdź temperatury większe niż 20; oczekuj P-22 i P-23.
+3. Zmień temperaturę P-21 na 23, zachowując typ number, i powtórz drugi odczyt.
+4. Dodaj ręcznie dokument testowy, potem usuń tylko ten dokument. Wskaż różnicę pomiędzy jego kodem i _id.
 
-```bash
-npx tsc
-node src/zadanie1.js
-```
+## 2. Odczyt i zapis przez aplikację
 
-Dla kolejnych zadań podaj właściwą nazwę pliku JS. Jeśli konfiguracja już istnieje, nie wykonuj ponownie `--init`. Przy globalnym kompilatorze możesz użyć `tsc` zamiast `npx tsc`. Po błędzie popraw kod i ponów kompilację przed uruchomieniem JS. Nie przenoś tu konfiguracji z Angulara.
+Starter: [api.js](api.js). Port 3116. Bazę i kolekcję wybiera przygotowany kod połączenia.
 
-## Zadanie 1. Metryka produktu
+1. Dodaj GET /api/odczyty zwracające wszystkie dokumenty.
+2. Dodaj GET /api/odczyty/:id. Poprawne ID ma 24 znaki szesnastkowe; zły zapis daje 400, a brak dokumentu 404.
+3. Dodaj POST /api/odczyty z polami kod i temperatura. Kod po trim jest niepusty, temperatura jest liczbą od -20 do 80 włącznie. Serwer ustawia aktywny:true.
+4. Zapisuj tylko dopuszczone pola. Sukces daje 201 i dokument z rzeczywistym _id; błędne dane 400. Ponowny GET ma pokazać nowy odczyt.
+5. Sprawdź temperatury -20,80,-21,81 i tekst "23", pusty kod, błędny ID i nieznany poprawny ID.
 
-Utwórz `src/zadanie1.ts`. Zapisz produkt o nazwie `Zeszyt`, cenie `12.5` i dostępności `true`, używając jawnych typów `string`, `number`, `boolean`. Dodaj rabat `0.2` z typem wywnioskowanym przez kompilator. Napisz funkcję `cenaPoRabacie(cena: number, rabat: number): number`. Wypisz dokładnie `Zeszyt: 10 zł, dostępny: tak`. Skompiluj projekt i uruchom wygenerowany plik JS. Na próbę zamień cenę na tekst `'12.5'`, zobacz błąd kompilatora, a następnie przywróć liczbę.
+## 3. Przewidź efekt aktualizacji
 
-**Oddawany rezultat:** `src/zadanie1.ts`, `tsconfig.json`, wynik uruchomienia oraz zanotowana informacja, dlaczego zapis `const cena: number = '12.5'` nie jest poprawny.
+Na testowym dokumencie w osobnym skrypcie wykonaj updateOne z filtrem po _id i $set ustawiającym tę samą temperaturę dwukrotnie. Przed próbą przewidź matchedCount i modifiedCount. Wyjaśnij, dlaczego niezmieniona wartość nie oznacza braku rekordu. Wskaż, jak ograniczyć deleteOne do jednego dokumentu. Korzystaj z własnego testowego _id.
 
-## Zadanie 2. Wyniki próbnego testu
-
-Utwórz `src/zadanie2.ts`. Wyniki czterech osób wynoszą `[15, 20, 5, 20]` punktów. Utwórz tablicę `number[]`, funkcję `obliczSrednia(wyniki: number[]): number` oraz zmienną logiczną określającą, czy średnia wynosi co najmniej 12 punktów. Policz, ile wyników wynosi co najmniej 18 punktów. Wypisz w jednej linii JSON `{"srednia":15,"zaliczono":true,"wysokieWyniki":2}`. Pusta tablica ma dawać średnią `0` bez dzielenia przez zero.
-
-**Oddawany rezultat:** `src/zadanie2.ts` i wynik programu.
-
-## Zadanie 3. Miniarkusz: rachunek zakupów
-
-**Autorska sytuacja:** Kasjer ma trzy produkty: długopis, zeszyt i teczkę. Ceny jednostkowe to `[3, 8.5, 12]`, a liczby zamówionych sztuk `[2, 3, 1]`. Przy kwocie przed rabatem wynoszącej co najmniej 40 zł klient otrzymuje 10% rabatu. Oblicz rachunek jako dane JSON. Jest to ćwiczenie typów prostych i funkcji, bez połączenia z bazą.
-
-**Wymagania do odhaczenia:**
-
-1. Użyj `string[]` dla nazw, `number[]` dla cen oraz ilości; zmienną `promocja` typu `boolean` ustaw na podstawie kwoty.
-2. Napisz funkcję `obliczRazem(ceny: number[], ilosci: number[]): number`; jeśli długości tablic się różnią, zgłoś błąd opisujący przyczynę.
-3. Sprawdź, czy ilości są dodatnimi liczbami całkowitymi oraz czy ceny są dodatnimi, skończonymi liczbami; w razie błędu przerwij obliczenie komunikatem. TypeScript sprawdza **typy**, a ten warunek sprawdza **wartości**.
-4. Poprawny rachunek wypisz jako `{"sztuki":6,"razemPrzedRabatem":43.5,"rabatProcent":10,"doZaplaty":39.15,"promocja":true}`. Wynik kwoty zaokrąglij do dwóch miejsc po przecinku, reprezentowanych w JSON jako liczba.
-5. Projekt kompiluje się poleceniem `npx tsc`; `node src/zadanie3.js` wykonuje skompilowany kod. Przy różnych długościach tablic program zgłasza sensowny błąd zamiast wypisywać `NaN`.
-
-**Oddawany rezultat:** `src/zadanie3.ts`, działający wynik i informacja o próbie z błędnymi danymi.
-
-## Zadanie 4. Typ poprawny, wartość spoza zakresu
-
-Utwórz `src/naprawa16.ts` z ceną `12`, rabatem `120` typu `number` i obliczeniem `cena * (1 - rabat / 100)`. Przewidź, dlaczego kompilator akceptuje typy, mimo że wynik jest ujemny. Dodaj walidację: rabat ma być skończoną liczbą z zakresu 0-100. Sprawdź `0`, `100`, `120` i `NaN`. Oczekuj odpowiednio kwot `12`, `0` oraz odrzucenia dwóch błędnych danych. Zapisz różnicę między sprawdzaniem typu a sprawdzaniem zakresu.
-
-## Zadanie 5. Dla chętnych: kontrola wielkości rabatu
-
-Rozbuduj zadanie 3: napisz funkcję `zastosujRabat(kwota: number, rabat: number): number`. Ma zwracać kwotę z rabatem (zaokrągloną do dwóch miejsc), ale odrzucać rabat spoza zakresu `0-100` oraz ujemną lub niefinitywną kwotę. Użyj jej do wyznaczenia `doZaplaty`. Wywołanie z `zastosujRabat(100, 120)` ma rzucać błąd; typ `number` sam nie ogranicza zakresu.
-
-## Oddanie pracy
-
-Oddaj pliki wymagane w zadaniach i własną dokumentację testów. Zapisz sprawdzone dane, oczekiwany wynik oraz wynik rzeczywisty. Dołącz manifesty i konfigurację, jeśli projekt ich używa. Nie dołączaj `node_modules`, plików tymczasowych ani danych dostępowych. Zadanie 5 jest dodatkowe.
+Własne ulepszenie: przygotuj filtr odczytów w wybranym przedziale temperatur. Sprawdź próbę pustego wyniku. Nie wprowadzaj nowych bibliotek.

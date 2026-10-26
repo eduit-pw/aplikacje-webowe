@@ -1,53 +1,97 @@
-# Ćwiczenia: Angular: utworzenie projektu i komponenty standalone
+# TypeScript: klasy, konstruktory, dostęp i dziedziczenie
 
-## Przygotowanie
+W folderze lekcji wykonaj npm install. Kompiluj każdy plik osobno: npx tsc src/zadanie1.ts --target ES2022 --module commonjs --outDir dist, potem node dist/zadanie1.js. Dla następnego zadania zmień nazwę pliku; dla diagnozy użyj src/naprawa.ts, dla pracy domowej domowe/review.ts.
 
-Utwórz projekt:
+Wykonaj zadania 1-4. Zadanie 5 to własne ulepszenie dla chętnych, a zadanie 6 jest domowe. Rozwiązuj kolejne punkty i sprawdzaj działanie na bieżąco. Opis testów oddajesz w testy.md tylko przy zadaniu 4.
 
-```bash
-npx @angular/cli@20.3 new katalog --standalone --routing=false --style=css --ssr=false --defaults
-cd katalog
-npx ng serve
-```
+## Zadanie 1. Dwa obiekty produktu | 15 minut, prowadzone
 
-Zachowaj wygenerowaną konfigurację i obsługę Zone.js. Korzystaj z plików `src/app/app.ts`, `app.html`, `app.css`. Kompilację sprawdzaj przez `npx ng build`.
+**Pliki:** [src/zadanie1.ts](src/zadanie1.ts).
 
-Jeśli zadanie wymaga Bootstrapa, skopiuj `vendor/bootstrap.min.css` z lekcji 09-10 do `src/vendor/bootstrap.min.css`, a w `src/styles.css` dodaj:
+**Polecenie:**
 
-```css
-@import "./vendor/bootstrap.min.css";
-```
+1. Utwórz klasę Produkt z readonly id, public nazwa i prywatną ceną. Konstruktor przyjmuje te trzy dane.
+2. Metoda opis zwraca Nazwa: cena zł. Stwórz Notes 12 zł i Długopis 5 zł.
+3. Metoda zmienCene odrzuca cenę ujemną i nieskończoną; po zmianie Notes na 10 zł cena Długopisu pozostaje 5. Napisz przewidywanie przed wyświetleniem obu opisów.
 
-Potrzebne obrazy z folderu `obrazy` lekcji 09-10 skopiuj do `public/obrazy` projektu Angular. Odwołuj się do nich jako `obrazy/nazwa.svg`.
+**Oczekiwany wynik - przykład:** Po zmianie ceny: Notes: 10 zł; Długopis: 5 zł.
 
-## Zadanie 1. Uruchom i znajdź pliki
+**Sprawdź również:** Zmiana jednego obiektu nie zmienia drugiego; ujemna i nieskończona cena są odrzucone.
 
-Uruchom projekt katalog, znajdź main.ts, app.ts, app.html i app.css. Zastąp szablon stroną z nagłówkiem Pracownia webowa i akapitem Projekt uruchomiony. Dodaj ramkę CSS. Przed zmianą wskaż, który plik wpłynie na tekst, a który na wygląd.
+## Zadanie 2. Koszt produktu z dostawą | 18 minut, wspólne
 
-**Wynik oczekiwany:** Tekst i zielona ramka widoczne po zapisaniu, kompilacja bez błędów.
+**Pliki:** [src/zadanie2.ts](src/zadanie2.ts).
 
-## Zadanie 2. Samodzielny komponent stopki
+**Polecenie:**
 
-Utwórz stopka.ts i komponent standalone ze selektorem app-stopka. Ma wyświetlać Stopka pracowni. Zaimportuj go do App i umieść na końcu widoku. Nie dodawaj pliku TS do index.html skryptem.
+1. Napisz src/zadanie2.ts. Klasa Produkt ma protected cena i koszt() zwracające cenę.
+2. Klasa ProduktWysylkowy dodaje dostawę, wywołuje super i nadpisuje koszt(). Notes 12 zł z dostawą 8 zł ma koszt 20.
+3. Dodaj zwykły produkt 5 zł i policz sumę kosztów obydwu obiektów w tablicy Produkt[].
 
-**Wynik oczekiwany:** Nagłówek i dokładnie jedna stopka.
+**Oczekiwany wynik - przykład:** Koszty [20,5], suma 25.
 
-## Zadanie 3. Wizytówka szkolnej pracowni
+**Sprawdź również:** Porównaj metodę bazową i nadpisaną oraz wywołanie super w konstruktorze.
 
-W nowej kopii projektu wykonaj stronę: nagłówek Laboratorium 4 TI; komponent app-informacja z tekstem Zajęcia praktyczne; komponent app-kontakt z tekstem Kontakt: sala 12. W widoku rodzica umieść informację dwa razy, kontakt raz. Informacja ma niebieską ramkę, kontakt własny mały tekst. Bez interpolacji i zdarzeń, które będą w temacie 20.
+## Zadanie 3. Samodzielna wycena biletów | 25 minut, samodzielne
 
-**Wynik oczekiwany:** Dwie ramki informacyjne i jeden kontakt.
+**Pliki:** [src/zadanie3.ts](src/zadanie3.ts).
 
-## Zadanie 4. Selector lub imports
+**Polecenie:**
 
-W kopii zadania 3 zmień app-informacja na app-info bez zmiany selektora. Zapisz hipotezę, odczytaj pierwszy błąd i napraw. Następnie usuń Informacja z imports, zachowując import TS. Wyjaśnij różnicę obu problemów.
+1. Utwórz Bilet z nazwą i protected cena oraz metodą kwota. Konstruktor odrzuca cenę ujemną i nieskończoną.
+2. Utwórz BiletUlgowy dziedziczący z Bilet. Konstruktor przyjmuje procent rabatu 0-100 i odrzuca wartości spoza zakresu.
+3. Nadpisz kwota tak, aby uwzględniała rabat. Poprawnie wywołaj konstruktor bazowy.
+4. Przygotuj zwykły bilet 40 zł, ulgowy 40 zł z rabatem 25% i ulgowy 20 zł z rabatem 50%.
+5. Wyświetl kwoty i ich sumę, obliczając je przez metody obiektów.
+6. Sprawdź rabat 0,100 i -1 oraz niepoprawną cenę, nie usuwając walidacji ze wspólnej klasy.
+7. Zmieniaj stan obiektu przez metody pilnujące jego poprawności.
 
-**Wynik oczekiwany:** Przy poprawnym HTML oraz imports: [Informacja, Kontakt] z zadania 3 aplikacja działa.
+**Oczekiwany wynik - przykład:** Kwoty [40,30,10], suma 80.
 
-## Zadanie 5. Rozszerzenie dla kończących wcześniej
+**Sprawdź również:** Rabat 0 i 100 jest poprawny; -1 odrzucony. Sprawdź cenę ujemną i nieskończoną.
 
-Dodaj komponent standalone o selektorze `app-regulamin` z tekstem `Pracuj na swojej kopii.`. Umieść go w widoku aplikacji. Samodzielnie wskaż wszystkie miejsca potrzebne do połączenia rodzica i dziecka.
+<details><summary>Wskazówka</summary>
 
-## Oddanie pracy
+Uruchom najmniejszy działający fragment. Sprawdź jeden rekord lub jedną akcję, a potem dodawaj kolejne wymagania.
 
-Oddaj pliki wymagane w zadaniach i własną dokumentację testów. Zapisz sprawdzone dane, oczekiwany wynik oraz wynik rzeczywisty. Dołącz manifesty i konfigurację, jeśli projekt ich używa. Nie dołączaj `node_modules`, plików tymczasowych ani danych dostępowych. Zadanie 5 jest dodatkowe.
+</details>
+
+## Zadanie 4. this przed super | 15 minut, diagnoza
+
+**Pliki:** [src/naprawa.ts](src/naprawa.ts).
+
+**Polecenie:**
+
+1. W kopii BiletUlgowy wpisz przed super instrukcję this.procent = procent. Zapisz przewidywanie, skompiluj i przeczytaj błąd.
+2. Usuń tę instrukcję, pozostaw super na początku. Następnie porównaj private i protected: spróbuj odczytać this.cena w podklasie, gdy pole bazowe jest private.
+
+**Oczekiwany wynik - przykład:** Po poprawce kompilacja przechodzi, ulgowy bilet kosztuje 30.
+
+**Sprawdź również:** Porównaj this przed super oraz dostęp do pola private i protected.
+
+W testy.md zapisz trzy próby: typową, graniczną i własną, z oczekiwaniem i rzeczywistym wynikiem. Dodaj krótką diagnozę.
+
+## Zadanie 5. Własne ulepszenie - dla chętnych
+
+**Punkt wyjścia:** własna, działająca część podstawowa wskazana w poleceniu.
+
+Wybierz wariant opisany poniżej albo własny dodatek: Dodaj nową klasę pochodną z własną, prostą regułą wyceny. Zachowaj działanie części podstawowej.
+
+**Polecenie:**
+
+1. Dodaj interfejs Wycenialny z metodą kwota():number i zastosuj go do Bilet. Wyniki wycen pozostają 40, 30 i 10.
+
+Dla własnego pomysłu ustal oczekiwany efekt, pokaż jeden test dodatku i ponownie sprawdź podstawę. Wystarczy krótki komentarz w kodzie.
+
+## Zadanie 6. Zadanie domowe: Portfel z chronionym saldem
+
+**Pliki:** [domowe/review.ts](domowe/review.ts).
+
+**Cel naprawy:** Wpłata 40 i wypłata 15 dają saldo 25. Wypłata całego salda jest dozwolona. Wpłata wartości ujemnej ma być odrzucona.
+
+**Polecenie:**
+
+1. Uruchom lub skompiluj błędną wersję i porównaj jej zachowanie z wymaganiami.
+2. Znajdź i popraw trzy usterki. Zachowaj poznane mechanizmy i wymagane zachowanie.
+3. Nad każdą poprawką dodaj komentarz CODE REVIEW wyjaśniający przyczynę błędu. W HTML użyj komentarza HTML, a w JS lub TS komentarza //.
+4. Sprawdź: Wpłata 40,wypłata 15,wypłata całego salda i ujemna wpłata. Oddaj poprawiony kod i przygotuj krótkie wyjaśnienie jednej poprawki.

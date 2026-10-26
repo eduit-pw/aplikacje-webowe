@@ -1,68 +1,96 @@
-# Ćwiczenia: JSON i wbudowany serwer HTTP w Node.js
+# JSON i wbudowany serwer HTTP w Node.js
 
-## Przygotowanie
+Node.js, CommonJS. Uruchamiaj node ścieżka/do/pliku.js. Moduły wbudowane nie wymagają instalacji.
 
-Wymagany jest Node.js. Korzystaj z CommonJS (`require`); moduły `node:*` są wbudowane i nie wymagają instalacji. Każde zadanie wykonuj w osobnym podkatalogu, np. `zadanie1`. Uruchamiaj przez `node nazwa.js`; serwer zatrzymuj klawiszami Ctrl+C.
+Wykonaj zadania 1-4. Zadanie 5 to własne ulepszenie dla chętnych, a zadanie 6 jest domowe. Rozwiązuj kolejne punkty i sprawdzaj działanie na bieżąco. Opis testów oddajesz w testy.md tylko przy zadaniu 4.
 
-## Zadanie 1. Dostępne stanowiska - JSON do JSON
+## Zadanie 1. Dostępne stanowiska - JSON do JSON | 15 minut, prowadzone
 
-W katalogu `zadanie1` utwórz podkatalog `dane` i plik `stanowiska.json` z podaną niżej zawartością. Napisz `filtruj.js`, który asynchronicznie odczytuje plik, parsuje JSON, wybiera tylko stanowiska z polem `dostepne: true` i zapisuje do `out/dostepne.json` obiekt z polami `liczba` oraz `stanowiska` (tablica przefiltrowanych obiektów). Zapis ma być czytelny (wcięcie dwóch spacji). W terminalu wypisz `Zapisano 2 dostępne stanowiska.` dopiero po zapisie. Program ma działać także uruchomiony z katalogu nadrzędnego.
+**Pliki:** [zadanie1/filtruj.js](zadanie1/filtruj.js), [zadanie1/dane/stanowiska.json](zadanie1/dane/stanowiska.json).
 
-**Dane wejściowe: `zadanie1/dane/stanowiska.json`:**
+**Polecenie:**
 
-```json
-[
-  { "id": 1, "sala": "204", "dostepne": true },
-  { "id": 2, "sala": "205", "dostepne": false },
-  { "id": 3, "sala": "206", "dostepne": true }
-]
-```
+1. W katalogu `zadanie1` utwórz podkatalog `dane` i plik `stanowiska.json` z przygotowaną zawartością. Napisz `filtruj.js`, który asynchronicznie odczytuje plik, parsuje JSON, wybiera tylko stanowiska z polem `dostepne: true` i zapisuje do `out/dostepne.json` obiekt z polami `liczba` oraz `stanowiska` (tablica przefiltrowanych obiektów).
+2. Zapis ma być czytelny (wcięcie dwóch spacji). W terminalu wypisz `Zapisano 2 dostępne stanowiska.` dopiero po zapisie.
+3. Program ma działać także uruchomiony z katalogu nadrzędnego.
 
-**Oddawany rezultat:** `filtruj.js`, plik wejściowy i wygenerowany `out/dostepne.json`. **Sprawdź:** `true` nie jest napisem; w wyniku są tylko id 1 i 3; `liczba` jest liczbą 2; drugi przebieg nie powiela danych.
+**Oczekiwany wynik - przykład:** out/dostepne.json zawiera liczba:2 i stanowiska o ID 1 oraz 3.
 
-## Zadanie 2. Pierwszy serwer HTTP
+**Sprawdź również:** Sprawdź brak dostępnych stanowisk, pustą tablicę oraz inny katalog uruchomienia.
 
-Utwórz `zadanie2/server.js`. Serwer ma działać lokalnie na porcie `3038` i obsługiwać trzy przypadki: `GET /` → status `200`, typ `text/plain; charset=utf-8`, treść `Serwer działa`; `GET /status` → status `200`, typ JSON, obiekt `{"status":"ok"}`; każdy inny adres GET → status `404`, typ JSON, `{"error":"Nie znaleziono"}`. Każda odpowiedź musi się zakończyć. Sprawdź kody i nagłówki w terminalu.
+## Zadanie 2. Pierwszy serwer HTTP | 18 minut, wspólne
 
-**Oddawany rezultat:** `server.js` i zapis wyników trzech żądań. **Sprawdź:** czy `curl -i` pokazuje 200 / 200 / 404, czy odpowiedź `/status` da się sparsować jako JSON, czy program nadal obsługuje następne żądanie.
+**Pliki:** [zadanie2/server.js](zadanie2/server.js).
 
-## Zadanie 3. Miniarkusz: serwer katalogu kursów
+**Polecenie:**
 
-W `zadanie3/dane/kursy.json` zapisz podane poniżej trzy obiekty. Utwórz serwer `server.js` działający lokalnie na porcie `3038`. Program ma **asynchronicznie odczytać i sparsować plik przed otwarciem portu**; w razie błędu danych wypisać błąd i zakończyć działanie kodem innym niż zero.
+1. Utwórz `zadanie2/server.js`. Serwer ma działać lokalnie na porcie `3038` i obsługiwać trzy przypadki: `GET /` → status `200`, typ `text/plain; charset=utf-8`, treść `Serwer działa`; `GET /status` → status `200`, typ JSON, obiekt `{"status":"ok"}`; każdy inny adres GET → status `404`, typ JSON, `{"error":"Nie znaleziono"}`.
+2. Każda odpowiedź musi się zakończyć. Sprawdź kody i nagłówki w terminalu.
 
-```json
-[
-  { "id": 1, "nazwa": "Python", "miejsca": 8 },
-  { "id": 2, "nazwa": "JavaScript", "miejsca": 5 },
-  { "id": 3, "nazwa": "SQL", "miejsca": 6 }
-]
-```
+**Oczekiwany wynik - przykład:** GET /status: 200 i {"status":"ok"}; nieznany adres GET: 404.
 
-**Wymagania do odhaczenia:**
+**Sprawdź również:** Sprawdź /, /status, nieznany adres, nagłówki oraz kolejne żądanie po odpowiedzi.
 
-1. `GET /api/kursy` zwraca `200` i tablicę trzech kursów jako JSON.
-2. `GET /api/kursy?id=2` zwraca `200` i **jeden obiekt** kursu JavaScript, nie tablicę. `id=99` zwraca `404` i `{"error":"Nie ma kursu"}`.
-3. `GET /api/kursy?id=abc` (również `id=0` lub pusty `id=`) zwraca `400` i `{"error":"Niepoprawne id"}`.
-4. Nieznana ścieżka GET zwraca `404` i `{"error":"Nie znaleziono"}`. Żądanie z metodą inną niż GET zwraca `405`, nagłówek `Allow: GET` i `{"error":"Metoda niedozwolona"}`.
-5. Wszystkie odpowiedzi mają nagłówek `Content-Type: application/json; charset=utf-8`; po każdym żądaniu da się wysłać następne, a błędny plik JSON nie uruchamia serwera.
+## Zadanie 3. Miniarkusz: serwer katalogu kursów | 25 minut, samodzielne
 
-**Oddawany rezultat:** `server.js`, `dane/kursy.json` i zrzut kontroli statusów dla pięciu przypadków (w tym przynajmniej jednego błędu). Po każdej próbie zatrzymaj serwer przez `Ctrl+C`; przed uruchomieniem zadania 3 zatrzymaj serwer zadania 2, bo używają tego samego portu.
+**Pliki:** [zadanie3/server.js](zadanie3/server.js), [zadanie3/dane/kursy.json](zadanie3/dane/kursy.json).
 
-## Zadanie 4. Diagnoza: JSON poprawny składniowo, dane błędne
+**Polecenie:**
 
-W osobnym pliku sprawdź poniższy fragment dla trzech wartości `tekst`: `'{"cena":12}'`, `'{"cena":"abc"}'` oraz `'nie JSON'`.
+1. Wykorzystaj przygotowany zadanie3/dane/kursy.json z trzema kursami. Asynchronicznie odczytaj i sparsuj plik przed otwarciem portu 3038.
+2. Przy błędzie wejścia wypisz komunikat i zakończ program niezerowym kodem. Serwer nie powinien wtedy nasłuchiwać.
+3. GET /api/kursy zwraca 200 i tablicę wszystkich kursów. Opcjonalny parametr id wybiera jeden obiekt; brak takiego kursu daje 404 i błąd Nie ma kursu.
+4. Niepoprawne ID, w tym abc,0 i pusty napis, daje 400 oraz błąd Niepoprawne id.
+5. Nieznana ścieżka GET daje 404 i Nie znaleziono. Inna metoda daje 405, nagłówek Allow: GET i błąd Metoda niedozwolona.
+6. Wszystkie odpowiedzi są JSON z kodowaniem UTF-8 i kończą żądanie. Po błędnym zapytaniu kolejne poprawne nadal działa.
+7. Oddziel poprawność składni JSON od poprawności wartości odczytanych danych.
 
-```js
-const dane = JSON.parse(tekst);
-console.log(dane.cena * 2);
-```
+**Oczekiwany wynik - przykład:** GET /api/kursy?id=2 zwraca jeden obiekt JavaScript; id=99 daje 404.
 
-Przed uruchomieniem przewidź wyniki. Dodaj osobno obsługę błędu formatu JSON i walidację danych: cena ma być skończoną liczbą nieujemną. Zaproponuj i sprawdź próby z ceną `0` oraz `-1`. Udokumentuj różnicę między błędem składni JSON a błędną wartością pola.
+**Sprawdź również:** Sprawdź brak ID, abc,0,puste ID, nieznaną ścieżkę, metodę POST i błędny plik wejściowy.
 
-## Zadanie 5. Dla chętnych: liczba kursów
+<details><summary>Wskazówka</summary>
 
-Rozszerz serwer z zadania 3 o `GET /api/liczba`, które zwraca `200` i `{"liczba":3}` (wartość obliczona z tablicy, nie wpisana na stałe). Pozostałe adresy i kody mają zachować opisane działanie.
+Uruchom najmniejszy działający fragment. Sprawdź jeden rekord lub jedną akcję, a potem dodawaj kolejne wymagania.
 
-## Oddanie pracy
+</details>
 
-Oddaj pliki wymagane w zadaniach i własną dokumentację testów. Zapisz sprawdzone dane, oczekiwany wynik oraz wynik rzeczywisty. Dołącz manifesty i konfigurację, jeśli projekt ich używa. Nie dołączaj `node_modules`, plików tymczasowych ani danych dostępowych. Zadanie 5 jest dodatkowe.
+## Zadanie 4. Diagnoza: JSON poprawny składniowo, dane błędne | 15 minut, diagnoza
+
+**Pliki:** [naprawa.js](naprawa.js).
+
+**Polecenie:**
+
+1. Przeanalizuj szablon `const dane = JSON.parse(tekst); console.log(dane.cena * 2);` i trzy napisy: `{"cena":12}`, `{"cena":"abc"}`, `nie JSON`. Wymaganie: cena jest skończoną liczbą >= 0.
+2. Dodaj osobno obsługę błędu formatu i walidację danych. Zaproponuj próbę ceny 0 i -1.
+
+**Oczekiwany wynik - przykład:** Tekst {"cena":12} daje 24; cena jako "abc" jest odrzucona; nie JSON daje błąd formatu.
+
+**Sprawdź również:** Cena 0 jest poprawna, -1 błędna. Oddziel błąd parsowania od błędnej wartości.
+
+W testy.md zapisz trzy próby: typową, graniczną i własną, z oczekiwaniem i rzeczywistym wynikiem. Dodaj krótką diagnozę.
+
+## Zadanie 5. Własne ulepszenie - dla chętnych
+
+**Punkt wyjścia:** własna, działająca część podstawowa wskazana w poleceniu.
+
+Wybierz wariant opisany poniżej albo własny dodatek: Dodaj własny odczytowy endpoint zwracający podsumowanie danych. Zachowaj działanie części podstawowej.
+
+**Polecenie:**
+
+1. Rozszerz serwer z zadania 3 o `GET /api/liczba`, które zwraca `200` i `{"liczba":3}` (wartość obliczona z tablicy, nie wpisana na stałe). Pozostałe adresy i kody mają zachować opisane działanie.
+
+Dla własnego pomysłu ustal oczekiwany efekt, pokaż jeden test dodatku i ponownie sprawdź podstawę. Wystarczy krótki komentarz w kodzie.
+
+## Zadanie 6. Zadanie domowe: Weryfikacja programu kina
+
+**Pliki:** [domowe/review.js](domowe/review.js).
+
+**Cel naprawy:** Odczytaj JSON, wybierz filmy trwające co najmniej 90 minut i oblicz łączny czas. Dla danych startowych wynik wynosi 190.
+
+**Polecenie:**
+
+1. Uruchom lub skompiluj błędną wersję i porównaj jej zachowanie z wymaganiami.
+2. Znajdź i popraw trzy usterki. Zachowaj poznane mechanizmy i wymagane zachowanie.
+3. Nad każdą poprawką dodaj komentarz CODE REVIEW wyjaśniający przyczynę błędu. W HTML użyj komentarza HTML, a w JS lub TS komentarza //.
+4. Sprawdź: Filmy o czasie 89,90 i 100 minut oraz brak filmów spełniających warunek. Oddaj poprawiony kod i przygotuj krótkie wyjaśnienie jednej poprawki.

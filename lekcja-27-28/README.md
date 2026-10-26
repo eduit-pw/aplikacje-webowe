@@ -1,52 +1,102 @@
-# Ćwiczenia: MongoDB: CRUD z aplikacji Node.js i Express
+# MongoDB: dokumenty, kolekcje i MongoDB Compass
 
-## Przygotowanie
+Działający lokalny MongoDB i Compass; połączenie mongodb://127.0.0.1:27017. Bazę i kolekcje tworzymy w zadaniu 1.
 
-Wymagane są Node.js, działający MongoDB i MongoDB Compass. Przy wspólnym serwerze korzystaj z własnej przypisanej bazy.
+Wykonaj zadania 1-4. Zadanie 5 to własne ulepszenie dla chętnych, a zadanie 6 jest domowe. Rozwiązuj kolejne punkty i sprawdzaj działanie na bieżąco. Opis testów oddajesz w testy.md tylko przy zadaniu 4.
 
-```bash
-npm init -y
-npm install express@5 mongodb@6 cors@2
-```
+## Zadanie 1. Załóż bazę i zaimportuj kursy | 15 minut, prowadzone
 
-Używaj CommonJS (`require`). Serwery uruchamiaj przez `node nazwa.js` i zatrzymuj Ctrl+C. Zapisz rzeczywiste identyfikatory dokumentów zwrócone przez bazę.
+**Pliki:** [diagnostyka.json](diagnostyka.json), [kursy.json](kursy.json), [projekty.json](projekty.json).
 
-## Zadanie 1. Odczytaj dane z poprzedniej lekcji
+**Polecenie:**
 
-Napisz `zadanie1.js`. Połącz się z bazą tematu 13, pobierz z kolekcji `kursy` tylko kursy podstawowe. Wypisz do terminalu tablicę obiektów zawierających `kod`, `nazwa` i `godziny`, posortowanych rosnąco według godzin. Jeśli połączenie lub zapytanie się nie uda, wypisz błąd i zakończ proces kodem błędu. Zamknij klienta także w przypadku błędu. To zadanie nie zmienia kolekcji `kursy`.
+1. W MongoDB Compass utwórz bazę `inf04_t14` z pierwszą kolekcją `kursy`. Zapisz przygotowane dane do pliku `kursy.json` w kodowaniu UTF-8.
+2. Zaimportuj plik jako JSON. Sprawdź liczbę dokumentów, typ `godziny` i pola `_id`. **Dane importuj tylko raz**; powtórny import do tej samej kolekcji bez jawnych `_id` utworzy dodatkowe dokumenty.
+3. połącz się z serwerem → wybierz **Create Database** → wpisz `inf04_t14` i pierwszą kolekcję `kursy` → wejdź w kolekcję → **Add Data → Import JSON or CSV file** → wybierz `kursy.json`, typ JSON → **Import**. W razie ponownego uruchomienia ćwiczenia pracuj na nowej, pustej kolekcji wyraźnie wskazanej przez nauczyciela; nie importuj drugi raz do już zapełnionej.
 
-## Zadanie 2. Cztery operacje na jednej notatce
+**Oczekiwany wynik - przykład:** Kolekcja kursy zawiera pięć dokumentów; godziny są liczbą, _id są nadane.
 
-Napisz `zadanie2.js` pracujący w bazie tematu 14 i kolekcji `notatki_demo`. W trakcie jednego uruchomienia: dodaj notatkę `{ tytul: 'Powtórka', ukonczona: false }`, odczytaj ją po wygenerowanym `_id`, zmień `ukonczona` na `true`, odczytaj ponownie, usuń dokument i upewnij się, że kolejne `findOne()` zwraca `null`. Usuwaj **tylko notatkę wstawioną przez ten przebieg programu**, filtrując po jej `_id`.
+**Sprawdź również:** Porównaj liczbę po imporcie i nie importuj ponownie do zapełnionej kolekcji.
 
-## Zadanie 3. Miniarkusz: API produktów z MongoDB
+## Zadanie 2. Zapytania w Compassie | 18 minut, wspólne
 
-**Autorska specyfikacja:** Napisz `zadanie3.js` udostępniający API pod `http://127.0.0.1:3043`. Korzystaj z kolekcji `produkty_api` w bazie tematu 14. Przykłady dotyczą pojedynczego stanowiska; przy wspólnym serwerze koniecznie korzystaj z przypisanej bazy. Każdy nowy produkt ma nazwę od 1 do 50 znaków po usunięciu spacji na krańcach, dodatnią cenę będącą skończoną liczbą i `dostepny: true`.
+**Pliki:** [diagnostyka.json](diagnostyka.json), [kursy.json](kursy.json), [projekty.json](projekty.json).
 
-**Wymagania do odhaczenia:**
+**Polecenie:**
 
-1. `POST /api/produkty` z JSON-em `{"nazwa":"Zeszyt","cena":8.5}` tworzy dokument, zwraca 201 oraz `{ "id": "...", "nazwa": "Zeszyt", "cena": 8.5, "dostepny": true }`; pustą nazwę albo niedodatnią lub nienumeryczną cenę odrzuca 400. Nie przyjmuj `id` ani `dostepny` przesłanych przez klienta jako danych dokumentu.
-2. `GET /api/produkty` zwraca tablicę produktów, a `GET /api/produkty/:id` wybrany produkt. Niepoprawny zapis ID daje 400; poprawny 24 znakowy identyfikator szesnastkowy bez dokumentu - 404.
-3. `PATCH /api/produkty/:id` przyjmuje tylko nową dodatnią cenę, np. `{"cena":9}`, i zwraca produkt po zmianie; brak dokumentu daje 404. Walidacja działa także dla braku lub złego typu danych.
-4. `DELETE /api/produkty/:id` usuwa jeden dokument i zwraca 204 bez treści; ponowne usunięcie tego samego dokumentu daje 404. Inne adresy dają 404 JSON.
-5. Błędny JSON w żądaniu daje 400 JSON. Błędy operacji bazy po uruchomieniu API dają 500 JSON bez ujawnienia szczegółów klientowi; jeśli początkowe połączenie się nie uda, aplikacja zgłasza błąd w terminalu i nie otwiera portu. Po ponownym uruchomieniu aplikacji poprawnie zapisane dokumenty pozostają w bazie.
+1. Na kolekcji `inf04_t14.kursy` wykonaj pięć odczytów. Każdy filtr wpisz w polu **Filter** i uruchom przyciskiem **Find**.
+2. Zapisz otrzymane wartości `kod`. Przy piątym zapytaniu otwórz **Options**, wpisz dokumenty w polach **Sort** i **Project**, a potem uruchom zapytanie.
+3. Nie zmieniaj dokumentów.
+4. | Próba | Wymaganie | Oczekiwane kody | |---:|---|---| | 1 | Kursy podstawowe. | `JS01`, `PY01`, `DB01` (bez zadanej kolejności). | | 2 | Kursy z tagiem `web`. | `JS01`, `RE01` (równość dopasowuje element tablicy). | | 3 | Prowadzący z Gliwic. | `PY01`, `EX01`, `RE01`. | | 4 | Kursy trwające co najmniej 15 godzin. | `PY01`, `EX01`, `RE01`. | | 5 | Kursy zaawansowane, posortowane malejąco po godzinach, pokazujące tylko `kod` i `nazwa`. | `EX01`, potem `RE01`. | Dla próby 5 dobierz Sort i Project. Nie zmieniaj zapisanych dokumentów.
 
-**Oddawany rezultat:** `zadanie3.js`, `package.json`, `package-lock.json`, wyniki żądań POST → GET → PATCH → GET → DELETE → GET oraz widok kolekcji w Compassie po utworzeniu i po usunięciu.
+**Oczekiwany wynik - przykład:** Kursy podstawowe: JS01,PY01,DB01; zaawansowane malejąco po godzinach: EX01,RE01.
 
-## Zadanie 4. CORS sprawdzony w przeglądarce
+**Sprawdź również:** Wykonaj wszystkie pięć zapytań z tabeli, kontrolując filtr, sortowanie i projekcję.
 
-W folderze `zadanie4` znajdziesz `cors-api.js`, `klient.js` i `public/index.html`. Zainstaluj zależności w katalogu lekcji. W dwóch terminalach uruchom `node zadanie4/cors-api.js` i `node zadanie4/klient.js`. API działa na porcie 3094, strona na 8080.
+## Zadanie 3. Miniarkusz: projekty i zagnieżdżone zadania | 25 minut, samodzielne
 
-1. Otwórz `http://localhost:8080`. Przed poprawką sprawdź blokowanie odczytu odpowiedzi przez JavaScript.
-2. Dodaj konfigurację CORS przed trasami API. Dozwolony origin to `http://localhost:8080`.
-3. Sprawdź GET, POST JSON i żądanie OPTIONS w Network. POST powinien zwracać 201.
-4. Otwórz stronę przez `http://127.0.0.1:8080` i zapisz wynik: to inny origin.
-5. Przenieś middleware CORS do serwera MongoDB z zadania 3. Zachowaj jego pozostałe trasy.
+**Pliki:** [diagnostyka.json](diagnostyka.json), [kursy.json](kursy.json), [projekty.json](projekty.json).
 
-## Zadanie 5. Dla chętnych: zmiana dostępności
+**Dane i kontekst:** Plik projekty.json jest przygotowany. Dokumenty zawierają opiekuna i tablicę zadań; tylko PR-3 ma pole priorytet.
 
-Rozszerz zadanie 3 o `PATCH /api/produkty/:id/dostepnosc`. Żądanie z JSON-em `{ "dostepny": false }` ustawia stan dostępności produktu i zwraca cały produkt po zmianie; wartość musi być wartością logiczną. Błędne ID → 400, nieznany identyfikator → 404, zły typ pola → 400. Trasę umieść **przed middleware 404**. Ponowne ustawienie tej samej wartości powinno nadal zwrócić 200 (liczy się znaleziony dokument, a nie to, czy wartość się zmieniła).
+**Polecenie:**
 
-## Oddanie pracy
+1. W bazie inf04_t14 utwórz kolekcję projekty i zaimportuj raz trzy przygotowane dokumenty.
+2. Sprawdź strukturę jednego projektu: kod, tytul, opiekun i zadania. Wskaż poddokument oraz tablicę poddokumentów.
+3. Dobierz filtr projektów mających otwarte zadanie, odwołując się do zadania.status.
+4. Dobierz filtr projektów opiekunki Ali przez opiekun.imie.
+5. Znajdź projekty z istniejącym polem priorytet. Wyjaśnij różnicę między brakiem pola i polem z napisem brak.
+6. Porównaj otrzymane kody z oczekiwaniem. Odczyty wykonuj w Compassie; aplikację CRUD zbudujesz w temacie 15.
+7. Sprawdzaj typ wartości pola; liczba i podobnie wyglądający napis mogą dawać różne wyniki filtrów.
 
-Oddaj pliki wymagane w zadaniach i własną dokumentację testów. Zapisz sprawdzone dane, oczekiwany wynik oraz wynik rzeczywisty. Dołącz manifesty i konfigurację, jeśli projekt ich używa. Nie dołączaj `node_modules`, plików tymczasowych ani danych dostępowych. Zadanie 5 jest dodatkowe.
+**Oczekiwany wynik - przykład:** Otwarte zadanie: PR-1 i PR-3; opiekunka Ala: PR-1 i PR-3; pole priorytet: PR-3.
+
+**Sprawdź również:** Porównaj tablicę poddokumentów, pole zagnieżdżone oraz brak pola w dokumencie.
+
+<details><summary>Wskazówka</summary>
+
+Uruchom najmniejszy działający fragment. Sprawdź jeden rekord lub jedną akcję, a potem dodawaj kolejne wymagania.
+
+</details>
+
+## Zadanie 4. Diagnoza: Identyczne teksty, różne typy pól | 15 minut, diagnoza
+
+**Pliki:** [diagnostyka.json](diagnostyka.json), [kursy.json](kursy.json), [projekty.json](projekty.json).
+
+**Polecenie:**
+
+1. W osobnej kolekcji diagnostyka umieść {"id":1,"cena":12} i {"id":2,"cena":"12"}. Przed filtrowaniem przewidź wyniki {"cena":12} oraz {"cena":"12"}.
+2. Następnie w Compass poprawia drugi dokument tak, by cena była liczbą, i powtarza filtry. Oczekuje obydwu ID w filtrze liczbowym.
+3. Nie zmieniaj kolekcji kursy potrzebnej w tym temacie.
+
+**Oczekiwany wynik - przykład:** Przed poprawką filtr liczbowy wybiera ID 1, tekstowy ID 2. Po poprawce liczbowy wybiera oba.
+
+**Sprawdź również:** Powtórz oba filtry po zmianie typu. Kolekcja kursy pozostaje bez zmian.
+
+W testy.md zapisz trzy próby: typową, graniczną i własną, z oczekiwaniem i rzeczywistym wynikiem. Dodaj krótką diagnozę.
+
+## Zadanie 5. Własne ulepszenie - dla chętnych
+
+**Pliki:** [diagnostyka.json](diagnostyka.json), [kursy.json](kursy.json), [projekty.json](projekty.json).
+
+Wybierz wariant opisany poniżej albo własny dodatek: Zaproponuj własne zapytanie po poznanych polach i opisz oczekiwane dokumenty. Zachowaj działanie części podstawowej.
+
+**Polecenie:**
+
+1. W kolekcji `kursy` ustaw filtr `{ "poziom": "zaawansowany" }`. Użyj w Compassie funkcji **Export Data → Export query results** (nazwy pozycji mogą się różnić zależnie od wersji), wybierz JSON i zapisz plik `kursy_zaawansowane.json`.
+2. Otwórz plik i odczytaj wartości `kod`. Zwróć uwagę, że eksport JSON może używać zapisu Extended JSON dla typu `ObjectId`.
+
+Dla własnego pomysłu ustal oczekiwany efekt, pokaż jeden test dodatku i ponownie sprawdź podstawę. Wystarczy krótki komentarz w kodzie.
+
+## Zadanie 6. Zadanie domowe: Przegląd filtrów projektu
+
+**Pliki:** [domowe/review.js](domowe/review.js), [diagnostyka.json](diagnostyka.json), [kursy.json](kursy.json), [projekty.json](projekty.json).
+
+**Cel naprawy:** Popraw trzy filtry i uruchom je osobno w Compassie na kolekcji projekty z zadania 3. Szukamy projektu z zadaniem otwartym, projektów Ali i projektów z polem priorytet.
+
+**Polecenie:**
+
+1. Uruchom każdy filtr w Compassie na kolekcji projekty i porównaj wynik z wymaganiami.
+2. Znajdź i popraw trzy usterki. Zachowaj poznane mechanizmy i wymagane zachowanie.
+3. Nad każdą poprawką dodaj komentarz CODE REVIEW wyjaśniający przyczynę błędu. W HTML użyj komentarza HTML, a w JS lub TS komentarza //.
+4. Sprawdź: Każdy z trzech filtrów osobno na kolekcji projekty. Oddaj poprawiony kod i przygotuj krótkie wyjaśnienie jednej poprawki.

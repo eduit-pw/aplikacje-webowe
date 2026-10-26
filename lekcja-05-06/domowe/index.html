@@ -1,0 +1,12 @@
+<!doctype html><html lang="pl"><meta charset="utf-8"><title>Czytelnia</title>
+<style>.przeczytane { color: green; }</style>
+<ul id="lista"><li>Orbita <button type="button">Oznacz</button></li>
+<li>Robot <button type="button">Oznacz</button></li></ul>
+<p id="licznik">0</p>
+<script src="../vendor/jquery.min.js"></script>
+<script>
+$('#lista').on('click', 'button', function () {
+  $(this).closest('ul').addClass('przeczytane');
+  $('#licznik').text($('#lista li').length);
+});
+</script></html>

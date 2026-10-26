@@ -1,0 +1,10 @@
+{
+  "name": "lekcja-23-24",
+  "private": true,
+  "type": "commonjs",
+  "dependencies": {
+    "express": "5.2.1",
+    "express-session": "1.19.0",
+    "cookie-parser": "1.4.7"
+  }
+}

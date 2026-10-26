@@ -1,51 +1,99 @@
-# Ćwiczenia: Angular: listy, @for, track i @empty
+# Angular: listy, @for, track i @empty
 
-## Przygotowanie
+Projekt Angular 20 standalone jest przygotowany. Po npm install uruchom npx ng serve i otwórz podany adres. Dla zadania N skopiuj pliki startery/zadanieN do projektu z zachowaniem ścieżek. Używaj własnych rozwiązań z wcześniejszych zadań tam, gdzie polecenie je rozwija.
 
-Pracuj w projekcie Angular 20.3 z komponentami standalone i plikami `src/app/app.ts`, `app.html`, `app.css`. Zachowaj konfigurację wygenerowaną w lekcjach 37-38, w tym obsługę Zone.js. Otwórz terminal w katalogu aplikacji.
+Wykonaj zadania 1-4. Zadanie 5 to własne ulepszenie dla chętnych, a zadanie 6 jest domowe. Rozwiązuj kolejne punkty i sprawdzaj działanie na bieżąco. Opis testów oddajesz w testy.md tylko przy zadaniu 4.
 
-```bash
-npx ng serve
-```
+## Zadanie 1. Lista i pusty wynik | 15 minut, prowadzone
 
-Otwórz adres podany w terminalu. Kompilację sprawdzaj poleceniem `npx ng build`. Serwer zatrzymuj przez Ctrl+C. Do osobnych ćwiczeń korzystaj z kopii własnego czystego projektu; nie nadpisuj wcześniejszych rozwiązań.
+**Pliki:** [startery/zadanie1/src/app/app.ts](startery/zadanie1/src/app/app.ts).
 
-Jeśli zadanie wymaga Bootstrapa, skopiuj `vendor/bootstrap.min.css` z lekcji 09-10 do `src/vendor/bootstrap.min.css`, a w `src/styles.css` dodaj:
+**Polecenie:**
 
-```css
-@import "./vendor/bootstrap.min.css";
-```
+1. Zdefiniuj produkty o ID 11 (Notes,12) i 22 (Długopis,5). Wyświetl nazwy i ceny przez @for z track p.id.
+2. Dodaj @empty z Brak produktów. Przed uruchomieniem przewidź liczbę wierszy.
+3. Potem podstaw pustą tablicę.
 
-Potrzebne obrazy z folderu `obrazy` lekcji 09-10 skopiuj do `public/obrazy` projektu Angular. Odwołuj się do nich jako `obrazy/nazwa.svg`.
+**Oczekiwany wynik - przykład:** Notes i Długopis w dwóch wierszach; po [] komunikat Brak produktów.
 
-## Zadanie 1. Lista i pusty wynik
+**Sprawdź również:** Sprawdź listę dwóch elementów i pustą listę.
 
-Zdefiniuj produkty o ID 11 (Notes,12) i 22 (Długopis,5). Wyświetl nazwy i ceny przez @for z track p.id. Dodaj @empty z Brak produktów. Przed uruchomieniem przewidź liczbę wierszy. Potem podstaw pustą tablicę.
+## Zadanie 2. Tabela i usuwanie po ID | 18 minut, wspólne
 
-**Wynik oczekiwany:** Dwa wiersze, po [] jeden komunikat Brak produktów.
+**Pliki:** [startery/zadanie2/src/app/app.ts](startery/zadanie2/src/app/app.ts).
 
-## Zadanie 2. Tabela i usuwanie po ID
+**Polecenie:**
 
-Kontynuuj na dwóch rekordach. Wyświetl tabelę: numer od 1, nazwa, cena, Usuń. Przycisk usuwa właściwy ID metodą filter. Pozostałe rekordy mają numerację bez luk. Oddziel indeks widoku od identyfikatora rekordu.
+1. Kontynuuj na dwóch rekordach. Wyświetl tabelę: numer od 1, nazwa, cena, Usuń.
+2. Przycisk usuwa właściwy ID metodą filter. Pozostałe rekordy mają numerację bez luk.
+3. Oddziel indeks widoku od identyfikatora rekordu.
 
-**Wynik oczekiwany:** Po usunięciu ID 11 pozostaje Długopis z numerem 1 i ID 22.
+**Oczekiwany wynik - przykład:** Po usunięciu ID 11 pozostaje Długopis z numerem 1 i ID 22.
 
-## Zadanie 3. Galeria z niezależnymi licznikami
+**Sprawdź również:** Usuń pierwszy i ostatni rekord; numer porządkowy nie jest ID.
 
-Zbuduj galerię Bootstrap: {id:1,nazwa:Las,plik:las.svg,pobrania:0}, {id:2,nazwa:Morze,plik:morze.svg,pobrania:2}, {id:3,nazwa:Góry,plik:gory.svg,pobrania:0}. Skopiuj obrazy do `public/obrazy` zgodnie z instrukcją przygotowania. Karty w jednej kolumnie na telefonie, dwóch od md. Przyciski Pobierz zwiększają wyłącznie licznik danej karty; nazwa akcji jest szkolna, pliku nie trzeba faktycznie pobierać. Usuń kasuje właściwą kartę. Wyczyść listę oraz Brak zdjęć po pustej liście. Zdefiniuj interfejs `Zdjecie`.
+## Zadanie 3. Galeria z niezależnymi licznikami | 25 minut, samodzielne
 
-**Wynik oczekiwany:** Start 0,2,0; dwa kliknięcia Las i jedno Góry dają 2,2,1.
+**Pliki:** [startery/zadanie3/src/app/app.ts](startery/zadanie3/src/app/app.ts), [startery/zadanie3/src/app/app.html](startery/zadanie3/src/app/app.html), [startery/zadanie3/src/app/app.css](startery/zadanie3/src/app/app.css).
 
-## Zadanie 4. Powtarzający się klucz track
+**Dane i kontekst:** Dane: ID 1 Las/las.svg/0 pobrań, ID 2 Morze/morze.svg/2, ID 3 Góry/gory.svg/0. Obrazy są w public/obrazy.
 
-Ustaw drugiemu zdjęciu id=1. Zapisz dlaczego klucze przestają identyfikować rekord jednoznacznie. Sprawdź konsolę i przywróć 2. Nie rozwiązuj usterki użyciem indeksu, skoro rekordy mają trwałe ID.
+**Polecenie:**
 
-**Wynik oczekiwany:** ID 1,2,3; operacja na jednym rekordzie nie zmienia dwóch kart.
+1. Zdefiniuj interface Zdjecie i tablicę obiektów zgodną z danymi.
+2. Wyświetl karty przez @for z track po trwałym ID. Każda karta pokazuje obraz, nazwę i licznik.
+3. Zbuduj jedną kolumnę na telefonie i dwie od md, korzystając z Bootstrapa.
+4. Pobierz zwiększa wyłącznie licznik wskazanej karty. Jest to symulacja, bez pobierania rzeczywistego pliku.
+5. Usuń kasuje wyłącznie kartę o wskazanym ID. Wyczyść listę usuwa wszystkie karty.
+6. Dla pustej listy pokaż Brak zdjęć. Sprawdź niezależność liczników i usuwanie środkowej karty.
+7. Używaj trwałego ID rekordu niezależnego od numeru wiersza w widoku.
 
-## Zadanie 5. Rozszerzenie dla kończących wcześniej
+**Oczekiwany wynik - przykład:** Liczniki 0,2,0; dwa kliknięcia Las i jedno Góry dają 2,2,1.
 
-Dodaj przycisk `Odwróć kolejność`, który odwraca kolejność zdjęć. Liczniki mają pozostać przy właściwych rekordach. Sprawdź to po pobraniu wybranego zdjęcia i kilkukrotnym odwróceniu listy. Zachowaj trwałe ID w `track`.
+**Sprawdź również:** Usuń środkową kartę, wyczyść listę i sprawdź pusty stan oraz układ 1/2 kolumn.
 
-## Oddanie pracy
+<details><summary>Wskazówka</summary>
 
-Oddaj pliki wymagane w zadaniach i własną dokumentację testów. Zapisz sprawdzone dane, oczekiwany wynik oraz wynik rzeczywisty. Dołącz manifesty i konfigurację, jeśli projekt ich używa. Nie dołączaj `node_modules`, plików tymczasowych ani danych dostępowych. Zadanie 5 jest dodatkowe.
+Uruchom najmniejszy działający fragment. Sprawdź jeden rekord lub jedną akcję, a potem dodawaj kolejne wymagania.
+
+</details>
+
+## Zadanie 4. Diagnoza: tożsamość rekordu | 15 minut, diagnoza
+
+**Pliki:** [startery/zadanie4/src/app/app.ts](startery/zadanie4/src/app/app.ts).
+
+**Polecenie:**
+
+1. Dwa rekordy mają wyświetlać A i B. Napraw problem z kluczem śledzenia widoczny w konsoli.
+2. Zachowaj track po trwałym ID.
+
+**Oczekiwany wynik - przykład:** Widać A i B, konsola nie zgłasza powtarzającego się klucza śledzenia.
+
+**Sprawdź również:** Sprawdź unikalność trwałych ID i zachowanie po zmianie kolejności.
+
+W testy.md zapisz trzy próby: typową, graniczną i własną, z oczekiwaniem i rzeczywistym wynikiem. Dodaj krótką diagnozę.
+
+## Zadanie 5. Własne ulepszenie - dla chętnych
+
+**Punkt wyjścia:** własna, działająca część podstawowa wskazana w poleceniu.
+
+Wybierz wariant opisany poniżej albo własny dodatek: Dodaj łączną liczbę pobrań wszystkich zdjęć. Zachowaj działanie części podstawowej.
+
+**Polecenie:**
+
+1. Dodaj przycisk Odwróć kolejność. Liczniki pobrań pozostają przy właściwych zdjęciach.
+
+Dla własnego pomysłu ustal oczekiwany efekt, pokaż jeden test dodatku i ponownie sprawdź podstawę. Wystarczy krótki komentarz w kodzie.
+
+## Zadanie 6. Zadanie domowe: Lista startowa zawodników
+
+**Pliki:** [domowe/app.ts](domowe/app.ts).
+
+**Cel naprawy:** Wyświetl numer porządkowy od 1, imię i przycisk usunięcia. Usuwamy po ID 11 lub 22, a nie po pozycji w tablicy.
+
+**Polecenie:**
+
+1. Uruchom lub skompiluj błędną wersję i porównaj jej zachowanie z wymaganiami.
+2. Znajdź i popraw trzy usterki. Zachowaj poznane mechanizmy i wymagane zachowanie.
+3. Nad każdą poprawką dodaj komentarz CODE REVIEW wyjaśniający przyczynę błędu. W HTML użyj komentarza HTML, a w JS lub TS komentarza //.
+4. Sprawdź: Usunięcie pierwszego i drugiego ID oraz numeracja od 1. Oddaj poprawiony kod i przygotuj krótkie wyjaśnienie jednej poprawki.

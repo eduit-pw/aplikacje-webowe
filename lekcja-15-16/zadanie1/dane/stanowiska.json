@@ -1,0 +1,5 @@
+[
+  { "id": 1, "sala": "204", "dostepne": true },
+  { "id": 2, "sala": "205", "dostepne": false },
+  { "id": 3, "sala": "206", "dostepne": true }
+]

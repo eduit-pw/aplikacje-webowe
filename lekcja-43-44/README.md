@@ -1,51 +1,96 @@
-# Ćwiczenia: Angular: @if, przełączniki i filtrowanie
+# Angular: @if, przełączniki i filtrowanie
 
-## Przygotowanie
+Projekt Angular 20 standalone jest przygotowany. Po npm install uruchom npx ng serve i otwórz podany adres. Dla zadania N skopiuj pliki startery/zadanieN do projektu z zachowaniem ścieżek. Używaj własnych rozwiązań z wcześniejszych zadań tam, gdzie polecenie je rozwija.
 
-Pracuj w projekcie Angular 20.3 z komponentami standalone i plikami `src/app/app.ts`, `app.html`, `app.css`. Zachowaj konfigurację wygenerowaną w lekcjach 37-38, w tym obsługę Zone.js. Otwórz terminal w katalogu aplikacji.
+Wykonaj zadania 1-4. Zadanie 5 to własne ulepszenie dla chętnych, a zadanie 6 jest domowe. Rozwiązuj kolejne punkty i sprawdzaj działanie na bieżąco. Opis testów oddajesz w testy.md tylko przy zadaniu 4.
 
-```bash
-npx ng serve
-```
+## Zadanie 1. Widok zależny od boolean | 15 minut, prowadzone
 
-Otwórz adres podany w terminalu. Kompilację sprawdzaj poleceniem `npx ng build`. Serwer zatrzymuj przez Ctrl+C. Do osobnych ćwiczeń korzystaj z kopii własnego czystego projektu; nie nadpisuj wcześniejszych rozwiązań.
+**Pliki:** [startery/zadanie1/src/app/app.ts](startery/zadanie1/src/app/app.ts).
 
-Jeśli zadanie wymaga Bootstrapa, skopiuj `vendor/bootstrap.min.css` z lekcji 09-10 do `src/vendor/bootstrap.min.css`, a w `src/styles.css` dodaj:
+**Polecenie:**
 
-```css
-@import "./vendor/bootstrap.min.css";
-```
+1. Utwórz dostępny=true, przycisk przełączający i @if/@else z tekstem Dostępny albo Niedostępny. Przewidź tekst po dwóch kliknięciach.
 
-Potrzebne obrazy z folderu `obrazy` lekcji 09-10 skopiuj do `public/obrazy` projektu Angular. Odwołuj się do nich jako `obrazy/nazwa.svg`.
+**Oczekiwany wynik - przykład:** Dostępny → Niedostępny → Dostępny.
 
-## Zadanie 1. Widok zależny od boolean
+**Sprawdź również:** Sprawdź stan początkowy i dwa kliknięcia.
 
-Utwórz dostępny=true, przycisk przełączający i @if/@else z tekstem Dostępny albo Niedostępny. Przewidź tekst po dwóch kliknięciach.
+## Zadanie 2. Checkbox a value | 18 minut, wspólne
 
-**Wynik oczekiwany:** Dostępny, Niedostępny, Dostępny.
+**Pliki:** [startery/zadanie2/src/app/app.ts](startery/zadanie2/src/app/app.ts).
 
-## Zadanie 2. Checkbox a value
+**Polecenie:**
 
-Odczytaj stan checkboxa przez #filtr.checked w zdarzeniu change. Ma pokazywać panel Szczegóły tylko po zaznaczeniu. Bez ngModel; użyj @if. Porównaj usunięcie elementu z DOM z [hidden].
+1. Odczytaj stan checkboxa przez #filtr.checked w zdarzeniu change. Ma pokazywać panel Szczegóły tylko po zaznaczeniu.
+2. Bez ngModel; użyj @if. Porównaj usunięcie elementu z DOM z [hidden].
 
-**Wynik oczekiwany:** Start bez panelu, po zaznaczeniu panel, po odznaczeniu znika.
+**Oczekiwany wynik - przykład:** Początkowo brak panelu Szczegóły; zaznaczenie pokazuje, odznaczenie usuwa panel.
 
-## Zadanie 3. Filtrowanie kilkoma przełącznikami
+**Sprawdź również:** Sprawdź checked, zdarzenie change i obecność elementu w DOM.
 
-Nowe dane: ID 1 Las kategoria natura, ID 2 Morze natura, ID 3 Miasto architektura. Oba przełączniki kategorii początkowo zaznaczone. Ich wybór ma sumować kategorie (OR), a nie wymagać, by zdjęcie należało do obydwu. Brak zaznaczonych kategorii daje Brak pasujących zdjęć. Przyciski Pobierz zwiększają licznik zdjęcia; licznik zachowuje się po ukryciu i ponownym pokazaniu kategorii. Skopiuj obrazy do `public/obrazy` zgodnie z instrukcją przygotowania.
+## Zadanie 3. Filtrowanie kilkoma przełącznikami | 25 minut, samodzielne
 
-**Wynik oczekiwany:** Start 3; tylko natura 2; tylko architektura 1; brak 0. Liczniki wracają ze zdjęciem.
+**Pliki:** [startery/zadanie3/src/app/app.ts](startery/zadanie3/src/app/app.ts), [startery/zadanie3/src/app/app.html](startery/zadanie3/src/app/app.html), [startery/zadanie3/src/app/app.css](startery/zadanie3/src/app/app.css).
 
-## Zadanie 4. Filtr niszczy dane źródłowe
+**Dane i kontekst:** Dane: ID 1 Las/natura, ID 2 Morze/natura, ID 3 Miasto/architektura. Obrazy są w public/obrazy.
 
-Zastąp źródło wynikiem filtra: this.zdjecia = this.zdjecia.filter(...). Wyłącz naturę i spróbuj włączyć ponownie. Wyjaśnij utratę rekordów, przywróć dane i użyj get widoczne z zadania 3.
+**Polecenie:**
 
-**Wynik oczekiwany:** Po przywróceniu źródła i poprawce ukryte zdjęcia wracają.
+1. Dodaj przełączniki Natura i Architektura, początkowo zaznaczone. Odczytuj stan przez checked.
+2. Pokaż zdjęcia z dowolnej zaznaczonej kategorii, łącząc kategorie przez OR.
+3. Gdy nie zaznaczono żadnej lub wynik jest pusty, pokaż Brak pasujących zdjęć.
+4. Zachowaj pełną tablicę źródłową podczas filtrowania.
+5. Dodaj Pobierz, zwiększające licznik wyłącznie danego zdjęcia. Ukrycie i ponowne pokazanie kategorii zachowuje licznik.
+6. Sprawdź cztery kombinacje przełączników oraz powrót wcześniej ukrytego zdjęcia.
+7. Filtruj widok, zachowując pełne dane źródłowe.
 
-## Zadanie 5. Rozszerzenie dla kończących wcześniej
+**Oczekiwany wynik - przykład:** Obie kategorie:3 zdjęcia; natura:2; architektura:1; żadne:0.
 
-Dodaj przełącznik `Tylko pobrane`, początkowo wyłączony. Po włączeniu widoczne są tylko zdjęcia z licznikiem większym od zera, które jednocześnie należą do wybranej kategorii. Kategorie nadal łączą się przez OR, a warunek pobrania przez AND. Sprawdź pusty wynik i ponowne pokazanie wszystkich zdjęć po wyłączeniu przełącznika.
+**Sprawdź również:** Zwiększ licznik, ukryj kategorię i pokaż ponownie. Licznik pozostaje przy zdjęciu.
 
-## Oddanie pracy
+<details><summary>Wskazówka</summary>
 
-Oddaj pliki wymagane w zadaniach i własną dokumentację testów. Zapisz sprawdzone dane, oczekiwany wynik oraz wynik rzeczywisty. Dołącz manifesty i konfigurację, jeśli projekt ich używa. Nie dołączaj `node_modules`, plików tymczasowych ani danych dostępowych. Zadanie 5 jest dodatkowe.
+Uruchom najmniejszy działający fragment. Sprawdź jeden rekord lub jedną akcję, a potem dodawaj kolejne wymagania.
+
+</details>
+
+## Zadanie 4. Diagnoza: filtr gubi źródło | 15 minut, diagnoza
+
+**Pliki:** [startery/zadanie4/src/app/app.ts](startery/zadanie4/src/app/app.ts).
+
+**Polecenie:**
+
+1. Po pierwszym kliknięciu zostaje A, po drugim wracają A i B. Napraw utratę danych po wyłączeniu filtra.
+
+**Oczekiwany wynik - przykład:** Pierwsze kliknięcie pozostawia A, drugie przywraca A i B.
+
+**Sprawdź również:** Powtórz przełączanie kilka razy i sprawdź zachowanie danych źródłowych.
+
+W testy.md zapisz trzy próby: typową, graniczną i własną, z oczekiwaniem i rzeczywistym wynikiem. Dodaj krótką diagnozę.
+
+## Zadanie 5. Własne ulepszenie - dla chętnych
+
+**Punkt wyjścia:** własna, działająca część podstawowa wskazana w poleceniu.
+
+Wybierz wariant opisany poniżej albo własny dodatek: Dodaj informację, ile zdjęć pasuje do aktualnego filtra. Zachowaj działanie części podstawowej.
+
+**Polecenie:**
+
+1. Dodaj Tylko pobrane. Kategorie łącz przez OR, a warunek pobrań z wynikiem przez AND.
+2. Bez pobranych zdjęć widok jest pusty.
+
+Dla własnego pomysłu ustal oczekiwany efekt, pokaż jeden test dodatku i ponownie sprawdź podstawę. Wystarczy krótki komentarz w kodzie.
+
+## Zadanie 6. Zadanie domowe: Filtry atrakcji
+
+**Pliki:** [domowe/app.ts](domowe/app.ts).
+
+**Cel naprawy:** Niezależnie włączamy kategorie park i muzeum. Zaznaczenie obu pokazuje dwa wpisy, wyłączenie obu komunikat Brak. Źródło musi przetrwać filtrowanie.
+
+**Polecenie:**
+
+1. Uruchom lub skompiluj błędną wersję i porównaj jej zachowanie z wymaganiami.
+2. Znajdź i popraw trzy usterki. Zachowaj poznane mechanizmy i wymagane zachowanie.
+3. Nad każdą poprawką dodaj komentarz CODE REVIEW wyjaśniający przyczynę błędu. W HTML użyj komentarza HTML, a w JS lub TS komentarza //.
+4. Sprawdź: Cztery kombinacje kategorii i przywrócenie danych po zmianie filtra. Oddaj poprawiony kod i przygotuj krótkie wyjaśnienie jednej poprawki.

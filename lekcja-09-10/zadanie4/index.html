@@ -1,0 +1,10 @@
+<!doctype html><html lang="pl"><meta charset="utf-8"><title>Powiadomienie</title>
+<link rel="stylesheet" href="../vendor/bootstrap.min.css">
+<label class="form-check"><input id="zgoda" type="checkbox" class="form-check-input">Powiadom mnie</label>
+<button id="sprawdz" type="button" class="btn btn-primary">Sprawdź</button><p id="wynik"></p>
+<script>
+document.querySelector('#sprawdz').addEventListener('click',()=>{
+ const zaznaczono=document.querySelector('#zgoda').value;
+ document.querySelector('#wynik').textContent=zaznaczono?'tak':'nie';
+});
+</script></html>

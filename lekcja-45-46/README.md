@@ -1,51 +1,101 @@
-# Ćwiczenia: Angular: input, output i odpowiedzialność komponentów
+# Angular: input, output i odpowiedzialność komponentów
 
-## Przygotowanie
+Projekt Angular 20 standalone jest przygotowany. Po npm install uruchom npx ng serve i otwórz podany adres. Dla zadania N skopiuj pliki startery/zadanieN do projektu z zachowaniem ścieżek. Używaj własnych rozwiązań z wcześniejszych zadań tam, gdzie polecenie je rozwija.
 
-Pracuj w projekcie Angular 20.3 z komponentami standalone i plikami `src/app/app.ts`, `app.html`, `app.css`. Zachowaj konfigurację wygenerowaną w lekcjach 37-38, w tym obsługę Zone.js. Otwórz terminal w katalogu aplikacji.
+Wykonaj zadania 1-4. Zadanie 5 to własne ulepszenie dla chętnych, a zadanie 6 jest domowe. Rozwiązuj kolejne punkty i sprawdzaj działanie na bieżąco. Opis testów oddajesz w testy.md tylko przy zadaniu 4.
 
-```bash
-npx ng serve
-```
+## Zadanie 1. Dane rodzica w karcie | 15 minut, prowadzone
 
-Otwórz adres podany w terminalu. Kompilację sprawdzaj poleceniem `npx ng build`. Serwer zatrzymuj przez Ctrl+C. Do osobnych ćwiczeń korzystaj z kopii własnego czystego projektu; nie nadpisuj wcześniejszych rozwiązań.
+**Pliki:** [startery/zadanie1/src/app/karta.ts](startery/zadanie1/src/app/karta.ts), [startery/zadanie1/src/app/app.ts](startery/zadanie1/src/app/app.ts).
 
-Jeśli zadanie wymaga Bootstrapa, skopiuj `vendor/bootstrap.min.css` z lekcji 09-10 do `src/vendor/bootstrap.min.css`, a w `src/styles.css` dodaj:
+**Dane i kontekst:** Rodzic ma produkt ID 1, Notes, cena 12. Importy oraz szablon komponentu Karta są w starterze.
 
-```css
-@import "./vendor/bootstrap.min.css";
-```
+**Polecenie:**
 
-Potrzebne obrazy z folderu `obrazy` lekcji 09-10 skopiuj do `public/obrazy` projektu Angular. Odwołuj się do nich jako `obrazy/nazwa.svg`.
+1. Uzupełnij wymagane wejście input.required<Produkt>() w komponencie Karta.
+2. Przekaż produkt z rodzica przez wiązanie [produkt].
+3. Wyświetl w karcie nazwę i cenę otrzymanego produktu.
+4. Zmień nazwę w danych rodzica i sprawdź zmianę w dziecku.
 
-## Zadanie 1. Dane rodzica w karcie
+**Oczekiwany wynik - przykład:** Dziecko wyświetla Notes i cenę 12 z danych rodzica.
 
-Utwórz komponent Karta z wymaganym input Produkt. Rodzic ma produkt ID 1 Notes 12 i przekazuje go przez [produkt]. Wyświetl nazwę i cenę. Samodzielnie zdefiniuj wymagane wejście i szablon dziecka.
+**Sprawdź również:** Zmień nazwę przekazaną przez rodzica i sprawdź widok dziecka.
 
-**Wynik oczekiwany:** Jedna karta Notes 12.
+## Zadanie 2. Zdarzenie w górę | 18 minut, wspólne
 
-## Zadanie 2. Zdarzenie w górę
+**Pliki:** [startery/zadanie2/src/app/karta.ts](startery/zadanie2/src/app/karta.ts), [startery/zadanie2/src/app/app.ts](startery/zadanie2/src/app/app.ts).
 
-Dodaj w Karcie `output<number>` usunieto, przycisk emituje ID. Rodzic odbiera $event i na razie pokazuje Ostatnia akcja:1. Rodzic posiada stan, dziecko zgłasza zamiar.
+**Polecenie:**
 
-**Wynik oczekiwany:** Kliknięcie daje Ostatnia akcja:1.
+1. Dodaj w Karcie output<number> usunieto, przycisk emituje ID. Rodzic odbiera $event i na razie pokazuje Ostatnia akcja:1.
+2. Rodzic posiada stan, dziecko zgłasza zamiar.
 
-## Zadanie 3. Lista kart z usuwaniem i wyczyszczeniem
+**Oczekiwany wynik - przykład:** Kliknięcie przycisku dziecka daje w rodzicu Ostatnia akcja:1.
 
-Rodzic ma produkty ID 1 Notes 12, ID 2 Długopis 5, ID 3 Teczka 8. Renderuje Karta przez @for. Każde dziecko pokazuje dane i emituje usunieto z własnym ID; rodzic usuwa tylko ten rekord. Dodaj Wyczyść w rodzicu i komunikat Brak produktów. Dziecko nie dostaje całej tablicy i nie modyfikuje input.
+**Sprawdź również:** Sprawdź emitowany ID i odbiór $event w rodzicu.
 
-**Wynik oczekiwany:** Usunięcie Długopisu pozostawia Notes i Teczka; wyczyszczenie pokazuje pusty stan.
+## Zadanie 3. Lista kart z usuwaniem i wyczyszczeniem | 25 minut, samodzielne
 
-## Zadanie 4. Brak wywołania input albo wymaganych danych
+**Pliki:** [startery/zadanie3/src/app/karta.ts](startery/zadanie3/src/app/karta.ts), [startery/zadanie3/src/app/app.ts](startery/zadanie3/src/app/app.ts), [startery/zadanie3/src/app/app.html](startery/zadanie3/src/app/app.html), [startery/zadanie3/src/app/app.css](startery/zadanie3/src/app/app.css).
 
-W dziecku zamień produkt().nazwa na produkt.nazwa. Sprawdź błąd typów i napraw. W drugim wariancie usuń [produkt] z jednej karty rodzica. Zapisz, co oznacza input.required.
+**Dane i kontekst:** Dane rodzica: ID 1 Notes/12, ID 2 Długopis/5, ID 3 Teczka/8.
 
-**Wynik oczekiwany:** Po poprawkach obie karty otrzymują wymagane dane, a projekt kompiluje się bez błędów.
+**Polecenie:**
 
-## Zadanie 5. Rozszerzenie dla kończących wcześniej
+1. W rodzicu przygotuj listę produktów i wyświetl komponenty Karta przez @for z trwałym ID.
+2. Każdej karcie przekaż jeden produkt. Dziecko pokazuje nazwę i cenę.
+3. Przycisk dziecka emituje usunieto z ID własnego produktu.
+4. Rodzic odbiera zdarzenie i usuwa wyłącznie wskazany rekord.
+5. Dodaj Wyczyść w rodzicu i komunikat Brak produktów dla pustej listy.
+6. Zachowaj odpowiedzialności: dziecko nie dostaje całej tablicy i nie modyfikuje input. Sprawdź usunięcie rekordu środkowego.
+7. Rodzic zarządza danymi, a dziecko przekazuje zdarzenie opisujące działanie użytkownika.
 
-Dodaj zdarzenie `wybrano` przekazujące liczbowe ID produktu oraz drugi przycisk w karcie. Rodzic przechowuje `wybraneId` typu `number | null`, początkowo `null`, i wyświetla ID otrzymane ze zdarzenia. Wybór nie może zmieniać listy produktów.
+**Oczekiwany wynik - przykład:** Usunięcie Długopisu pozostawia Notes i Teczkę; Wyczyść daje Brak produktów.
 
-## Oddanie pracy
+**Sprawdź również:** Dziecko dostaje jeden produkt i nie zmienia wejścia; rodzic zmienia tablicę.
 
-Oddaj pliki wymagane w zadaniach i własną dokumentację testów. Zapisz sprawdzone dane, oczekiwany wynik oraz wynik rzeczywisty. Dołącz manifesty i konfigurację, jeśli projekt ich używa. Nie dołączaj `node_modules`, plików tymczasowych ani danych dostępowych. Zadanie 5 jest dodatkowe.
+<details><summary>Wskazówka</summary>
+
+Uruchom najmniejszy działający fragment. Sprawdź jeden rekord lub jedną akcję, a potem dodawaj kolejne wymagania.
+
+</details>
+
+## Zadanie 4. Diagnoza: odczyt wejścia | 15 minut, diagnoza
+
+**Pliki:** [startery/zadanie4/src/app/app.ts](startery/zadanie4/src/app/app.ts).
+
+**Polecenie:**
+
+1. Komponent ma wyświetlać Robotyka. Napraw odczyt input.
+2. Sprawdź także inną nazwę przekazaną przez rodzica.
+
+**Oczekiwany wynik - przykład:** Komponent pokazuje Robotyka, a po zmianie wejścia nową nazwę.
+
+**Sprawdź również:** Sprawdź odczyt wartości input oraz drugą nazwę od rodzica.
+
+W testy.md zapisz trzy próby: typową, graniczną i własną, z oczekiwaniem i rzeczywistym wynikiem. Dodaj krótką diagnozę.
+
+## Zadanie 5. Własne ulepszenie - dla chętnych
+
+**Punkt wyjścia:** własna, działająca część podstawowa wskazana w poleceniu.
+
+Wybierz wariant opisany poniżej albo własny dodatek: Dodaj zdarzenie wybrania produktu i pokaż wybór w rodzicu. Zachowaj działanie części podstawowej.
+
+**Polecenie:**
+
+1. Dodaj zdarzenie wyboru karty. Rodzic pokazuje wybrane ID, ale nie usuwa rekordu.
+
+Dla własnego pomysłu ustal oczekiwany efekt, pokaż jeden test dodatku i ponownie sprawdź podstawę. Wystarczy krótki komentarz w kodzie.
+
+## Zadanie 6. Zadanie domowe: Usuwanie karty z poziomu rodzica
+
+**Pliki:** [domowe/app.ts](domowe/app.ts).
+
+**Cel naprawy:** Dziecko dostaje rekord i emituje jego ID. Kliknięcie Usuń przy ID 22 pozostawia tylko ID 11.
+
+**Polecenie:**
+
+1. Uruchom lub skompiluj błędną wersję i porównaj jej zachowanie z wymaganiami.
+2. Znajdź i popraw trzy usterki. Zachowaj poznane mechanizmy i wymagane zachowanie.
+3. Nad każdą poprawką dodaj komentarz CODE REVIEW wyjaśniający przyczynę błędu. W HTML użyj komentarza HTML, a w JS lub TS komentarza //.
+4. Sprawdź: Usunięcie ID 22 i zachowanie rekordu ID 11. Oddaj poprawiony kod i przygotuj krótkie wyjaśnienie jednej poprawki.

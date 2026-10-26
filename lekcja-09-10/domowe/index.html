@@ -1,0 +1,18 @@
+<!doctype html><html lang="pl"><meta charset="utf-8"><title>Wejściówka</title>
+<link rel="stylesheet" href="../vendor/bootstrap.min.css">
+<form id="formularz" class="container py-4">
+<label for="imie">Imię</label><input id="imie" class="form-control" required>
+<label><input id="zgoda" type="checkbox"> Zgoda</label>
+<button type="button" class="btn btn-primary">Zapisz</button>
+<button type="reset" class="btn btn-secondary">Reset</button></form>
+<p id="wynik"></p><script>
+const f = document.querySelector('#formularz');
+const wynik = document.querySelector('#wynik');
+f.addEventListener('submit', e => {
+  e.preventDefault();
+  const imie = document.querySelector('#imie').value.trim();
+  const zgoda = document.querySelector('#zgoda').value;
+  wynik.textContent = imie && zgoda ? `Zapisano: ${imie}` : 'Sprawdź dane';
+});
+f.addEventListener('reset', () => { wynik.textContent = 'Zapisano'; });
+</script></html>

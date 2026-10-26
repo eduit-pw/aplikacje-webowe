@@ -1,0 +1,8 @@
+{
+  "name": "lekcja-21-22",
+  "private": true,
+  "type": "commonjs",
+  "dependencies": {
+    "express": "5.2.1"
+  }
+}

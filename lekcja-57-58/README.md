@@ -1,43 +1,34 @@
-# Ćwiczenia: Sprawdzian praktyczny: Angular, galeria i formularz
+# Powtórzenie: Angular w małych ćwiczeniach
 
-## Przygotowanie
+Powtórz listy i trwałe ID, zdarzenia, komunikację komponentów, formularze oraz walidację. Każde ćwiczenie jest osobne. W folderze wykonaj npm install i npx ng serve. Przed kolejnym ćwiczeniem skopiuj odpowiedni starter do src/app/app.ts. Wszystkie dane są przygotowane.
 
-Pracuj w projekcie Angular 20.3 z komponentami standalone i plikami `src/app/app.ts`, `app.html`, `app.css`. Zachowaj konfigurację wygenerowaną w lekcjach 37-38, w tym obsługę Zone.js. Otwórz terminal w katalogu aplikacji.
+## 1. Stan wybranego rekordu
 
-```bash
-npx ng serve
-```
+Starter: [zadanie1/app.ts](startery/zadanie1/src/app/app.ts).
 
-Otwórz adres podany w terminalu. Kompilację sprawdzaj poleceniem `npx ng build`. Serwer zatrzymuj przez Ctrl+C. Do osobnych ćwiczeń korzystaj z kopii własnego czystego projektu; nie nadpisuj wcześniejszych rozwiązań.
+1. Wyświetl przygotowane przesyłki przez @for, z numeracją od 1 i track po id.
+2. Pokaż etykietę oraz Oczekuje albo Odebrana.
+3. Przycisk Odbierz zmienia stan tylko wskazanego rekordu. Odebrany rekord ma zablokowany przycisk; ponowna próba nie zmienia innych danych.
+4. Dla pustej tablicy pokaż Brak przesyłek.
 
-Jeśli zadanie wymaga Bootstrapa, skopiuj `vendor/bootstrap.min.css` z lekcji 09-10 do `src/vendor/bootstrap.min.css`, a w `src/styles.css` dodaj:
+Sprawdź odbiór środkowego rekordu: E-27 jest odebrana, pozostałe nadal oczekują. Zmień kolejność i sprawdź przypisanie stanu do ID.
 
-```css
-@import "./vendor/bootstrap.min.css";
-```
+## 2. Wiadomość od dziecka do rodzica
 
-Potrzebne obrazy z folderu `obrazy` lekcji 09-10 skopiuj do `public/obrazy` projektu Angular. Odwołuj się do nich jako `obrazy/nazwa.svg`.
+Starter: [zadanie2/app.ts](startery/zadanie2/src/app/app.ts).
 
-## Zadanie 1. Galeria według specyfikacji
+1. Etykieta ma wymagane wejście tytul typu string i wyjście wskazano typu string.
+2. Przycisk dziecka emituje aktualny tytuł. Rodzic przechowuje ostatnią otrzymaną wiadomość.
+3. Wyświetl dwa dzieci z tytułami Północ i Południe. Początkowa wiadomość rodzica: Brak.
+4. Kliknij kolejno oba przyciski i sprawdź wynik oraz brak samodzielnej zmiany wejścia przez dziecko.
 
-Strona Katalog kursów. Dane ID 1 Angular,frontend,angular.svg,pobrania 0; ID 2 React,frontend,react.svg,pobrania 0; ID 3 Express,backend,express.svg,pobrania 0. Karty Bootstrap mają obraz z alt, nazwę, licznik i przycisk Pobierz. Układ jedna kolumna poniżej 768 px, dwie od 768 px. Dane w tablicy obiektów, @for i trwałe ID. Wykorzystaj obrazy skopiowane do `public/obrazy`. Nie wpisuj kart ręcznie.
+## 3. Podgląd obliczenia w formularzu
 
-## Zadanie 2. Filtry i niezależny stan
+Starter: [zadanie3/app.ts](startery/zadanie3/src/app/app.ts).
 
-Dwa checkboxy Frontend/Backend początkowo zaznaczone. Wybrane kategorie sumują się (OR). Wyłączenie obu daje Brak pasujących kursów. Pobierz zwiększa licznik wyłącznie danej karty i oznacza szkolną symulację akcji. Stan zachowuje się po ukryciu i pokazaniu kategorii. Nie kasuj danych przy filtrowaniu.
+1. Powiąż pola kilometrów i stawki z ngModel. Początkowo kilometry są puste, stawka 0.9.
+2. Wymagaj skończonych, nieujemnych liczb. Puste pole nie jest zerem.
+3. Przy poprawnych danych pokazuj na żywo kwotę zaokrągloną do dwóch miejsc. Przy błędzie pokaż Uzupełnij poprawne dane.
+4. Reset przywraca wartości początkowe. Dla 12.5 km i stawki 0.9 oczekuj 11.25 zł.
 
-## Zadanie 3. Zapis na kurs
-
-Formularz z imieniem początkowo pustym, listą wszystkich kursów z pustym wyborem początkowym, zgodą początkowo odznaczoną. Zapisz jest zablokowany bez zgody. Metoda również sprawdza zgodę, imię po trim i rzeczywiście istniejący kurs. Po zapisie pokaż Ostatni zapis: imię - kurs. Edycja pól nie zmienia zatwierdzonego podsumowania do następnego poprawnego zapisu. Błędny zapis zachowuje wcześniejsze poprawne podsumowanie i pokazuje komunikat. Reset formularza usuwa podsumowanie i przywraca pola, **nie zeruje liczników galerii ani filtrów**. Zastosuj FormsModule i ngModel. Nie potrzebujesz backendu.
-
-## Zadanie 4. Testy i oddanie
-
-Sprawdź cztery kombinacje filtrów, niezależność liczników, powrót ukrytej kategorii, poprawny zapis, same spacje, brak wyboru, brak zgody, zmianę po zapisie i reset. Wybierz trzy najważniejsze próby do dokumentacja.md, wykonaj aktualny zrzut i oddaj projekt. Uruchomienie bez błędu nie zastępuje testu zachowania. Nie dodawaj mechanizmów, które zmieniają wymagane wartości początkowe.
-
-## Zadanie 5. Rozszerzenie dla kończących wcześniej
-
-Po oddaniu części obowiązkowej dodaj sortowanie widocznych kursów rosnąco po nazwie. Sortuj kopię danych i zachowaj ID oraz liczniki. Sprawdź sortowanie po zmianie filtrów i po zwiększeniu liczników.
-
-## Oddanie pracy
-
-Oddaj pliki wymagane w zadaniach i własną dokumentację testów. Zapisz sprawdzone dane, oczekiwany wynik oraz wynik rzeczywisty. Dołącz manifesty i konfigurację, jeśli projekt ich używa. Nie dołączaj `node_modules`, plików tymczasowych ani danych dostępowych. Zadanie 5 jest dodatkowe.
+Sprawdź zero, puste pole, wartość ujemną i Reset. Własne ulepszenie: dodaj czytelne formatowanie lub dodatkowy przycisk korzystający z poznanych mechanizmów.

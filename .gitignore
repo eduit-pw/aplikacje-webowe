@@ -1,8 +1,11 @@
-node_modules/
-dist/
-.angular/
-coverage/
-.env
-.env.*
-!.env.example
-*.log
+**/node_modules/
+**/dist/
+**/.angular/
+**/out/
+**/coverage/
+
+# Materiały nauczyciela przechowuj poza repozytorium uczniowskim.
+nauczyciel/
+konspekty/
+materialy_na_zajecia/
+*.zip

@@ -1,52 +1,111 @@
-# Ćwiczenia: Node.js: ścieżki i asynchroniczne operacje na plikach
+# Node.js: ścieżki i asynchroniczne operacje na plikach
 
-## Przygotowanie
+Node.js, CommonJS. Uruchamiaj node ścieżka/do/pliku.js. Moduły wbudowane nie wymagają instalacji.
 
-Wymagany jest Node.js. Korzystaj z CommonJS (`require`); moduły `node:*` są wbudowane i nie wymagają instalacji. Każde zadanie wykonuj w osobnym podkatalogu, np. `zadanie1`. Uruchamiaj przez `node nazwa.js`; serwer zatrzymuj klawiszami Ctrl+C.
+Wykonaj zadania 1-4. Zadanie 5 to własne ulepszenie dla chętnych, a zadanie 6 jest domowe. Rozwiązuj kolejne punkty i sprawdzaj działanie na bieżąco. Opis testów oddajesz w testy.md tylko przy zadaniu 4.
 
-## Zadanie 1. Inspektor ścieżki
+## Zadanie 1. Ścieżka i dwa zapisy | 15 minut, prowadzone
 
-Utwórz `sciezki.js`. Przyjmij, że interesuje nas plik `dane/wyniki.txt` położony w katalogu `dane` obok skryptu. Oblicz ścieżkę bezwzględną bez ręcznego wpisywania separatora. Wypisz dokładnie: `Nazwa pliku: wyniki.txt`, `Rozszerzenie: .txt` oraz `Ścieżka bezwzględna: tak` (wyznaczoną na podstawie rzeczywistej ścieżki). Dodatkowo wypisz samą obliczoną ścieżkę. W tym zadaniu **nie twórz** pliku; sprawdź, czy program mimo to działa.
+**Pliki:** [zadanie1/sciezki.js](zadanie1/sciezki.js).
 
-**Oddawany rezultat:** `zadanie1/sciezki.js`, zrzut z `node sciezki.js` i odpowiedź: „Czy `path.join` utworzył katalog `dane`?”.
+**Polecenie:**
 
-## Zadanie 2. Dziennik pracowni
+1. W zadanie1/sciezki.js zbuduj ścieżkę do wynik.txt obok skryptu.
+2. Wypisz nazwę pliku, rozszerzenie i katalog przy użyciu modułu path.
+3. W pierwszym komentarzu przewidź zawartość po dwóch zapisach.
+4. Zapisz Pierwszy zapis, następnie Drugi zapis. Użyj writeFile i poczekaj na zakończenie każdego zapisu.
+5. Uruchom skrypt także z folderu nadrzędnego i sprawdź ten sam plik wynikowy.
 
-Przygotuj `dziennik.js`. Program ma sam utworzyć katalog `dane`, zapisać w `dane/notatka.txt` wiersz `Start zajęć`, dopisać drugi wiersz `Ćwiczymy Node.js`, odczytać plik jako tekst UTF-8 i wypisać jego zawartość. Dwa wpisy mają znaleźć się w **dwóch osobnych wierszach**. Uruchom program dwukrotnie: po drugim uruchomieniu zawartość ma wciąż składać się z dokładnie dwóch wierszy. Przy błędzie zapisu/odczytu pokaż komunikat i ustaw niezerowy kod zakończenia.
+**Oczekiwany wynik - przykład:** wynik.txt zawiera wyłącznie Drugi zapis.
 
-**Oddawany rezultat:** `zadanie2/dziennik.js` i powstały `zadanie2/dane/notatka.txt`.
+**Sprawdź również:** Uruchom skrypt z jego folderu i z folderu nadrzędnego. Sprawdź nazwę, rozszerzenie i katalog.
 
-## Zadanie 3. Miniarkusz: raport wyników uczniów
+## Zadanie 2. Czy urządzenie zgłosiło gotowość? | 18 minut, wspólne
 
-**Sytuacja (autorskie ćwiczenie).** Otrzymujesz plik tekstowy `dane/wyniki.txt` o zawartości pokazanej niżej. Każdy niepusty wiersz zawiera imię i liczbę punktów oddzielone średnikiem.
+**Pliki:** [zadanie2/gotowosc.js](zadanie2/gotowosc.js), [zadanie2/dane/gotowe.flag](zadanie2/dane/gotowe.flag).
 
-```text
-Ala;8
-Bartek;5
-Celina;10
-Daniel;7
-```
+**Dane i kontekst:** Urządzenie sygnalizuje gotowość samą obecnością pliku zadanie2/dane/gotowe.flag.
 
-**Wymagania do sprawdzenia:**
+**Polecenie:**
 
-1. Program `raport.js` odczytuje `dane/wyniki.txt` asynchronicznie w UTF-8 ze ścieżki zbudowanej względem katalogu skryptu.
-2. Ignoruje puste wiersze (w tym końcowy znak nowej linii) i oblicza liczbę uczniów oraz średnią z jednym miejscem po kropce.
-3. Wskazuje imię i punkty osoby z najwyższym wynikiem oraz liczy osoby, które uzyskały **co najmniej 7** punktów.
-4. Tworzy katalog `out`, zapisuje wynik do `out/raport.txt`, a w terminalu wypisuje `Zapisano raport: raport.txt` dopiero po zakończeniu zapisu. Uruchomienie z innego katalogu roboczego ma dać ten sam wynik.
-5. Jeśli plik wejściowy nie istnieje, program wyświetla `Brak pliku wejściowego: wyniki.txt`, nie tworzy pustego raportu i kończy się kodem różnym od zera.
+1. Napisz asynchroniczną funkcję czyIstnieje(plik), która sprawdza dostępność ścieżki przez fs.access i zwraca boolean.
+2. Dla błędu ENOENT zwróć false, a inne błędy przekaż dalej. Nie odczytuj zawartości pliku.
+3. W gotowosc.js zbuduj ścieżkę względem folderu skryptu i poczekaj na wynik funkcji.
+4. Wypisz Sygnał gotowości: TAK albo Sygnał gotowości: NIE.
+5. Zmień nazwę gotowe.flag na gotowe.old, sprawdź wynik, a następnie przywróć nazwę i uruchom z innego katalogu.
 
-**Oddawany rezultat:** `zadanie3/raport.js`, `zadanie3/dane/wyniki.txt`, wygenerowany `zadanie3/out/raport.txt` oraz zrzut działania i zrzut przypadku braku wejścia.
+**Oczekiwany wynik - przykład:** Istniejący gotowe.flag: Sygnał gotowości: TAK; brak ścieżki: Sygnał gotowości: NIE.
 
-## Zadanie 4. Diagnoza: Ścieżka zależna od terminala
+**Sprawdź również:** Zmień nazwę pliku, sprawdź brak sygnału, przywróć nazwę. Odróżnij ENOENT od innych błędów.
 
-Otwórz `naprawa.js` i plik `dane/tekst.txt`. Najpierw uruchom skrypt z folderu lekcji przez `node naprawa.js`, a potem z katalogu nadrzędnego przez `node lekcja-13-14/naprawa.js`. Przed drugą próbą zapisz przewidywanie. Wyjaśnij różnicę wyników i popraw budowanie ścieżki, aby obie próby odczytały `Zażółć gęślą`. Nie wpisuj bezwzględnej ścieżki swojego komputera. Zapisz przyczynę, poprawkę i wyniki obu prób w `dokumentacja.md`.
+## Zadanie 3. Rejestr alarmów temperatury | 25 minut, samodzielne
 
-## Zadanie 5. Dla chętnych: historia wygenerowanych raportów
+**Pliki:** [zadanie3/alarmy.js](zadanie3/alarmy.js).
 
-Rozszerzenie wykonaj w istniejącym programie z zadania 3.
+**Dane i kontekst:** Dane pomiarów są przygotowane w zadanie3/alarmy.js. Alarm występuje od 30°C włącznie.
 
-Rozbuduj zadanie 3: po zapisaniu `out/raport.txt` dopisz tę samą treść do `out/historia.txt`, a po niej wiersz `---`. Po dwóch uruchomieniach plik `raport.txt` ma zawierać **jeden** aktualny raport, a `historia.txt` ma zawierać **dwa** raporty rozdzielone wierszem `---`. Błąd dopisywania historii musi zostać obsłużony tak samo jak pozostałe błędy operacji na plikach.
+**Polecenie:**
 
-## Oddanie pracy
+1. Napisz wybierzAlarmy(dane, prog=30), zwracającą wybrane pomiary bez operacji na plikach.
+2. Sprawdź wynik funkcji dla przygotowanych danych, temperatur 29 i 30 oraz pustej tablicy.
+3. W main utwórz zadanie3/out, jeśli nie istnieje. Zbuduj ścieżkę do alarmy.log względem skryptu.
+4. Dopisz wyłącznie alarmy, po jednym wierszu id;temperatura. Poczekaj na każdy zapis i zachowaj wcześniejsze wiersze.
+5. Wyświetl Dopisano alarmów: N, obliczając N z bieżącej partii danych. Nie odczytuj logu do liczenia tych alarmów.
+6. Przy braku alarmów wypisz 0 i nie zmieniaj logu; jeśli go nie było, nie musisz tworzyć pliku.
+7. Nad funkcją dodaj JSDoc opisujący parametry i zwracany wynik. Sprawdź ponowne uruchomienie programu.
+8. Buduj ścieżki do własnych plików względem katalogu skryptu.
 
-Oddaj pliki wymagane w zadaniach i własną dokumentację testów. Zapisz sprawdzone dane, oczekiwany wynik oraz wynik rzeczywisty. Dołącz manifesty i konfigurację, jeśli projekt ich używa. Nie dołączaj `node_modules`, plików tymczasowych ani danych dostępowych. Zadanie 5 jest dodatkowe.
+**Oczekiwany wynik - przykład:** Pierwszy zapis logu: A1;32 oraz A3;30. Terminal: Dopisano alarmów: 2.
+
+**Sprawdź również:** Drugi start dopisuje te same dwa wpisy. Dla 29 brak alarmu, dla 30 jest alarm. Pusta tablica nie zmienia logu.
+
+<details><summary>Wskazówka</summary>
+
+Sprawdź najpierw wynik funkcji dla temperatur 29 i 30. Potem dobierz zapis, który zachowuje wcześniejsze wiersze.
+
+</details>
+
+## Zadanie 4. Dlaczego czytnik nie działa? | 15 minut, diagnoza
+
+**Pliki:** [naprawa.js](naprawa.js), [dane/tekst.txt](dane/tekst.txt).
+
+**Polecenie:**
+
+1. Otwórz przygotowany naprawa.js oraz dane/tekst.txt z tekstem Zażółć gęślą w UTF-8.
+2. Uruchom błędny program i odczytaj komunikat w terminalu.
+3. Wyjaśnij, dlaczego wynik readFile w tej wersji nie zachowuje się jak oczekiwany tekst.
+4. Popraw odczyt i sprawdź polskie znaki, pusty plik oraz uruchomienie z innego katalogu.
+
+**Oczekiwany wynik - przykład:** Program wypisuje Zażółć gęślą, bez zniekształceń.
+
+**Sprawdź również:** Sprawdź polskie znaki, pusty plik oraz uruchomienie z innego katalogu.
+
+W testy.md zapisz trzy próby: typową, graniczną i własną, z oczekiwaniem i rzeczywistym wynikiem. Dodaj krótką diagnozę.
+
+## Zadanie 5. Własne ulepszenie - dla chętnych
+
+**Pliki:** [zadanie5/robocze/sesja.tmp](zadanie5/robocze/sesja.tmp), [zadanie5/robocze/podglad.tmp](zadanie5/robocze/podglad.tmp), [zadanie5/robocze/notatki.txt](zadanie5/robocze/notatki.txt).
+
+Wybierz wariant opisany poniżej albo własny dodatek: Dodaj osobny log pomiarów bez alarmu, zachowując oryginalny log alarmów. Zachowaj działanie części podstawowej.
+
+**Polecenie:**
+
+1. W `zadanie5/robocze` przygotuj trzy zwykłe pliki: `sesja.tmp`, `podglad.tmp` i `notatki.txt`. Ich treść jest dowolna.
+2. Skrypt `zadanie5/porzadki.js` ma pobrać listę nazw, usunąć wyłącznie pliki z rozszerzeniem `.tmp` w tym folderze i wypisać liczbę usuniętych plików. Bez przeszukiwania podfolderów.
+3. Pierwsza próba: usunięte dwa pliki, `notatki.txt` pozostaje. Druga próba: usuniętych zero.
+4. Sprawdź również uruchomienie z innego katalogu.
+
+Dla własnego pomysłu ustal oczekiwany efekt, pokaż jeden test dodatku i ponownie sprawdź podstawę. Wystarczy krótki komentarz w kodzie.
+
+## Zadanie 6. Zadanie domowe: napraw kopię biletu
+
+**Pliki:** [domowe/kopia.js](domowe/kopia.js), [domowe/dane/bilet.txt](domowe/dane/bilet.txt).
+
+**Cel naprawy:** Plik domowe/dane/bilet.txt zawiera polskie znaki w UTF-8. Program ma utworzyć identyczną kopię w domowe/out/bilet_kopia.txt. Kolejne uruchomienie odświeża jedną kopię. Program działa także uruchomiony z katalogu nadrzędnego.
+
+**Polecenie:**
+
+1. Uruchom lub skompiluj błędną wersję i porównaj jej zachowanie z wymaganiami.
+2. Znajdź i popraw trzy usterki. Zachowaj poznane mechanizmy i wymagane zachowanie.
+3. Nad każdą poprawką dodaj komentarz CODE REVIEW wyjaśniający przyczynę błędu. W HTML użyj komentarza HTML, a w JS lub TS komentarza //.
+4. Sprawdź: Polskie znaki, dwa uruchomienia i uruchomienie z innego katalogu. Oddaj poprawiony kod i przygotuj krótkie wyjaśnienie jednej poprawki.

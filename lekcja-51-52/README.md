@@ -1,51 +1,97 @@
-# Ćwiczenia: Angular: enum, @switch, dynamiczne klasy i style
+# Angular: enum, @switch, dynamiczne klasy i style
 
-## Przygotowanie
+Projekt Angular 20 standalone jest przygotowany. Po npm install uruchom npx ng serve i otwórz podany adres. Dla zadania N skopiuj pliki startery/zadanieN do projektu z zachowaniem ścieżek. Używaj własnych rozwiązań z wcześniejszych zadań tam, gdzie polecenie je rozwija.
 
-Pracuj w projekcie Angular 20.3 z komponentami standalone i plikami `src/app/app.ts`, `app.html`, `app.css`. Zachowaj konfigurację wygenerowaną w lekcjach 37-38, w tym obsługę Zone.js. Otwórz terminal w katalogu aplikacji.
+Wykonaj zadania 1-4. Zadanie 5 to własne ulepszenie dla chętnych, a zadanie 6 jest domowe. Rozwiązuj kolejne punkty i sprawdzaj działanie na bieżąco. Opis testów oddajesz w testy.md tylko przy zadaniu 4.
 
-```bash
-npx ng serve
-```
+## Zadanie 1. Status wybiera komunikat | 15 minut, prowadzone
 
-Otwórz adres podany w terminalu. Kompilację sprawdzaj poleceniem `npx ng build`. Serwer zatrzymuj przez Ctrl+C. Do osobnych ćwiczeń korzystaj z kopii własnego czystego projektu; nie nadpisuj wcześniejszych rozwiązań.
+**Pliki:** [startery/zadanie1/src/app/app.ts](startery/zadanie1/src/app/app.ts).
 
-Jeśli zadanie wymaga Bootstrapa, skopiuj `vendor/bootstrap.min.css` z lekcji 09-10 do `src/vendor/bootstrap.min.css`, a w `src/styles.css` dodaj:
+**Polecenie:**
 
-```css
-@import "./vendor/bootstrap.min.css";
-```
+1. Utwórz enum Status o wartościach nowe,w-realizacji,gotowe. Udostępnij enum jako pole Status w klasie.
+2. Stan początkowy Nowe, przyciski zmieniają status. @switch wybiera Oczekuje, Pracujemy albo Gotowe do odbioru.
 
-Potrzebne obrazy z folderu `obrazy` lekcji 09-10 skopiuj do `public/obrazy` projektu Angular. Odwołuj się do nich jako `obrazy/nazwa.svg`.
+**Oczekiwany wynik - przykład:** Oczekuje → Pracujemy → Gotowe do odbioru.
 
-## Zadanie 1. Status wybiera komunikat
+**Sprawdź również:** Sprawdź każdy dozwolony stan enum i odpowiadającą mu gałąź @switch.
 
-Utwórz enum Status o wartościach nowe,w-realizacji,gotowe. Udostępnij enum jako pole Status w klasie. Stan początkowy Nowe, przyciski zmieniają status. @switch wybiera Oczekuje, Pracujemy albo Gotowe do odbioru.
+## Zadanie 2. Klasy i style z danych | 18 minut, wspólne
 
-**Wynik oczekiwany:** Oczekuje, po rozpoczęciu Pracujemy, po zakończeniu Gotowe do odbioru.
+**Pliki:** [startery/zadanie2/src/app/app.ts](startery/zadanie2/src/app/app.ts), [startery/zadanie2/src/app/app.html](startery/zadanie2/src/app/app.html), [startery/zadanie2/src/app/app.css](startery/zadanie2/src/app/app.css).
 
-## Zadanie 2. Klasy i style z danych
+**Polecenie:**
 
-Utwórz dostępny=true i rozmiar 18. Element korzysta z ngClass: dostepny lub brak; ngStyle font-size.px z rozmiar i color z dostępności. Zaimportuj NgClass oraz NgStyle. W przełączniku zmieniaj boolean.
+1. Utwórz dostępny=true i rozmiar 18. Element korzysta z ngClass: dostepny lub brak; ngStyle font-size.px z rozmiar i color z dostępności.
+2. Zaimportuj NgClass oraz NgStyle. W przełączniku zmieniaj boolean.
 
-**Wynik oczekiwany:** Zmieniają się klasa, ramka i kolor; rozmiar 18 px.
+**Oczekiwany wynik - przykład:** Rozmiar wynosi 18 px; zmiana dostępności zmienia klasę, kolor i ramkę.
 
-## Zadanie 3. Panel zamówień ze stanami
+**Sprawdź również:** Sprawdź obie wartości boolean i importy NgClass oraz NgStyle.
 
-Dane: ID 1 Notes ilość 2 Status.Nowe; ID 2 Teczka ilość 1 Status.WRealizacji; ID 3 Długopis ilość 3 Status.Gotowe. Karty renderowane @for. @switch pokazuje opis. Nowe żółte tło; WRealizacji niebieskie; Gotowe zielone. Użyj ngClass. Przycisk Dalej Nowe→WRealizacji→Gotowe, blokada na Gotowe. Metoda także pilnuje granicy. Reset pojedynczego zamówienia do Nowe. ngStyle szerokość paska:0%,50%,100%. Enum bez niebezpiecznego rzutowania na dowolny status.
+## Zadanie 3. Panel zamówień ze stanami | 25 minut, samodzielne
 
-**Wynik oczekiwany:** Trzy różne stany na starcie. Dwa Dalej dla Notes dają 100%; Teczka i Długopis bez zmiany.
+**Pliki:** [startery/zadanie3/src/app/app.ts](startery/zadanie3/src/app/app.ts), [startery/zadanie3/src/app/app.html](startery/zadanie3/src/app/app.html), [startery/zadanie3/src/app/app.css](startery/zadanie3/src/app/app.css).
 
-## Zadanie 4. Klasa bez CSS albo dyrektywa bez importu
+**Dane i kontekst:** Dane: Notes ID 1/2 szt./Nowe, Teczka ID 2/1 szt./WRealizacji, Długopis ID 3/3 szt./Gotowe.
 
-Usuń NgStyle z imports, pozostaw wiązanie w HTML. Odczytaj błąd i napraw. Potem usuń regułę CSS .gotowe: kompilacja przejdzie, ale naruszysz wymaganie wyglądu. Przywróć regułę.
+**Polecenie:**
 
-**Wynik oczekiwany:** Po naprawie build przechodzi i karta Gotowe ma zielone tło.
+1. Zdefiniuj enum Status i tablicę zamówień. Renderuj karty przez @for z trwałym ID.
+2. Przez @switch wyświetl opis bieżącego stanu.
+3. Użyj ngClass: Nowe ma żółte tło, WRealizacji niebieskie, Gotowe zielone.
+4. Dalej zmienia stan Nowe na WRealizacji, a potem na Gotowe. Dla Gotowe zablokuj przycisk i zabezpiecz metodę.
+5. Reset pojedynczego zamówienia przywraca Nowe, zachowując pozostałe rekordy.
+6. Przez ngStyle ustaw pasek na 0%,50%,100% zgodnie ze stanem. Korzystaj z wartości enum bez rzutowania dowolnego napisu na status.
+7. Stan aplikacji opisuj ustalonymi wartościami enum zamiast przypadkowymi napisami.
 
-## Zadanie 5. Rozszerzenie dla kończących wcześniej
+**Oczekiwany wynik - przykład:** Trzy różne stany na starcie. Dwa Dalej dla Notes dają 100%, pozostałe zamówienia są bez zmian.
 
-Przekształć listę zamówień w sygnał. Dodaj `computed`, które wyznacza liczbę zamówień gotowych do odbioru. Zmiany statusów mają aktualizować listę i licznik bez ręcznego przeliczania. To zadanie dodatkowe; zachowaj wymagane zachowanie panelu.
+**Sprawdź również:** Gotowe nie przechodzi dalej; Reset dotyczy jednego rekordu i przywraca 0%.
 
-## Oddanie pracy
+<details><summary>Wskazówka</summary>
 
-Oddaj pliki wymagane w zadaniach i własną dokumentację testów. Zapisz sprawdzone dane, oczekiwany wynik oraz wynik rzeczywisty. Dołącz manifesty i konfigurację, jeśli projekt ich używa. Nie dołączaj `node_modules`, plików tymczasowych ani danych dostępowych. Zadanie 5 jest dodatkowe.
+Uruchom najmniejszy działający fragment. Sprawdź jeden rekord lub jedną akcję, a potem dodawaj kolejne wymagania.
+
+</details>
+
+## Zadanie 4. Diagnoza: klasa bez stylu | 15 minut, diagnoza
+
+**Pliki:** [startery/zadanie4/src/app/app.ts](startery/zadanie4/src/app/app.ts).
+
+**Polecenie:**
+
+1. Tekst Alarm ma być czerwony. Klasa jest w HTML, ale wygląd jest niezgodny.
+2. Napraw CSS.
+
+**Oczekiwany wynik - przykład:** Alarm ma czerwony tekst po poprawieniu selektora CSS.
+
+**Sprawdź również:** Sprawdź zgodność nazwy klasy w szablonie i arkuszu stylów.
+
+W testy.md zapisz trzy próby: typową, graniczną i własną, z oczekiwaniem i rzeczywistym wynikiem. Dodaj krótką diagnozę.
+
+## Zadanie 5. Własne ulepszenie - dla chętnych
+
+**Punkt wyjścia:** własna, działająca część podstawowa wskazana w poleceniu.
+
+Wybierz wariant opisany poniżej albo własny dodatek: Dodaj filtr zamówień według wybranego statusu. Zachowaj działanie części podstawowej.
+
+**Polecenie:**
+
+1. Przekształć listę zamówień w signal i dodaj computed liczby gotowych. Zmieniaj rekordy niezmiennie przez update.
+
+Dla własnego pomysłu ustal oczekiwany efekt, pokaż jeden test dodatku i ponownie sprawdź podstawę. Wystarczy krótki komentarz w kodzie.
+
+## Zadanie 6. Zadanie domowe: Status i pasek realizacji
+
+**Pliki:** [domowe/app.ts](domowe/app.ts).
+
+**Cel naprawy:** Początkowo status jest nowe, po Zakończ gotowe. Gotowe ma zielony tekst. Szerokość paska 30 oznacza 30%, nie 30 pikseli.
+
+**Polecenie:**
+
+1. Uruchom lub skompiluj błędną wersję i porównaj jej zachowanie z wymaganiami.
+2. Znajdź i popraw trzy usterki. Zachowaj poznane mechanizmy i wymagane zachowanie.
+3. Nad każdą poprawką dodaj komentarz CODE REVIEW wyjaśniający przyczynę błędu. W HTML użyj komentarza HTML, a w JS lub TS komentarza //.
+4. Sprawdź: Stan początkowy,zakończenie i szerokość paska 30%. Oddaj poprawiony kod i przygotuj krótkie wyjaśnienie jednej poprawki.

@@ -1,53 +1,100 @@
-# Ćwiczenia: Angular: routing SPA, HttpClient i integracja z API
+# Angular: routing SPA, HttpClient i integracja z API
 
-## Przygotowanie
+Projekt Angular 20 standalone jest przygotowany. Po npm install uruchom npx ng serve i otwórz podany adres. Dla zadania N skopiuj pliki startery/zadanieN do projektu z zachowaniem ścieżek. Używaj własnych rozwiązań z wcześniejszych zadań tam, gdzie polecenie je rozwija.
 
-Pracuj w projekcie Angular 20.3 z komponentami standalone i plikami `src/app/app.ts`, `app.html`, `app.css`. Zachowaj konfigurację wygenerowaną w lekcjach 37-38, w tym obsługę Zone.js. Otwórz terminal w katalogu aplikacji.
+Wykonaj zadania 1-4. Zadanie 5 to własne ulepszenie dla chętnych, a zadanie 6 jest domowe. Rozwiązuj kolejne punkty i sprawdzaj działanie na bieżąco. Opis testów oddajesz w testy.md tylko przy zadaniu 4.
 
-```bash
-npx ng serve
-```
+## Zadanie 1. Dwa adresy i RouterOutlet | 15 minut, prowadzone
 
-Otwórz adres podany w terminalu. Kompilację sprawdzaj poleceniem `npx ng build`. Serwer zatrzymuj przez Ctrl+C. Do osobnych ćwiczeń korzystaj z kopii własnego czystego projektu; nie nadpisuj wcześniejszych rozwiązań.
+**Pliki:** [startery/zadanie1/src/app/app.ts](startery/zadanie1/src/app/app.ts), [startery/zadanie1/src/app/app.config.ts](startery/zadanie1/src/app/app.config.ts), [startery/zadanie1/src/app/app.routes.ts](startery/zadanie1/src/app/app.routes.ts), [startery/zadanie1/src/app/informacje.ts](startery/zadanie1/src/app/informacje.ts), [startery/zadanie1/src/app/oferta.ts](startery/zadanie1/src/app/oferta.ts), [startery/zadanie1/src/app/app.html](startery/zadanie1/src/app/app.html), [startery/zadanie1/src/app/app.css](startery/zadanie1/src/app/app.css).
 
-Jeśli zadanie wymaga Bootstrapa, skopiuj `vendor/bootstrap.min.css` z lekcji 09-10 do `src/vendor/bootstrap.min.css`, a w `src/styles.css` dodaj:
+**Polecenie:**
 
-```css
-@import "./vendor/bootstrap.min.css";
-```
+1. Utwórz dwa widoki Oferta i Informacje. Menu routerLink, miejsce na widok router-outlet.
+2. Adres pusty kieruje na ofertę; nieznany także na ofertę. Zachowaj providery istniejącej konfiguracji, dodaj Router.
 
-Potrzebne obrazy z folderu `obrazy` lekcji 09-10 skopiuj do `public/obrazy` projektu Angular. Odwołuj się do nich jako `obrazy/nazwa.svg`.
+**Oczekiwany wynik - przykład:** Menu przełącza Oferta i Informacje; pusty oraz nieznany adres kierują na ofertę.
 
-Backend do zadania 2 znajduje się w `backend/api.js`. W katalogu `backend` wykonaj `npm install`, a następnie `node api.js`. Plik `proxy.conf.json` skopiuj do katalogu głównego projektu Angular i uruchom frontend przez `npx ng serve --proxy-config proxy.conf.json`.
+**Sprawdź również:** Sprawdź adresy, router-outlet i brak ręcznej podmiany DOM.
 
-## Zadanie 1. Dwa adresy i RouterOutlet
+## Zadanie 2. GET przez proxy | 18 minut, wspólne
 
-Utwórz dwa widoki Oferta i Informacje. Menu routerLink, miejsce na widok router-outlet. Adres pusty kieruje na ofertę; nieznany także na ofertę. Zachowaj providery istniejącej konfiguracji, dodaj Router.
+**Pliki:** [startery/zadanie2/backend/api.js](startery/zadanie2/backend/api.js), [startery/zadanie2/src/app/oferta.ts](startery/zadanie2/src/app/oferta.ts), [startery/zadanie2/proxy.conf.json](startery/zadanie2/proxy.conf.json).
 
-**Wynik oczekiwany:** Menu zmienia adres i treść widoku bez ręcznej podmiany DOM.
+**Polecenie:**
 
-## Zadanie 2. GET przez proxy
+1. Dodaj provideHttpClient oraz Oferta z pobieraniem danych. Przygotuj api.js i proxy.conf.json.
+2. Najpierw sprawdź JSON pod localhost:3000/api/produkty, potem uruchom Angular z proxy. Przed subscribe przewidź, czy samo get wysyła żądanie.
 
-Dodaj provideHttpClient oraz Oferta z pobieraniem danych. Przygotuj api.js i proxy.conf.json. Najpierw sprawdź JSON pod localhost:3000/api/produkty, potem uruchom Angular z proxy. Przed subscribe przewidź, czy samo get wysyła żądanie.
+**Oczekiwany wynik - przykład:** Oferta pokazuje Notes 12 i Długopis 5; żądanie GET jest widoczne w Network.
 
-**Wynik oczekiwany:** Widoczne Notes 12 i Długopis 5; GET w Network.
+**Sprawdź również:** Najpierw sprawdź backend na porcie 3000, potem frontend z proxy i moment wysłania żądania.
 
-## Zadanie 3. Samodzielne API kursów i trzy stany widoku
+## Zadanie 3. Samodzielne API kursów i trzy stany widoku | 25 minut, samodzielne
 
-Nowe dane /api/kursy: ID 1 Python cena 80, ID 2 JavaScript 100, ID 3 C# 120. Widok Oferta pobiera kursy zamiast produktów, menu zachowane. Ma Ładowanie, błąd, listę albo Brak kursów. Dodaj Odśwież z blokadą podczas ładowania. Przy błędzie nie wyświetlaj starej listy jako udanej odpowiedzi. Przećwicz ponowienie po przywróceniu backendu. Wykorzystaj dołączony `backend/szkielet.js` i konfigurację proxy. Endpoint i obsługę odpowiedzi napisz samodzielnie. Przed uruchomieniem zatrzymaj serwer zadania 2.
+**Pliki:** [startery/zadanie3/backend/api.js](startery/zadanie3/backend/api.js), [startery/zadanie3/src/app/app.ts](startery/zadanie3/src/app/app.ts), [startery/zadanie3/src/app/app.config.ts](startery/zadanie3/src/app/app.config.ts), [startery/zadanie3/src/app/app.routes.ts](startery/zadanie3/src/app/app.routes.ts), [startery/zadanie3/src/app/informacje.ts](startery/zadanie3/src/app/informacje.ts), [startery/zadanie3/src/app/oferta.ts](startery/zadanie3/src/app/oferta.ts), [startery/zadanie3/proxy.conf.json](startery/zadanie3/proxy.conf.json), [startery/zadanie3/src/app/app.html](startery/zadanie3/src/app/app.html), [startery/zadanie3/src/app/app.css](startery/zadanie3/src/app/app.css).
 
-**Wynik oczekiwany:** Lista 3, [] daje Brak kursów, brak serwera daje Nie udało się pobrać danych.
+**Dane i kontekst:** Dane API /api/kursy: Python ID 1/cena 80, JavaScript ID 2/100, C# ID 3/120. Szkielet backendu, konfiguracja i proxy są w starterze.
 
-## Zadanie 4. Trasa wildcard albo brak subscribe
+**Polecenie:**
 
-Umieść trasę `**` na początku i sprawdź menu. Następnie przywróć kolejność i usuń subscribe z GET. W Network sprawdź, czy żądanie istnieje. Napraw każdą usterkę osobno.
+1. Zaimplementuj endpoint kursów w API, a następnie pobieranie tych danych w widoku Oferta. Zachowaj menu i routing.
+2. Pokaż Ładowanie podczas oczekiwania na odpowiedź.
+3. Po sukcesie pokaż listę kursów albo Brak kursów dla pustej tablicy.
+4. Po błędzie pokaż Nie udało się pobrać danych. Usuń starą listę i zakończ stan ładowania.
+5. Dodaj Odśwież z blokadą podczas żądania. Po zakończeniu każdej próby przycisk ponownie działa.
+6. Sprawdź dane, pustą tablicę, zatrzymany backend i ponowienie po przywróceniu API.
+7. Pokaż użytkownikowi ładowanie, wynik albo błąd i pozwól ponowić próbę.
 
-**Wynik oczekiwany:** Po naprawie menu działa i żądanie kończy stan ładowania.
+**Oczekiwany wynik - przykład:** Poprawna odpowiedź:3 kursy; []:Brak kursów; brak serwera:Nie udało się pobrać danych.
 
-## Zadanie 5. Rozszerzenie dla kończących wcześniej
+**Sprawdź również:** Sprawdź ładowanie, blokadę Odśwież, błąd bez starej listy i udane ponowienie po uruchomieniu API.
 
-Przygotuj lokalny wariant awarii: endpoint ma zwracać błąd HTTP 500 po 500 ms. Sprawdź, czy frontend pokazuje komunikat błędu i kończy stan ładowania. Następnie przywróć poprawną odpowiedź endpointu i ponów pobieranie.
+<details><summary>Wskazówka</summary>
 
-## Oddanie pracy
+Uruchom najmniejszy działający fragment. Sprawdź jeden rekord lub jedną akcję, a potem dodawaj kolejne wymagania.
 
-Oddaj pliki wymagane w zadaniach i własną dokumentację testów. Zapisz sprawdzone dane, oczekiwany wynik oraz wynik rzeczywisty. Dołącz manifesty i konfigurację, jeśli projekt ich używa. Nie dołączaj `node_modules`, plików tymczasowych ani danych dostępowych. Zadanie 5 jest dodatkowe.
+</details>
+
+## Zadanie 4. Diagnoza: wildcard przechwytuje menu | 15 minut, diagnoza
+
+**Pliki:** [startery/zadanie4/src/app/app.ts](startery/zadanie4/src/app/app.ts), [startery/zadanie4/src/app/app.config.ts](startery/zadanie4/src/app/app.config.ts).
+
+**Polecenie:**
+
+1. Menu otwiera dwie różne strony. Nieznany adres kieruje na ofertę.
+2. Napraw kolejność tras.
+
+**Oczekiwany wynik - przykład:** Menu pokazuje dwie różne strony; nieznana ścieżka prowadzi na ofertę.
+
+**Sprawdź również:** Sprawdź obie trasy i wildcard po zmianie kolejności definicji.
+
+W testy.md zapisz trzy próby: typową, graniczną i własną, z oczekiwaniem i rzeczywistym wynikiem. Dodaj krótką diagnozę.
+
+## Zadanie 5. Własne ulepszenie - dla chętnych
+
+**Punkt wyjścia:** własna, działająca część podstawowa wskazana w poleceniu.
+
+Wybierz wariant opisany poniżej albo własny dodatek: Dodaj liczbę rekordów ostatniej udanej odpowiedzi i czyść ją przy błędzie. Zachowaj działanie części podstawowej.
+
+**Polecenie:**
+
+1. Zasymuluj błąd API po 500 ms. Widok pokazuje ładowanie, potem błąd i odblokowuje Odśwież.
+2. Następnie przywróć poprawną odpowiedź.
+
+Dla własnego pomysłu ustal oczekiwany efekt, pokaż jeden test dodatku i ponownie sprawdź podstawę. Wystarczy krótki komentarz w kodzie.
+
+## Zadanie 6. Zadanie domowe: Odświeżenie kursów po awarii
+
+**Pliki:** [domowe/app.ts](domowe/app.ts).
+
+**Cel naprawy:** Komponent pobiera /api/kursy z backendu lekcji 28 przez proxy. Początkowo pokazuje dane, a po zatrzymaniu backendu błąd i kończy ładowanie. Przycisk pozwala ponowić próbę.
+
+W projekcie pozostają provideHttpClient, routing i proxy z zadania 3. Podmień tylko src/app/app.ts.
+
+**Polecenie:**
+
+1. Uruchom lub skompiluj błędną wersję i porównaj jej zachowanie z wymaganiami.
+2. Znajdź i popraw trzy usterki. Zachowaj poznane mechanizmy i wymagane zachowanie.
+3. Nad każdą poprawką dodaj komentarz CODE REVIEW wyjaśniający przyczynę błędu. W HTML użyj komentarza HTML, a w JS lub TS komentarza //.
+4. Sprawdź: Sukces,błąd po zatrzymaniu backendu i ponowienie po jego uruchomieniu. Oddaj poprawiony kod i przygotuj krótkie wyjaśnienie jednej poprawki.

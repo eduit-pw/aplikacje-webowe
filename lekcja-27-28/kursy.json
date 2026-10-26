@@ -1,0 +1,47 @@
+[
+  {
+    "kod": "JS01",
+    "nazwa": "JavaScript od podstaw",
+    "dzial": "web",
+    "poziom": "podstawowy",
+    "godziny": 12,
+    "tagi": ["js", "web"],
+    "prowadzacy": { "imie": "Ala", "miasto": "Kraków" }
+  },
+  {
+    "kod": "PY01",
+    "nazwa": "Python i API",
+    "dzial": "backend",
+    "poziom": "podstawowy",
+    "godziny": 15,
+    "tagi": ["python", "api"],
+    "prowadzacy": { "imie": "Bartek", "miasto": "Gliwice" }
+  },
+  {
+    "kod": "EX01",
+    "nazwa": "Express zaawansowany",
+    "dzial": "backend",
+    "poziom": "zaawansowany",
+    "godziny": 20,
+    "tagi": ["js", "api"],
+    "prowadzacy": { "imie": "Ala", "miasto": "Gliwice" }
+  },
+  {
+    "kod": "DB01",
+    "nazwa": "Podstawy MongoDB",
+    "dzial": "baza",
+    "poziom": "podstawowy",
+    "godziny": 10,
+    "tagi": ["mongodb", "baza"],
+    "prowadzacy": { "imie": "Celina", "miasto": "Kraków" }
+  },
+  {
+    "kod": "RE01",
+    "nazwa": "React w praktyce",
+    "dzial": "web",
+    "poziom": "zaawansowany",
+    "godziny": 18,
+    "tagi": ["react", "web"],
+    "prowadzacy": { "imie": "Bartek", "miasto": "Gliwice" }
+  }
+]

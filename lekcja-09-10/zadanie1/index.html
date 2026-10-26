@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zapis na warsztaty</title>
+  <link rel="stylesheet" href="../vendor/bootstrap.min.css">
+</head>
+<body>
+  <main>
+    <h1>Zapis na warsztaty</h1>
+    <form id="zapis">
+      <div>
+        <label for="imie">Imię</label>
+        <input id="imie" name="imie" type="text" required>
+      </div>
+      <div>
+        <label for="email">Adres e-mail</label>
+        <input id="email" name="email" type="email" required>
+      </div>
+      <div>
+        <label for="warsztat">Warsztat</label>
+        <select id="warsztat" name="warsztat" required>
+          <option value="" selected>Wybierz warsztat</option>
+          <option value="Python">Python</option>
+          <option value="JavaScript">JavaScript</option>
+        </select>
+      </div>
+      <div>
+        <input id="przypomnienie" name="przypomnienie"
+               type="checkbox" role="switch" checked>
+        <label for="przypomnienie">Wyślij przypomnienie</label>
+      </div>
+      <button type="submit">Zapisz</button>
+      <button type="reset">Wyczyść</button>
+    </form>
+    <p id="wynik" role="status" aria-live="polite"></p>
+  </main>
+  <script>
+// TODO: obsługa zgodna z poleceniem.
+</script>
+</body>
+</html>

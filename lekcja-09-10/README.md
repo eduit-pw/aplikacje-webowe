@@ -1,66 +1,105 @@
-# Ćwiczenia: formularze i komponenty Bootstrapa
+# Bootstrap: formularze, przełączniki i karty
 
-> Wykonaj zadania, korzystając z przygotowanego szablonu. Zwróć uwagę na poprawne działanie formularzy, dostępność etykiet oraz zachowanie strony bez jej przeładowywania.
+Otwórz plik HTML w przeglądarce. Wyniki i błędy skryptu sprawdzaj w F12. Biblioteki i obrazy są lokalne.
 
-## Zadanie 1. Pełny formularz zapisu
+Wykonaj zadania 1-4. Zadanie 5 to własne ulepszenie dla chętnych, a zadanie 6 jest domowe. Rozwiązuj kolejne punkty i sprawdzaj działanie na bieżąco. Opis testów oddajesz w testy.md tylko przy zadaniu 4.
 
-1. Ustaw tytuł strony i nagłówek `h1` na **Zapis na warsztaty**.
-2. Dodaj wymagane pola:
-   - `Imię` — pole tekstowe;
-   - `Adres e-mail` — pole typu `email`;
-   - `Warsztat` — lista z pustą opcją `Wybierz warsztat` oraz opcjami `Python` i `JavaScript`.
-3. Zastosuj właściwe klasy Bootstrapa i dodaj etykiety. Dodaj też przełącznik `Wyślij przypomnienie`, zaznaczony początkowo.
-4. Dodaj przyciski `Zapisz` i `Wyczyść`. Pierwszy zatwierdza formularz, a drugi go resetuje. Nie pozwól zatwierdzić formularza z pustym imieniem, imieniem składającym się z samych spacji, niepoprawnym adresem e-mail ani bez wybranego warsztatu.
-5. Po poprawnym zatwierdzeniu wyświetl komunikat w formacie: `Zapisano: <imię>. Warsztat: <warsztat>. Przypomnienie: tak/nie.` Imię ma być przycięte, a strona nie może się przeładować.
-6. Edycja pola lub przełącznika usuwa poprzedni komunikat. Reset przywraca puste pola, pusty wybór i zaznaczone przypomnienie, a także usuwa komunikat oraz własny błąd imienia.
+## Zadanie 1. Pełny formularz zapisu | 15 minut, prowadzone
 
-## Zadanie 2. Karty z obrazami, filtrem i licznikami
+**Pliki:** [zadanie1/index.html](zadanie1/index.html).
 
-1. Ustaw nagłówek strony na **Katalog kursów** i dodaj dwie karty w podanej kolejności:
-   - **Python** — `Podstawy programowania. Tryb: stacjonarnie.`
-   - **JavaScript** — `Interaktywne strony. Tryb: online.`
-2. Każda karta ma zawierać właściwy lokalny obraz z opisem alternatywnym, tytuł, opis, tekst `Polubienia: 0` i przycisk `Lubię to`. Użyj odpowiednich klas `.card-*`.
-3. Poniżej szerokości 768 px karty mają być ułożone jedna pod drugą. Od 768 px każda karta ma zajmować połowę wiersza. Zachowaj odstępy i dopasuj obrazy tak, by mieściły się w kartach.
-4. Dodaj początkowo wyłączony przełącznik `Tylko online`:
-   - po włączeniu ukryj całą kolumnę Python;
-   - karta JavaScript ma przesunąć się na początek i nadal zajmować połowę szerokości od 768 px;
-   - po wyłączeniu przełącznika pokaż ponownie obie karty.
-5. Kliknięcie przycisku zwiększa licznik tylko na danej karcie o 1. Filtrowanie nie może resetować liczników, a zmiana napisu tytułu nie może psuć ich działania.
+**Polecenie:**
 
-## Zadanie 3. Samodzielnie: rezerwacja i tabela
+1. Tytuł strony i `h1`: `Zapis na warsztaty`.
+2. Pola `Imię` (tekst) i `Adres e-mail` (`email`) są wymagane. Dodaj listę `Warsztat` z pustą opcją `Wybierz warsztat` i wyborami `Python`, `JavaScript`. Wybór warsztatu jest wymagany.
+3. Zastosuj właściwe klasy Bootstrapa, etykiety i przełącznik `Wyślij przypomnienie`, początkowo zaznaczony.
+4. Przyciski: `Zapisz` zatwierdza, `Wyczyść` resetuje. Pola nie mogą być zatwierdzone z pustym imieniem, samymi spacjami, niepoprawnym e-mailem albo bez warsztatu.
+5. Po poprawnym zatwierdzeniu wyświetl `Zapisano: <imię>. Warsztat: <warsztat>. Przypomnienie: tak/nie.`. Imię ma być przycięte; strona nie przeładowuje się.
+6. Edycja pól lub przełącznika usuwa stare potwierdzenie. Reset przywraca puste pola, pusty wybór, zaznaczone przypomnienie i usuwa komunikat oraz własny błąd imienia.
 
-1. Ustaw tytuł strony i nagłówek `h1` na **Rezerwacja stanowiska**. Umieść formularz w karcie z nagłówkiem **Formularz rezerwacji**.
-2. Dodaj wymagane kontrolki:
-   - `Imię` — nie może składać się z samych spacji;
-   - `Adres e-mail`;
-   - `Stanowisko` — lista z pustą opcją `Wybierz stanowisko`, a następnie `PC-1` i `PC-2`.
-3. Dodaj początkowo zaznaczony przełącznik `Bez dodatkowych uwag` oraz pole `Uwagi (opcjonalnie)` typu `textarea`. Gdy przełącznik jest zaznaczony, pole ma być nieaktywne. Odznaczenie ma natychmiast je odblokować, a ponowne zaznaczenie — zablokować. Zmiana przełącznika nie może usuwać tekstu z pola.
-4. Przycisk `Zarezerwuj` zatwierdza formularz. Podsumowanie ma być tabelą z kolumnami `Pole` i `Wartość` oraz czterema wierszami: `Imię`, `Adres e-mail`, `Stanowisko`, `Uwagi`. Przed pierwszym zatwierdzeniem wszystkie wartości mają wynosić `—`.
-5. Uzupełniaj tabelę dopiero po poprawnym zatwierdzeniu:
-   - gdy przełącznik jest zaznaczony, pokaż `Brak uwag`, nawet jeśli nieaktywne pole zawiera wcześniejszy tekst;
-   - gdy przełącznik jest odznaczony, pokaż przycięty tekst albo `Brak uwag`, jeśli pole jest puste.
-6. Zmiana pól lub przełącznika nie może zmieniać poprzedniego podsumowania. Dopiero kolejne poprawne zatwierdzenie zastępuje wartości. Błędny formularz pozostawia ostatnie poprawne podsumowanie.
-7. Od 768 px formularz i tabela mają zajmować dwie równe kolumny. Na telefonie tabela ma znajdować się pod formularzem. Użyj `.card`, `.table`, `.table-striped` i opakowania `.table-responsive`.
-8. Wyświetlaj dane użytkownika jako tekst. Strona nie może się przeładowywać; dane nie są zapisywane na serwerze.
+**Oczekiwany wynik - przykład:** Ala, ala@example.com, Python, zaznaczone przypomnienie: Zapisano: Ala. Warsztat: Python. Przypomnienie: tak.
 
-## Zadanie 4. Naprawa i własne testy
+**Sprawdź również:** Sprawdź same spacje, niepoprawny e-mail, brak warsztatu, zmianę pól po zapisie i reset.
 
-1. Otwórz `zadanie4/index.html`. Formularz ma spełniać wymagania zadania 3, ale przełącznik nie działa prawidłowo. Zapisz, co powinno się stać po jego odznaczeniu, a następnie sprawdź rzeczywisty wynik.
-2. Znajdź przyczynę problemu i popraw ją. Nie usuwaj kontrolki ani nie odblokowuj pola na stałe.
-3. W pliku `dokumentacja.md` zapisz jedno lub dwa zdania o przyczynie i poprawce.
-4. Sprawdź cztery przypadki:
-   - stan początkowy;
-   - odznaczenie przełącznika i zatwierdzenie formularza z uwagami;
-   - ponowne zaznaczenie przełącznika i zatwierdzenie formularza;
-   - wybrany przez siebie przypadek graniczny.
+## Zadanie 2. Karty z obrazami, filtrem i licznikami | 18 minut, wspólne
 
-   Przypadek graniczny wybierz przed uruchomieniem testu, np. imię złożone z samych spacji albo pusty wybór stanowiska.
+**Pliki:** [zadanie2/index.html](zadanie2/index.html).
 
-## Zadanie 5. Dla chętnych: modal z informacją
+**Polecenie:**
 
-Utwórz przycisk `Zobacz informacje`, który otwiera modal zawierający:
+1. Strona ma nagłówek `Katalog kursów` i dwie karty: najpierw `Python` z opisem `Podstawy programowania. Tryb: stacjonarnie.`, potem `JavaScript` z opisem `Interaktywne strony. Tryb: online.`.
+2. Każda karta ma właściwy lokalny obraz, opis alternatywny, tytuł, opis, `Polubienia: 0` i przycisk `Lubię to`. Użyj odpowiednich klas `.card-*`.
+3. Poniżej 768 px karty są jedna pod drugą; od 768 px każda zajmuje połowę wiersza. Zachowaj odstępy i obrazy mieszczące się w kartach.
+4. Przełącznik `Tylko online` jest początkowo wyłączony. Włączenie ukrywa całą kolumnę Python; JavaScript przesuwa się na początek i zachowuje połowę szerokości od 768 px. Wyłączenie przywraca obie karty.
+5. Kliknięcie zwiększa licznik tylko danej karty o 1. Filtrowanie nie resetuje liczników. Zmiana napisu tytułu nie może zepsuć licznika.
 
-- tytuł **Przed zajęciami**;
-- tekst `Zabierz własne pomysły. Sprzęt jest dostępny w pracowni.`
+**Oczekiwany wynik - przykład:** Dwa polubienia JavaScript i jedno Python dają odpowiednio 2 i 1.
 
-Modal ma się zamykać przez ikonę, przycisk `Rozumiem` oraz klawisz Escape. Użyj atrybutów `data-bs-*` i dopasowanego identyfikatora. Nie pisz własnego mechanizmu modala.
+**Sprawdź również:** Włącz i wyłącz filtr. Liczniki pozostają, a ukryta karta zwalnia miejsce. Sprawdź telefon i ekran od 768 px.
+
+## Zadanie 3. Samodzielnie: rezerwacja i tabela | 25 minut, samodzielne
+
+**Pliki:** [zadanie3/index.html](zadanie3/index.html).
+
+**Polecenie:**
+
+1. Przygotuj stronę Rezerwacja stanowiska z formularzem w karcie Formularz rezerwacji.
+2. Dodaj wymagane imię, e-mail i select Stanowisko: pusty wybór Wybierz stanowisko, PC-1, PC-2. Imię po przycięciu musi być niepuste.
+3. Dodaj zaznaczony przełącznik Bez dodatkowych uwag i zablokowane textarea Uwagi (opcjonalnie). Odznaczenie odblokowuje pole; ponowne zaznaczenie je blokuje i zachowuje wpisany tekst.
+4. Dodaj przycisk Zarezerwuj. Po poprawnym zatwierdzeniu pokaż dane w tabeli Pole/Wartość z wierszami Imię, Adres e-mail, Stanowisko, Uwagi. Początkowo każda wartość to -.
+5. Przy wyłączonych uwagach pokaż Brak uwag. Przy włączonych pokaż przycięty tekst, a dla pustego również Brak uwag.
+6. Edycja pól nie zmienia zapisanej tabeli. Dopiero poprawne zatwierdzenie zastępuje podsumowanie; błędne zachowuje poprzednie.
+7. Na telefonie tabela jest pod formularzem, od 768 px obie części są w równych kolumnach. Użyj card, table, table-striped i table-responsive. Dane pokazuj jako tekst, bez przeładowania strony i bez serwera.
+8. Odróżniaj bieżący stan formularza od ostatniego zatwierdzonego wyniku.
+
+**Oczekiwany wynik - przykład:** Ala, ala@example.com, PC-1, bez uwag: tabela zawiera te dane oraz Brak uwag.
+
+**Sprawdź również:** Zmień pola bez zatwierdzenia: tabela zachowuje poprzedni zapis. Sprawdź uwagi włączone, wyłączone i puste.
+
+<details><summary>Wskazówka</summary>
+
+Uruchom najmniejszy działający fragment. Sprawdź jeden rekord lub jedną akcję, a potem dodawaj kolejne wymagania.
+
+</details>
+
+## Zadanie 4. Diagnoza: wartość a zaznaczenie | 15 minut, diagnoza
+
+**Pliki:** [zadanie4/index.html](zadanie4/index.html).
+
+**Polecenie:**
+
+1. Przycisk Sprawdź ma wyświetlać tak tylko po zaznaczeniu przełącznika. Napraw odczyt stanu kontrolki.
+2. Sprawdź kolejno: odznaczony, zaznaczony i ponownie odznaczony.
+
+**Oczekiwany wynik - przykład:** Odznaczony przełącznik daje nie, zaznaczony tak, ponownie odznaczony nie.
+
+**Sprawdź również:** Sprawdź stan checked niezależnie od tekstowej wartości value.
+
+W testy.md zapisz trzy próby: typową, graniczną i własną, z oczekiwaniem i rzeczywistym wynikiem. Dodaj krótką diagnozę.
+
+## Zadanie 5. Własne ulepszenie - dla chętnych
+
+**Punkt wyjścia:** własna, działająca część podstawowa wskazana w poleceniu.
+
+Wybierz wariant opisany poniżej albo własny dodatek: Dodaj własny wariant karty lub czytelne potwierdzenie akcji. Zachowaj działanie części podstawowej.
+
+**Polecenie:**
+
+1. W nowej stronie dodaj przycisk otwierający modal Bootstrap. Tytuł modala: Przed zajęciami.
+2. Treść: Zabierz własne pomysły. Sprzęt jest dostępny w pracowni.
+3. Zamknięcie ma działać przez krzyżyk i przycisk Rozumiem. Użyj lokalnego skryptu bootstrap.bundle.min.js.
+
+Dla własnego pomysłu ustal oczekiwany efekt, pokaż jeden test dodatku i ponownie sprawdź podstawę. Wystarczy krótki komentarz w kodzie.
+
+## Zadanie 6. Zadanie domowe: Potwierdzenie wejściówki
+
+**Pliki:** [domowe/index.html](domowe/index.html).
+
+**Cel naprawy:** Formularz pokazuje potwierdzenie imienia i zaznaczenia zgody. Reset usuwa potwierdzenie. Zapisz działa także przez Enter.
+
+**Polecenie:**
+
+1. Uruchom lub skompiluj błędną wersję i porównaj jej zachowanie z wymaganiami.
+2. Znajdź i popraw trzy usterki. Zachowaj poznane mechanizmy i wymagane zachowanie.
+3. Nad każdą poprawką dodaj komentarz CODE REVIEW wyjaśniający przyczynę błędu. W HTML użyj komentarza HTML, a w JS lub TS komentarza //.
+4. Sprawdź: Zapis przyciskiem i Enter, odznaczona zgoda oraz reset. Oddaj poprawiony kod i przygotuj krótkie wyjaśnienie jednej poprawki.

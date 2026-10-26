@@ -1,0 +1,13 @@
+const cenaTekst = '20';
+const ilosc = 3;
+const dostawaTekst = '5';
+const budzet = 80;
+const cena = Number(cenaTekst);
+const dostawa = dostawaTekst;
+const bilety = cena + ilosc;
+const razem = bilety + dostawa;
+const pozostalo = budzet - razem;
+const status = pozostalo > 0 ? 'W budżecie' : 'Za drogo';
+console.log(`Do zapłaty: ${razem} zł`);
+console.log(`Pozostało: ${pozostalo} zł`);
+console.log(status);

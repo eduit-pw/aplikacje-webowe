@@ -1,0 +1,8 @@
+{
+  "name": "lekcja-33-34",
+  "private": true,
+  "type": "commonjs",
+  "devDependencies": {
+    "typescript": "5.9.3"
+  }
+}

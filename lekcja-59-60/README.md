@@ -1,47 +1,28 @@
-# Ćwiczenia: Próba rezultatów webowych: integracja, testy i oddanie projektu
+# Trening: wspólny stan i komunikaty
 
-## Przygotowanie
+Przećwicz łączenie poznanych elementów Angulara: serwis, komponenty, signal, computed, formularz i walidację. Zadanie jest ćwiczeniem samodzielnego składania aplikacji. W folderze wykonaj npm install i npx ng serve.
 
-Pracuj w projekcie Angular 20.3 z komponentami standalone i plikami `src/app/app.ts`, `app.html`, `app.css`. Zachowaj konfigurację wygenerowaną w lekcjach 37-38, w tym obsługę Zone.js. Otwórz terminal w katalogu aplikacji.
+Pliki: [app.ts](src/app/app.ts), [kontrola.service.ts](src/app/kontrola.service.ts). Dane są przygotowane; uzupełnij TODO.
 
-```bash
-npx ng serve
-```
+## 1. Jedno miejsce przechowywania danych
 
-Otwórz adres podany w terminalu. Kompilację sprawdzaj poleceniem `npx ng build`. Serwer zatrzymuj przez Ctrl+C. Do osobnych ćwiczeń korzystaj z kopii własnego czystego projektu; nie nadpisuj wcześniejszych rozwiązań.
+1. Zapoznaj się z PunktKontroli. Lista początkowa zawiera trzy niewykonane punkty kontroli pracowni.
+2. Dodaj w serwisie przelacz(id), zmieniające stan tylko wskazanego punktu. Aktualizuj sygnał nową tablicą i zmieniony rekord nowym obiektem.
+3. Dodaj computed gotowe i postep. Postęp jest zaokrąglonym procentem wykonanych pozycji; dla pustej listy wynosi 0.
+4. Przewidź podsumowanie po oznaczeniu jednego z trzech punktów: 1 z 3, 33%.
 
-Jeśli zadanie wymaga Bootstrapa, skopiuj `vendor/bootstrap.min.css` z lekcji 09-10 do `src/vendor/bootstrap.min.css`, a w `src/styles.css` dodaj:
+## 2. Dwa komponenty, wspólny wynik
 
-```css
-@import "./vendor/bootstrap.min.css";
-```
+1. Lista wyświetla punkty przez @for z trwałym ID i przyciskiem Zmień stan.
+2. Postep pokazuje liczbę wykonanych, wszystkich oraz procent.
+3. Oba komponenty korzystają z tej samej instancji serwisu. Umieść je w App.
+4. Sprawdź zmianę środkowego punktu, powrót do stanu niewykonanego oraz ukończenie wszystkich: 100%.
 
-Potrzebne obrazy z folderu `obrazy` lekcji 09-10 skopiuj do `public/obrazy` projektu Angular. Odwołuj się do nich jako `obrazy/nazwa.svg`.
+## 3. Dodanie własnego punktu
 
-Dołączone pliki są infrastrukturą: `backend/api.js`, `backend/package.json`, `proxy.conf.json` i `src/app/app.config.ts`. W folderze `backend` wykonaj `npm install` i `node api.js`. Konfigurację proxy skopiuj do głównego katalogu własnego frontendu, a `app.config.ts` do jego `src/app`. Komponent `App`, widok i style wykonaj samodzielnie.
+1. Powiąż pole opisu z ngModel i obsłuż submit. Metoda serwisu dodaje przycięty opis od 1 do 50 znaków; nowa pozycja jest niewykonana i ma nowe ID.
+2. Odrzuć same spacje i zbyt długi opis, zachowując listę. Pokaż czytelny komunikat.
+3. Po sukcesie wyczyść pole i błąd. Podsumowanie wynika z danych, bez ręcznego zwiększania osobnych liczników.
+4. Sprawdź dodanie czwartego punktu: jeśli jeden punkt wykonano, postęp zmienia się z 33% na 25%.
 
-## Zadanie 1. Analiza specyfikacji i start
-
-Przed kodowaniem wypisz wymagania w tabeli: wymaganie, plik/metoda, sposób sprawdzenia. API GET /api/rezerwacje zwraca listę; POST przyjmuje {imie,miejsca}, miejsc całkowite 1-4, imię po trim niepuste. Endpoint działa na 3000. Frontend używa proxy, działa na 4200. Przygotowany backend uruchom `node api.js`, frontend `npx ng serve --proxy-config proxy.conf.json`. Na początku musi pojawić się ładowanie, potem lista lub pusty komunikat. Własne reguły nie mogą zmienić wymaganych danych.
-
-## Zadanie 2. Aplikacja według wymagań
-
-Nagłówek Rezerwacje pracowni. Bootstrap form: imię puste, miejsca 1. Zapisz wysyła dane do API dopiero po poprawnej walidacji. Podczas zapisu blokuje przycisk i pola, aby uniknąć przypadkowego podwójnego wysłania. Poprawny POST daje komunikat Zapisano, dodaje rekord zwrócony przez serwer do listy i przywraca pola początkowe. Lista w tabeli pokazuje imię i miejsca, computed sumę miejsc. Nie przypisuj sam ID zwróconego rekordu. Przy błędzie wyświetl komunikat, zwolnij blokadę, zachowaj dane formularza. Ładowanie, błąd i poprawny pusty wynik mają różne znaczenie. Aplikacja po odświeżeniu odczytuje stan z API.
-
-## Zadanie 3. Testy typowe, graniczne i błędne
-
-Nowy start backendu: lista[], suma 0. Zapis Anna 2 →lista 1,suma 2. Bartek 1 →lista 2,suma 3. Odśwież przeglądarkę bez restartu backendu →te same rekordy. Próby miejsc 0,5,1.5 i null oraz białego imienia →brak POST z poprawnymi danymi, komunikat walidacji. Miejsca 4 poprawne. Zatrzymaj API i wykonaj poprawny zapis →błąd sieci, dane zachowane, przycisk ponownie dostępny. Przy ponownym starcie API lista pamięci zostaje wyzerowana; odśwież stronę, zanim porównasz stan. Nie używaj starego zrzutu jako dowodu ostatniej wersji.
-
-## Zadanie 4. Dokumentacja i kompletne oddanie
-
-Szkolna specyfikacja oddania: folder lekcja-59-60 zawiera frontend z konfiguracją/manifestami i zasobami, backend/api.js z manifestami oraz dokumentacja.md i dowody/typowy.png, dowody/graniczny.png, dowody/bledny.png. Dokumentacja: faktyczne wersje narzędzi odczytane na stanowisku, polecenia startu, trzy testy z wynikami, jeden opis naprawy. Komentarz przy metodzie zapisz opisuje cel, dane wejściowe i skutki; nie kopiuj numerów kryteriów z innego arkusza. Archiwum lekcja-59-60.zip bez node_modules, cache, dist i danych wrażliwych. 
-
-Przed końcem rozpakuj ZIP do innego folderu, sprawdź obecność plików i aktualność źródeł/zrzutów. Zależności odtwarzaj z przygotowanego zestawu; nie usuwaj jedynej lokalnej kopii przez npm ci bez dostępu do pakietów. Na rzeczywistym egzaminie nazwy, zawartość i forma dokumentacji wynikają z otrzymanego arkusza, nie z tej szkolnej specyfikacji.
-
-## Zadanie 5. Rozszerzenie dla kończących wcześniej
-
-Po próbie dodaj przycisk czyszczący formularz bez wysyłania żądania HTTP. Ma przywracać puste imię, 1 miejsce i usuwać komunikaty. Podczas zapisywania przycisk jest zablokowany. Lista rezerwacji i suma miejsc pozostają bez zmian.
-
-## Oddanie pracy
-
-Oddaj pliki wymagane w zadaniach i własną dokumentację testów. Zapisz sprawdzone dane, oczekiwany wynik oraz wynik rzeczywisty. Dołącz manifesty i konfigurację, jeśli projekt ich używa. Nie dołączaj `node_modules`, plików tymczasowych ani danych dostępowych. Zadanie 5 jest dodatkowe.
+Własne ulepszenie: dodaj filtr wykonanych pozycji albo zmianę stylu ukończonego punktu. Sprawdź, czy ukrycie pozycji zachowuje jej dane i poprawne podsumowanie. Przypomnij też działanie routingu i obsługi błędu HTTP na wcześniejszym ćwiczeniu.

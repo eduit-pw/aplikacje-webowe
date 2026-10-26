@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wskaźnik postępu</title>
+
+  <style>body{font-family:system-ui;margin:24px} .niski{color:#a00000} .sredni{color:#805000} .wysoki{color:#006b25}</style>
+</head>
+<body>
+<h1>Wskaźnik postępu</h1>
+<label for="nazwa">Nazwa zadania</label><input id="nazwa">
+<label for="procent">Postęp (%)</label><input id="procent" type="number" min="0" max="100" step="1">
+<button id="ocen" type="button">Oceń postęp</button>
+<p id="blad" role="alert"></p><p id="status" aria-live="polite">Brak oceny.</p>
+<script src="../vendor/jquery.min.js"></script>
+<script>
+// TODO: obsługa zgodna z poleceniem.
+</script>
+</body>
+</html>

@@ -1,200 +1,108 @@
-# Ćwiczenia: Node.js: środowisko, REPL, asynchroniczność i npm
+# Node.js: środowisko, REPL, asynchroniczność i npm
 
-## Przygotowanie
+Node.js i npm. W folderze lekcji wykonaj npm install, potem node nazwa.js. Używamy CommonJS.
 
-Pracuj w jednym katalogu projektu. Sprawdź `node --version` i `npm --version`. Inicjalizację i instalację wykonaj zgodnie z zadaniem 1. Pliki uruchamiaj przez `node nazwa.js`. Przykłady używają CommonJS (`require`).
+Wykonaj zadania 1-4. Zadanie 5 to własne ulepszenie dla chętnych, a zadanie 6 jest domowe. Rozwiązuj kolejne punkty i sprawdzaj działanie na bieżąco. Opis testów oddajesz w testy.md tylko przy zadaniu 4.
 
-## Zadanie 1. Środowisko, REPL i pierwszy pakiet
+## Zadanie 1. Środowisko, REPL i pierwszy pakiet | 15 minut, prowadzone
 
-1. W terminalu sprawdź `node -v` i `npm -v`.
-2. Wpisz `node`, aby wejść do REPL. W osobnych wierszach wykonaj:
+**Pliki:** [srodowisko.js](srodowisko.js).
 
-```js
-const ceny = [12, 18, 12];
-ceny.filter((cena) => cena > 12)
-ceny.length
-process.versions.v8
-```
+**Polecenie:**
 
-Zapisz wynik filtrowania i długość tablicy. Wyjdź poleceniem `.exit`. Nie wpisuj `.exit` do pliku JavaScript. Wartość `undefined` po deklaracji zmiennej w REPL nie oznacza błędu.
+1. Sprawdź w terminalu wersje przez node -v i npm -v. Wejdź do REPL poleceniem node.
+2. Utwórz const ceny = [12,18,12]. W osobnych wierszach sprawdź ceny.filter(cena => cena > 12), ceny.length i process.versions.v8. Wyjdź poleceniem .exit.
+3. W folderze lekcji zainstaluj przygotowane zależności przez npm install i sprawdź npm ls lodash. Offline skorzystaj z projektu wcześniej przygotowanego przez nauczyciela.
+4. Uzupełnij srodowisko.js: wypisz rzeczywistą wersję Node.js i V8, poprzedzając je etykietami Node: oraz V8:.
+5. Pobierz unikalne ceny przez _.uniq. Wypisz tablicę z etykietą Unikalne ceny: i jej długość z etykietą Liczba:. Dla [12,18,12] wynik to [12,18] i 2.
+6. Uruchom node srodowisko.js. Zmień wejście na [5,5,9,11] i sprawdź wynik. Wskaż package.json, lockfile i node_modules oraz krótko wyjaśnij ich role.
 
-3. Przy dostępnym rejestrze npm przejdź w terminalu do pobranego katalogu `lekcja-11-12` i wykonaj:
+**Oczekiwany wynik - przykład:** Dla [12,18,12] unikalne ceny to [12,18], liczba 2; wersje Node.js i V8 pochodzą ze środowiska.
 
-```bash
-npm init -y
-npm install --save-exact lodash@4.18.1
-npm ls lodash
-```
+**Sprawdź również:** Dla [5,5,9,11] oczekuj [5,9,11] i 3. Wskaż package.json, lockfile i node_modules.
 
-Przy pracy offline skopiuj przygotowany przez nauczyciela projekt `lekcja-11-12`; w nim wykonaj tylko `npm ls lodash`. Kolejne pliki zapisuj w tym samym projekcie.
+## Zadanie 2. Kolejność wykonania i przejście do `await` | 18 minut, wspólne
 
-4. Utwórz `srodowisko.js`. Program ma wypisać:
-   - `Node: ` oraz rzeczywistą wartość `process.version`;
-   - `V8: ` oraz rzeczywistą wartość `process.versions.v8`;
-   - `Unikalne ceny: ` oraz tablicę bez powtórzeń jako JSON;
-   - `Liczba: ` oraz długość tablicy bez powtórzeń.
-5. Użyj tablicy `[12, 18, 12]` i funkcji pakietu `_.uniq`. Uruchom `node srodowisko.js`. Następnie zmień dane na `[5, 5, 9, 11]` i sprawdź, czy wynik zmienia się bez przepisywania obliczeń.
-6. Wskaż w projekcie: deklarację zależności, lockfile i katalog z kodem pakietu. Do `dokumentacja.md` wpisz wersję Node/npm i jedno zdanie o różnicy między `package.json` a `node_modules`.
+**Pliki:** [status.js](status.js), [kolejnosc.js](kolejnosc.js).
 
-**Podpowiedź API:** `const _ = require('lodash');` udostępnia pakiet. `_.uniq(tablica)` zwraca tablicę wartości bez powtórzeń, zachowując kolejność pierwszych wystąpień. `JSON.stringify(tablica)` zamienia ją na tekst JSON. 
+**Polecenie:**
 
-**Sprawdzenie:** dla pierwszych danych część wynikowa to `Unikalne ceny: [12,18]` i `Liczba: 2`; dla drugich `[5,9,11]` i `Liczba: 3`. Wersji środowiska nie wpisuj na sztywno.
+1. Otwórz przygotowany kolejnosc.js i zapisz przewidywaną kolejność komunikatów w komentarzu przed pierwszym uruchomieniem.
+2. Uruchom node kolejnosc.js. Porównaj START, KONIEC, PROMISE i TIMER ze swoim przewidywaniem.
+3. Otwórz starter status.js. W funkcji main poczekaj na wynik pobierzStatus() i zapisz go w zmiennej status.
+4. Wypisz Status: oraz uzyskany wynik między komunikatami A i B. Nie zmieniaj komunikatu C poza main.
+5. Przewidź kolejność A, C, Status: gotowe, B, a następnie sprawdź ją przez node status.js. Wyjaśnij, co zwraca pobierzStatus() przed zakończeniem operacji.
 
-## Zadanie 2. Kolejność wykonania i przejście do `await`
+**Oczekiwany wynik - przykład:** kolejnosc.js: START, KONIEC, PROMISE, TIMER. status.js: A, C, Status: gotowe, B.
 
-Zapisz poniższy kod jako `kolejnosc.js`. **Przed uruchomieniem** wpisz do `dokumentacja.md` przewidywaną kolejność czterech komunikatów.
+**Sprawdź również:** Zapisz przewidywanie przed uruchomieniem i wskaż miejsce oczekiwania na Promise.
 
-```js
-console.log('START');
+## Zadanie 3. Samodzielnie: kolejka wydruków | 25 minut, samodzielne
 
-setTimeout(() => {
-  console.log('TIMER');
-}, 0);
+**Pliki:** [kolejka.js](kolejka.js).
 
-Promise.resolve().then(() => {
-  console.log('PROMISE');
-});
+**Polecenie:**
 
-console.log('KONIEC');
-```
+1. W kolejka.js wykorzystaj przygotowane zestawy A, B, C oraz funkcje pobierzZgloszenia i obsluz. Napisz async main(daneWejsciowe).
+2. W main wypisz START i poczekaj na dane zwrócone przez pobierzZgloszenia.
+3. Usuń powtórzenia według id, zachowując pierwszy obiekt, a następnie pozostaw typ druk. Zachowaj kolejność zgłoszeń. Możesz użyć _.uniqBy(dane, 'id').
+4. Wypisz Przyjęto: N. Obsłuż każde pozostałe zgłoszenie kolejno, czekając na wynik obsluz i wypisując zwrócony komunikat.
+5. Po obsłużeniu całej kolejki wypisz Zakończono: N. Obie liczby wyznacz z danych. Przy braku wydruków obie wynoszą 0 i nie ma komunikatów Gotowe.
+6. Bezpośrednio po wywołaniu main, poza tą funkcją, wypisz Można przyjmować kolejne zadania. Ten komunikat ma pojawić się po START, ale przed przyjęciem i obsługą kolejki.
+7. Uruchom osobno zestawy A, B i C, zmieniając argument wywołania. Dodaj nad main krótki komentarz opisujący parametr i zwracaną Promise.
+8. Czekaj na wynik operacji asynchronicznej, zanim użyjesz go w dalszych obliczeniach.
 
-Uruchom `node kolejnosc.js`. Zapisz wynik rzeczywisty i wyjaśnij, czy `0` oznacza wykonanie callbacka w środku bieżących instrukcji. Nie zmieniaj przewidywania po obejrzeniu wyniku.
+**Oczekiwany wynik - przykład:** START → Można przyjmować kolejne zadania. → Przyjęto: 2 → Gotowe: D-1 → Gotowe: D-3 → Zakończono: 2.
 
-W pliku `status.js` otrzymujesz kod startowy:
+**Sprawdź również:** Sprawdź zestawy A, B oraz pusty C. Operacje obsługuj kolejno, zachowując kolejność ID.
 
-```js
-const { setTimeout: poczekaj } = require('node:timers/promises');
+<details><summary>Wskazówka</summary>
 
-function pobierzStatus() {
-  return poczekaj(40, 'gotowe');
-}
+Uruchom najmniejszy działający fragment. Sprawdź jeden rekord lub jedną akcję, a potem dodawaj kolejne wymagania.
 
-async function main() {
-  console.log('A');
-  // Pobierz wynik pobierzStatus() przez await do zmiennej status.
-  // Wypisz: Status: <wynik>
-  console.log('B');
-}
+</details>
 
-main().catch((blad) => {
-  console.error(`Błąd: ${blad.message}`);
-  process.exitCode = 1;
-});
+## Zadanie 4. Znajdź błąd, przetestuj i udokumentuj | 15 minut, diagnoza
 
-console.log('C');
-```
+**Pliki:** [naprawa.js](naprawa.js).
 
-Uzupełnij dwa brakujące wiersze. Najpierw przewidź kolejność, następnie uruchom `node status.js`. Wyjaśnij, dlaczego `C` może zostać wypisane podczas oczekiwania w `main`. Zapisz jedno zdanie o tym, co zwraca `pobierzStatus()` przed zakończeniem operacji.
+**Polecenie:**
 
-**Wskazówka na tym etapie:** konstrukcja ma postać `const wynik = await operacja();` wewnątrz funkcji `async`. Późniejsze zadanie 3 nie będzie miało rozpisanej logiki.
+1. Otwórz naprawa.js. W komentarzu przewidź wynik błędnej wersji, która ma wypisywać START, Gotowe: D-7, KONIEC.
+2. Uruchom program. Znajdź powód, dla którego main nie otrzymuje oczekiwanego komunikatu z funkcji obsluz.
+3. Popraw przekazywanie wyniku operacji asynchronicznej i ponownie uruchom program.
+4. Wykonaj trzy próby kolejki z zadania 3: zestaw A, pusty C i własny niepusty zestaw zawierający wyłącznie skany. Sprawdź liczbę komunikatów Gotowe i kolejność wypisywania. Nie mierz czasu w milisekundach.
 
-## Zadanie 3. Samodzielnie: kolejka wydruków
+**Oczekiwany wynik - przykład:** START → Gotowe: D-7 → KONIEC.
 
-Zapisz `kolejka.js` w projekcie z zadania 1. Program ma spełniać wszystkie wymagania:
+**Sprawdź również:** W testy.md sprawdź kolejkę A, pusty C i własny niepusty zestaw samych skanów.
 
-1. Na początku funkcji `main` wypisuje `START` i czeka na wynik `pobierzZgloszenia(daneWejsciowe)`.
-2. Usuwa duplikaty po polu `id`, zachowując pierwszy obiekt dla danego ID. Następnie zostawia tylko zgłoszenia typu `druk`. Zachowuje kolejność pozostałych zgłoszeń.
-3. Wypisuje `Przyjęto: N`, gdzie `N` jest długością przygotowanej kolejki.
-4. Obsługuje kolejkę **po jednym zgłoszeniu**, czekając na wynik `obsluz(zgloszenie)`. Każdy zwrócony komunikat wypisuje po zakończeniu tej operacji.
-5. Na końcu wypisuje `Zakończono: N`. Liczbę wyznacza z rzeczywistej kolejki, nie wpisuje jej na sztywno.
-6. Przy pustej kolejce wypisuje przyjęcie i zakończenie z zerem. Nie wypisuje komunikatu `Gotowe`.
-7. Po wywołaniu `main` kod poza funkcją wypisuje `Można przyjmować kolejne zadania.`. Ten wiersz ma pojawić się po `START`, ale przed przyjęciem kolejki i przed wynikami obsługi.
-8. Uruchamia się poleceniem `node kolejka.js`. Sprawdź osobno zestawy A, B i C, zmieniając wyłącznie argument wywołania `main`.
+W testy.md zapisz trzy próby: typową, graniczną i własną, z oczekiwaniem i rzeczywistym wynikiem. Dodaj krótką diagnozę.
 
-**Dane i infrastruktura do skopiowania:**
+## Zadanie 5. Własne ulepszenie - dla chętnych
 
-```js
-const _ = require('lodash');
-const { setTimeout: poczekaj } = require('node:timers/promises');
+**Punkt wyjścia:** własna, działająca część podstawowa wskazana w poleceniu.
 
-const zestawA = [
-  { id: 'D-1', typ: 'druk' },
-  { id: 'D-2', typ: 'skan' },
-  { id: 'D-1', typ: 'druk' },
-  { id: 'D-3', typ: 'druk' }
-];
+Wybierz wariant opisany poniżej albo własny dodatek: Zaprojektuj własną kolejkę opóźnionych operacji. Zachowaj działanie części podstawowej.
 
-const zestawB = [
-  { id: 'X-8', typ: 'druk' },
-  { id: 'X-9', typ: 'druk' },
-  { id: 'X-8', typ: 'druk' }
-];
+**Polecenie:**
 
-const zestawC = [];
+1. Rozszerzenie wykonuj po sprawdzeniu części obowiązkowej.
+2. W osobnym `blad.js` zasymuluj odrzucenie Promise z komunikatem `Brak połączenia`. Funkcja `main` ma oczekiwać na operację.
+3. Po odrzuceniu program ma wypisać `Błąd: Brak połączenia`, ustawić niezerowy kod zakończenia i nie wypisać `Gotowe`. Nie buduj prawdziwego połączenia sieciowego.
+4. Wskazówka API: `Promise.reject(new Error('tekst'))` zwraca odrzuconą Promise. W tym zadaniu wywołaj ją wewnątrz funkcji pobierającej dane, a tę funkcję wywołaj z `main`.
 
-function pobierzZgloszenia(dane) {
-  return poczekaj(40, dane);
-}
+Dla własnego pomysłu ustal oczekiwany efekt, pokaż jeden test dodatku i ponownie sprawdź podstawę. Wystarczy krótki komentarz w kodzie.
 
-function obsluz(zgloszenie) {
-  return poczekaj(30, `Gotowe: ${zgloszenie.id}`);
-}
+## Zadanie 6. Zadanie domowe: Status zamówienia
 
-// Napisz funkcję async main(daneWejsciowe) oraz kod jej uruchomienia.
-```
+**Pliki:** [domowe/review.js](domowe/review.js).
 
-**Podpowiedź API:** `_.uniqBy(tablicaObiektow, 'id')` usuwa powtórzenia według pola `id` i zachowuje pierwsze wystąpienie. Do filtrowania możesz użyć poznanego `.filter()`. Dane zawierają poprawne obiekty; nie musisz jeszcze projektować walidacji ich struktury. 
+**Cel naprawy:** Program ma wypisać START, następnie Status: gotowe, a na końcu KONIEC. Funkcja pobierz zwraca wynik opóźnionej operacji.
 
-**Wynik dla A:**
+**Polecenie:**
 
-```text
-START
-Można przyjmować kolejne zadania.
-Przyjęto: 2
-Gotowe: D-1
-Gotowe: D-3
-Zakończono: 2
-```
-
-Dla B liczba wynosi 2, a identyfikatory to kolejno `X-8`, `X-9`. Dla C są tylko cztery wiersze: `START`, komunikat o kolejnych zadaniach, `Przyjęto: 0`, `Zakończono: 0`.
-
-**Dokumentacja:** podaj w jednym zdaniu rolę `main`, znaczenie jej parametru i fakt, że zwraca Promise bez własnej wartości wynikowej. Dokładny szablon komentarza egzaminacyjnego stosuje się wtedy, gdy określa go arkusz.
-
-## Zadanie 4. Znajdź błąd, przetestuj i udokumentuj
-
-Poniższy `naprawa.js` powinien wypisać `START`, potem `Gotowe: D-7`, a na końcu `KONIEC`. Ma korzystać z tekstu zwróconego przez opóźnioną operację. **Przed uruchomieniem przewidź rzeczywisty wynik błędnej wersji.** Następnie uruchom ją, wskaż przyczynę i popraw program.
-
-```js
-const { setTimeout: poczekaj } = require('node:timers/promises');
-
-async function obsluz(zgloszenie) {
-  poczekaj(30, `Gotowe: ${zgloszenie.id}`);
-}
-
-async function main() {
-  console.log('START');
-  const komunikat = await obsluz({ id: 'D-7' });
-  console.log(komunikat);
-  console.log('KONIEC');
-}
-
-main().catch((blad) => {
-  console.error(`Błąd: ${blad.message}`);
-  process.exitCode = 1;
-});
-```
-
-1. Sprawdź poprawkę poleceniem `node naprawa.js`.
-2. W `dokumentacja.md` opisz przyczynę w jednym-dwóch zdaniach i wklej wynik po naprawie.
-3. Dla kolejki z zadania 3 zapisz trzy testy: typowy A, pusty C oraz własny zestaw z co najmniej dwoma poprawnymi zgłoszeniami typu `skan` i żadnym typu `druk`. Ostatni zestaw ma być Twoim pomysłem, nie kopią pustej tablicy.
-4. Uzupełnij kolumny wynik oczekiwany i rzeczywisty. Sprawdź w nich również liczbę komunikatów `Gotowe`, nie tylko ostatni wiersz.
-
-| Test | Dane / działanie | Wynik oczekiwany | Wynik rzeczywisty | Wniosek |
-|---|---|---|---|---|
-| Typowy | Zestaw A | Uzupełnij przed uruchomieniem | Uzupełnij po uruchomieniu | Spełnia / nie spełnia |
-| Graniczny | Pusta tablica C | Uzupełnij przed uruchomieniem | Uzupełnij po uruchomieniu | Spełnia / nie spełnia |
-| Własny | Co najmniej dwa skany, bez druku | Uzupełnij przed uruchomieniem | Uzupełnij po uruchomieniu | Spełnia / nie spełnia |
-
-Zadanie nie wymaga mierzenia 30 ms ani doinstalowania frameworka testowego. Jeśli test ujawni błąd, zapisz również poprawkę i wynik ponownego uruchomienia.
-
-## Zadanie 5. Dla chętnych: odrzucona Promise
-
-Rozszerzenie wykonuj po sprawdzeniu części obowiązkowej.
-
-W osobnym `blad.js` zasymuluj odrzucenie Promise z komunikatem `Brak połączenia`. Funkcja `main` ma oczekiwać na operację. Po odrzuceniu program ma wypisać `Błąd: Brak połączenia`, ustawić niezerowy kod zakończenia i nie wypisać `Gotowe`. Nie buduj prawdziwego połączenia sieciowego.
-
-**Podpowiedź API:** `Promise.reject(new Error('tekst'))` zwraca odrzuconą Promise. W tym zadaniu wywołaj ją wewnątrz funkcji pobierającej dane, a tę funkcję wywołaj z `main`.
-
-## Oddanie pracy
-
-Oddaj pliki wymagane w zadaniach i własną dokumentację testów. Zapisz sprawdzone dane, oczekiwany wynik oraz wynik rzeczywisty. Dołącz manifesty i konfigurację, jeśli projekt ich używa. Nie dołączaj `node_modules`, plików tymczasowych ani danych dostępowych. Zadanie 5 jest dodatkowe.
+1. Uruchom lub skompiluj błędną wersję i porównaj jej zachowanie z wymaganiami.
+2. Znajdź i popraw trzy usterki. Zachowaj poznane mechanizmy i wymagane zachowanie.
+3. Nad każdą poprawką dodaj komentarz CODE REVIEW wyjaśniający przyczynę błędu. W HTML użyj komentarza HTML, a w JS lub TS komentarza //.
+4. Sprawdź: Kolejność komunikatów i zwrócony status po zakończeniu operacji. Oddaj poprawiony kod i przygotuj krótkie wyjaśnienie jednej poprawki.

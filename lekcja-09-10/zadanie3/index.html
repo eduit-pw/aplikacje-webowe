@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rezerwacja stanowiska</title>
+  <link rel="stylesheet" href="../vendor/bootstrap.min.css">
+</head>
+<body>
+  <main>
+    <h1>Rezerwacja stanowiska</h1>
+    <div>
+      <section aria-labelledby="formularzTytul">
+        <div>
+          <div>
+            <h2 id="formularzTytul">Formularz rezerwacji</h2>
+            <form id="rezerwacja">
+              <div>
+                <label for="imie">Imię</label>
+                <input id="imie" name="imie" type="text" required>
+              </div>
+              <div>
+                <label for="email">Adres e-mail</label>
+                <input id="email" name="email" type="email" required>
+              </div>
+              <div>
+                <label for="stanowisko">Stanowisko</label>
+                <select id="stanowisko" name="stanowisko" required>
+                  <option value="" selected>Wybierz stanowisko</option>
+                  <option value="PC-1">PC-1</option>
+                  <option value="PC-2">PC-2</option>
+                </select>
+              </div>
+              <div>
+                <input id="bezUwag" type="checkbox"
+                       role="switch" checked>
+                <label for="bezUwag">Bez dodatkowych uwag</label>
+              </div>
+              <div>
+                <label for="uwagi">Uwagi (opcjonalnie)</label>
+                <textarea id="uwagi" name="uwagi" rows="3" disabled></textarea>
+              </div>
+              <button type="submit">Zarezerwuj</button>
+            </form>
+          </div>
+        </div>
+      </section>
+      <section aria-labelledby="podsumowanieTytul">
+        <h2 id="podsumowanieTytul">Ostatnie zgłoszenie</h2>
+        <div>
+          <table>
+            <caption>Lokalne podsumowanie ostatniego zgłoszenia</caption>
+            <thead><tr><th scope="col">Pole</th><th scope="col">Wartość</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Imię</th><td id="rImie">-</td></tr>
+              <tr><th scope="row">Adres e-mail</th><td id="rEmail">-</td></tr>
+              <tr><th scope="row">Stanowisko</th><td id="rStanowisko">-</td></tr>
+              <tr><th scope="row">Uwagi</th><td id="rUwagi">-</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script>
+// TODO: obsługa zgodna z poleceniem.
+</script>
+</body>
+</html>
